@@ -114,8 +114,32 @@ namespace GameDevClicker.Game
                 Debug.LogError("[GameController] UnlockManager not ready!");
                 return false;
             }
+            
+            // Initialize additional systems
+            InitializeGameSystems();
 
             return true;
+        }
+        
+        private void InitializeGameSystems()
+        {
+            // Initialize Statistics System
+            if (StatisticsSystem.Instance != null)
+            {
+                Debug.Log("[GameController] Statistics System initialized");
+            }
+            
+            // Initialize Achievement System
+            if (AchievementSystem.Instance != null)
+            {
+                Debug.Log("[GameController] Achievement System initialized");
+            }
+            
+            // Initialize Offline Progression System
+            if (OfflineProgressionSystem.Instance != null)
+            {
+                Debug.Log("[GameController] Offline Progression System initialized");
+            }
         }
 
         private void InitializeUISystem()

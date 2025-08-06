@@ -1,0 +1,8 @@
+progression_phase,level_range,exp_per_click,money_per_click,exp_money_ratio,primary_income_source,auto_exp_base,auto_money_base
+early_learning,1-9,1,0,0,click_only,0,0
+unlock_point,10,10,1,10,click_bonus,0,0
+early_mid,11-25,10,1,10,click_team,0.5,1
+mid_business,26-50,50,20,2.5,project_auto,3,5
+mid_late,51-100,500,200,2.5,diversified,50,100
+late_enterprise,101-150,10000,5000,2,large_projects,1000,5000
+endgame,151-200,1000000,500000,2,space_business,100000,500000

@@ -1,0 +1,11 @@
+stage_id,stage_name_en,stage_name_ko,required_exp,recommended_level,unlock_content,base_exp_click,base_money_click,expected_clear_time
+1,Indie Developer,인디 개발자,1000,1,basic_system,1,0,10
+2,Mobile Development,모바일 개발,5000,15,project_system,10,5,20
+3,PC Game Development,PC 게임 개발,25000,25,team_management,100,50,45
+4,VR Development,VR 개발,125000,35,research_lab,1000,500,90
+5,AI Development,AI 개발,625000,45,automation,10000,5000,180
+6,Robot Development,로봇 개발,3125000,60,production_line,100000,50000,300
+7,Rocket Development,로켓 개발,15625000,80,space_program,1000000,500000,480
+8,Spaceship Development,우주선 개발,78125000,100,planet_exploration,10000000,5000000,720
+9,Black Hole Explorer,블랙홀 탐사,390625000,130,dimension_research,100000000,50000000,1200
+10,Space-Time Conquest,시공간 정복,1953125000,170,prestige_system,1000000000,500000000,2100

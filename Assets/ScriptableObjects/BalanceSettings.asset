@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b41deeb4e617644193da49da8f0e4a3, type: 3}
+  m_Name: BalanceSettings
+  m_EditorClassIdentifier: 
+  moneyPerClickCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 10
+      value: 10
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  expPerClickCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 10
+      value: 10
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  baseExpPerLevel: 100
+  expLevelMultiplier: 1.5
+  moneyUnlockLevel: 10
+  stageExpRequirements: e803000000000000983a000000000000e86e030000000000987f330000000000e8790403000000009824432d00000000
+  baseMoneyToExpRatio: 1
+  stageMoneyMultipliers:
+  - 1
+  - 1.2
+  - 1.5
+  - 2
+  - 3
+  - 5
+  - 8
+  - 12
+  - 18
+  - 25
+  autoIncomeUpdateInterval: 1
+  baseAutoIncomeEfficiency: 0.1
+  baseCriticalChance: 0.05
+  baseCriticalMultiplier: 2
+  skills:
+    basePriceMultiplier: 1
+    priceGrowthRate: 1.15
+    effectivenessMultiplier: 1
+    unlocksAtStage: 1
+    unlocksAtLevel: 1
+  equipment:
+    basePriceMultiplier: 1
+    priceGrowthRate: 1.15
+    effectivenessMultiplier: 1
+    unlocksAtStage: 1
+    unlocksAtLevel: 1
+  team:
+    basePriceMultiplier: 1
+    priceGrowthRate: 1.15
+    effectivenessMultiplier: 1
+    unlocksAtStage: 1
+    unlocksAtLevel: 1
+  projectSystem:
+    baseExpRequired: 1000
+    requirementMultiplier: 1.5
+    baseReward: 500
+    rewardMultiplier: 1.3
+    easyProjectMultiplier: 1
+    mediumProjectMultiplier: 1.3
+    hardProjectMultiplier: 1.8
+    expertProjectMultiplier: 2.5
+    unlocksAtStage: 2
+    unlocksAtLevel: 1
+  offlineEarnings:
+    maxOfflineHours: 8
+    gracePeriodMinutes: 5
+    offlineEfficiency: 0.5
+    autoIncomeEfficiency: 0.8
+    enableOfflineBonus: 1
+    maxOfflineBonus: 2
+  prestige:
+    minStageForPrestige: 5
+    minExperienceForPrestige: 1000000
+    basePrestigeMultiplier: 1.1
+    prestigePointsPerStage: 1
+    prestigeUpgradeCostCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 9.9
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 10
+        value: 100
+        inSlope: 9.9
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4

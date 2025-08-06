@@ -1,0 +1,17 @@
+formula_id,category,name_en,name_ko,formula,description_en,description_ko,parameters
+level_calc,level,Current Level,현재 레벨,floor(cumulative_exp/100)+1,Calculate level from total exp,누적 경험치로 레벨 계산,cumulative_exp
+level_exp_remain,level,Exp to Next Level,다음 레벨까지,100-mod(cumulative_exp;100),Remaining exp for next level,다음 레벨까지 필요 경험치,cumulative_exp
+money_multiplier,level,Money Gain Rate,돈 획득 배율,max(0;1+(level-10)*0.1),Money multiplier from level 10,레벨 10부터 10%씩 증가,level
+stage_exp_req,stage,Stage Required Exp,스테이지 필요 경험치,1000*pow(5;stage-1),Exponential stage requirement,기하급수적 증가,stage
+stage_base_exp,stage,Base Click Exp,기본 클릭 경험치,pow(10;stage-1),10x increase per stage,10배씩 증가,stage
+stage_base_money,stage,Base Click Money,기본 클릭 돈,pow(5;stage-1)*enabled,5x increase per stage,5배씩 증가,stage;enabled
+project_req_exp,project,Project Required Exp,프로젝트 필요 경험치,100*pow(1.5;project_num-1),1.5x increase per project,1.5배씩 증가,project_num
+project_reward,project,Project Reward,프로젝트 보상,1000*pow(1.5;completed_count),Reward increases with completion,완성할수록 보상 증가,completed_count
+project_time,project,Completion Time,완성 시간,project_exp/(click_exp*click_rate+auto_exp),Time based on current rate,현재 속도로 계산,project_exp;click_exp;click_rate;auto_exp
+total_click_income,income,Total Click Income,총 클릭 수익,clicks*money_per_click*upgrade_mult,Income from clicking,클릭으로 얻는 돈,clicks;money_per_click;upgrade_mult
+total_auto_income,income,Total Auto Income,총 자동 수익,auto_money*time_sec*upgrade_mult,Income from automation,자동으로 얻는 돈,auto_money;time_sec;upgrade_mult
+income_per_minute,income,Income Per Minute,분당 수익,(click_income+auto_income)/play_time*60,Money earned per minute,분당 수익률,click_income;auto_income;play_time
+upgrade_price,upgrade,Upgrade Current Price,업그레이드 현재 가격,base_price*pow(price_mult;purchase_count),Exponential price increase,지수적 가격 증가,base_price;price_mult;purchase_count
+offline_earnings,offline,Offline Money,오프라인 수익,auto_income*offline_sec*0.5*min(1;offline_sec/28800),50% efficiency with 8hr cap,50% 효율 8시간 제한,auto_income;offline_sec
+prestige_points,prestige,Prestige Points,환생 포인트,sqrt(total_exp/1000000000000),Points from total experience,총 경험치 기반 포인트,total_exp
+prestige_bonus,prestige,Prestige Multiplier,환생 보너스,1+prestige_points*0.1,10% bonus per prestige point,환생 포인트당 10% 보너스,prestige_points

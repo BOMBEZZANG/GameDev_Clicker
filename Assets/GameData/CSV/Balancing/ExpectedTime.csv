@@ -1,0 +1,11 @@
+play_time_min,target_level,target_stage,milestone,expected_assets_exp,expected_assets_money,player_action
+5,8,1,basic_learning,800,0,learning_clicks
+10,12,1,money_unlock,1200,500,first_purchases
+20,20,2,project_start,2000,5000,team_hiring
+30,30,2,first_projects,3000,50000,auto_income
+60,50,3,automation_start,5000,500000,upgrade_focus
+120,70,4,enterprise_scale,7000,10000000,balanced_growth
+240,100,5,tech_advancement,10000,500000000,major_projects
+480,130,6,space_entry,13000,50000000000,advanced_tech
+960,160,8,galaxy_exploration,16000,10000000000000,dimension_research
+1920,200,10,time_conquest,20000,1000000000000000,prestige_ready

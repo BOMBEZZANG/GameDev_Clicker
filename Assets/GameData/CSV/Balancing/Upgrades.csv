@@ -1,0 +1,16 @@
+upgrade_id,category,name_en,name_ko,description_en,description_ko,currency_type,base_price,price_multiplier,effect_type,effect_value,max_level,unlock_condition
+skill_01,skills,Typing Speed,타이핑 속도,+2 EXP per click,클릭당 경험치 +2,experience,100,1.15,exp_per_click,2,50,none
+skill_02,skills,Algorithm Study,알고리즘 학습,+5 EXP per click,클릭당 경험치 +5,experience,500,1.15,exp_per_click,5,30,level_5
+skill_03,skills,Design Sense,디자인 감각,+3 Money per click (from Lv.10),돈 획득 +3/클릭 (Lv.10부터),experience,1000,1.15,money_per_click,3,25,level_10
+skill_04,skills,Project Management,프로젝트 관리,Project speed +20%,프로젝트 속도 +20%,experience,5000,1.2,project_speed,0.2,10,level_20
+skill_05,skills,Innovative Thinking,혁신적 사고,All EXP +50%,모든 경험치 +50%,experience,20000,1.25,exp_multiplier,0.5,5,level_30
+equip_01,equipment,Better Keyboard,더 좋은 키보드,All income x1.5,모든 수익 x1.5,money,200,0,all_multiplier,1.5,1,level_10
+equip_02,equipment,Dual Monitor,듀얼 모니터,All income x1.3,모든 수익 x1.3,money,1000,0,all_multiplier,1.3,1,level_15
+equip_03,equipment,High-end PC,고성능 PC,All income x2,모든 수익 x2,money,10000,0,all_multiplier,2,1,level_20
+equip_04,equipment,Server Farm,서버팜,Auto income x5,자동 수익 x5,money,100000,1.5,auto_multiplier,5,3,stage_3
+equip_05,equipment,AI Workstation,AI 워크스테이션,All income x10,모든 수익 x10,money,10000000,0,all_multiplier,10,1,stage_5
+team_01,team,Junior Developer,주니어 개발자,+1 Money/s +0.5 EXP/s,자동: +1 돈/초 +0.5 경험치/초,money,500,1.25,auto_income,1,100,level_10
+team_02,team,Graphic Designer,그래픽 디자이너,+3 Money/s,자동: +3 돈/초,money,2000,1.25,auto_money,3,50,level_15
+team_03,team,Senior Developer,시니어 개발자,+5 Money/s +3 EXP/s,자동: +5 돈/초 +3 경험치/초,money,15000,1.25,auto_income,5,25,level_25
+team_04,team,Project Manager,프로젝트 매니저,+20 Money/s,자동: +20 돈/초,money,50000,1.3,auto_money,20,10,stage_3
+team_05,team,AI Researcher,AI 연구원,+1000 Money/s +500 EXP/s,자동: +1000 돈/초 +500 경험치/초,money,1000000,1.3,auto_income,1000,5,stage_5

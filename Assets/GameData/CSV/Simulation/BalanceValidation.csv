@@ -1,0 +1,20 @@
+validation_id,category,check_item,target_value,target_min,target_max,check_formula,status_formula,priority
+prog_01,progression,Level 10 Time,7,5,7,find_time_for_level(10),check_range(actual;5;7),critical
+prog_02,progression,Stage 2 Time,20,15,20,find_time_for_stage(2),check_range(actual;15;20),high
+prog_03,progression,First Project Time,30,25,30,find_time_for_event(first_project),check_range(actual;25;30),medium
+prog_04,progression,First Million Money,50,40,50,find_time_for_money(1000000),check_range(actual;40;50),medium
+prog_05,progression,Stage 5 Time,240,180,240,find_time_for_stage(5),check_range(actual;180;240),low
+prog_06,progression,Stage 10 Time,2100,1800,2400,find_time_for_stage(10),check_range(actual;1800;2400),low
+currency_01,currency,Exp Money Ratio Lv20,5,4,6,get_ratio_at_level(20),check_range(actual;4;6),high
+currency_02,currency,Exp Money Ratio Lv50,2,1.5,2.5,get_ratio_at_level(50),check_range(actual;1.5;2.5),medium
+currency_03,currency,Click vs Auto 30min,20,15,30,get_auto_percentage(30),check_range(actual;15;30),high
+currency_04,currency,Click vs Auto 2hr,50,30,70,get_auto_percentage(120),check_range(actual;30;70),medium
+currency_05,currency,Project Income 1hr,30,20,40,get_project_percentage(60),check_range(actual;20;40),medium
+bottle_01,bottleneck,Progress 0-10min,1,0.8,1.2,get_level_rate(0;10),check_min(actual;0.8),critical
+bottle_02,bottleneck,Progress 10-30min,0.5,0.4,0.6,get_level_rate(10;30),check_min(actual;0.4),high
+bottle_03,bottleneck,Progress 30-60min,0.3,0.2,0.4,get_level_rate(30;60),check_min(actual;0.2),medium
+bottle_04,bottleneck,Progress 1-2hr,0.2,0.15,0.25,get_level_rate(60;120),check_min(actual;0.15),low
+bottle_05,bottleneck,Money Growth Rate,2,1.5,2.5,get_money_growth_rate(60),check_range(actual;1.5;2.5),high
+upgrade_01,upgrade,First Upgrade Time,3,2,5,find_first_upgrade_time(),check_range(actual;2;5),high
+upgrade_02,upgrade,Team Unlock Time,10,8,12,find_team_unlock_time(),check_range(actual;8;12),high
+upgrade_03,upgrade,All Upgrades Stage3,50,40,60,count_available_upgrades(3),check_range(actual;40;60),medium

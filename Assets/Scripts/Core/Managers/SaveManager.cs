@@ -16,9 +16,18 @@ namespace GameDevClicker.Core.Managers
         [SerializeField] private bool _useEncryption = false;
         [SerializeField] private bool _useCompression = false;
         [SerializeField] private bool _createBackups = true;
+        
+        [Header("Auto-Save Settings")]
+        [SerializeField] private bool _enableAutoSave = true;
+        [SerializeField] private float _autoSaveInterval = 30f; // Save every 30 seconds
+        [SerializeField] private bool _saveOnApplicationPause = true;
+        [SerializeField] private bool _saveOnApplicationFocus = true;
+        [SerializeField] private float _minTimeBetweenSaves = 1f; // Prevent save spam
 
         private GameData _currentGameData;
         private bool _isDirty = false;
+        private float _lastSaveTime;
+        private float _autoSaveTimer;
 
         public GameData CurrentGameData => _currentGameData;
         public bool HasUnsavedChanges => _isDirty;
@@ -34,6 +43,23 @@ namespace GameDevClicker.Core.Managers
         {
             base.Awake();
             InitializeSaveSystem();
+        }
+        
+        private void Update()
+        {
+            if (!_enableAutoSave || !_isDirty) return;
+            
+            _autoSaveTimer += Time.deltaTime;
+            
+            if (_autoSaveTimer >= _autoSaveInterval)
+            {
+                if (Time.time - _lastSaveTime >= _minTimeBetweenSaves)
+                {
+                    Debug.Log("[SaveManager] Auto-saving...");
+                    SaveGame();
+                    _autoSaveTimer = 0f;
+                }
+            }
         }
 
         private void InitializeSaveSystem()
@@ -79,6 +105,8 @@ namespace GameDevClicker.Core.Managers
                 PlayerPrefs.Save();
 
                 _isDirty = false;
+                _lastSaveTime = Time.time;
+                _autoSaveTimer = 0f;
                 OnSaveCompleted?.Invoke();
                 GameEvents.InvokeGameSaved();
 
@@ -349,18 +377,43 @@ namespace GameDevClicker.Core.Managers
             return System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(encryptedText));
         }
 
+        public void SetAutoSaveEnabled(bool enabled)
+        {
+            _enableAutoSave = enabled;
+            if (enabled)
+            {
+                _autoSaveTimer = 0f;
+            }
+        }
+        
+        public void SetAutoSaveInterval(float interval)
+        {
+            _autoSaveInterval = Mathf.Max(5f, interval); // Minimum 5 seconds
+        }
+
         private void OnApplicationPause(bool pauseStatus)
         {
-            if (pauseStatus && _isDirty && GameManager.Instance.CurrentState == GameState.Playing)
+            if (_saveOnApplicationPause && pauseStatus && _isDirty && GameManager.Instance.CurrentState == GameState.Playing)
             {
+                Debug.Log("[SaveManager] Saving on application pause...");
                 SaveGame();
             }
         }
 
         private void OnApplicationFocus(bool hasFocus)
         {
-            if (!hasFocus && _isDirty && GameManager.Instance.CurrentState == GameState.Playing)
+            if (_saveOnApplicationFocus && !hasFocus && _isDirty && GameManager.Instance.CurrentState == GameState.Playing)
             {
+                Debug.Log("[SaveManager] Saving on application focus lost...");
+                SaveGame();
+            }
+        }
+        
+        private void OnDestroy()
+        {
+            if (_isDirty && GameManager.Instance?.CurrentState == GameState.Playing)
+            {
+                Debug.Log("[SaveManager] Saving on destroy...");
                 SaveGame();
             }
         }

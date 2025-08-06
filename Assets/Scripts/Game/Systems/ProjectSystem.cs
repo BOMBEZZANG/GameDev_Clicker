@@ -275,7 +275,7 @@ namespace GameDevClicker.Game.Systems
             }
         }
 
-        private long CalculateProjectReward()
+        public long CalculateProjectReward()
         {
             if (_currentProjectType == null) return 0;
 
@@ -288,6 +288,19 @@ namespace GameDevClicker.Game.Systems
             finalReward *= GetDifficultyMultiplier(_currentProjectType.difficulty);
 
             return (long)finalReward;
+        }
+        
+        public void CompleteProjectOffline()
+        {
+            // Used by offline progression system
+            _completedProjectsCount++;
+            _currentProjectRequirement *= projectRequirementMultiplier;
+            _currentProjectProgress = 0f;
+            
+            // Select next project
+            _currentProjectType = SelectProjectType();
+            
+            SaveProjectData();
         }
 
         #endregion
