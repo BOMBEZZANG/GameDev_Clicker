@@ -1,0 +1,507 @@
+# Game Dev Clicker - Complete Development Specification
+
+## Project Overview
+
+### Game Concept
+A clicker/idle game where players progress through the evolution of game development, starting as an indie developer and eventually conquering space-time. The game features 10 progressive stages:
+
+1. **Indie Game Developer** → 2. **Mobile Game Development** → 3. **PC Game Development** → 4. **VR Game Development** → 5. **AI Development** → 6. **Robot Development** → 7. **Rocket Development** → 8. **Spaceship Development** → 9. **Black Hole Explorer Development** → 10. **Time Machine & Space-Time Conquest**
+
+### Core Gameplay
+- **Simple Controls**: One-click mechanics, no scene transitions, intuitive UI
+- **Quick Rewards**: Immediate numerical updates and fast leveling
+- **Endless Growth**: Visual and numerical changes with each growth milestone
+- **Balanced Progression**: Next goals always visible but require effort to achieve
+
+### Monetization Model
+- Advertisement-based revenue (reward ads)
+- In-app purchases (permanent boosts, time skips)
+
+## Technical Stack
+
+### Platform
+- **Engine**: Unity 6000.0 LTS or newer
+- **UI System**: UI Toolkit (USS/UXML)
+- **Backend**: Firebase (Authentication, Realtime Database, Analytics)
+- **Architecture**: MVP-Manager pattern with modular structure
+
+### Key Technologies
+- **State Management**: Singleton pattern with Event System
+- **Data Persistence**: Local save + Cloud sync
+- **Resource Management**: Addressables
+- **Analytics**: Firebase Analytics + Custom Events
+
+## Development Scope
+
+### Phase 1: Core Systems (Week 1)
+
+#### 1.1 Project Setup
+```
+Assets/
+├── Scripts/
+│   ├── Core/
+│   │   ├── Patterns/
+│   │   │   ├── Singleton.cs
+│   │   │   ├── EventSystem.cs
+│   │   │   └── ObjectPool.cs
+│   │   ├── Managers/
+│   │   │   ├── GameManager.cs
+│   │   │   ├── SaveManager.cs
+│   │   │   └── ResourceManager.cs
+│   │   └── Utilities/
+│   │       ├── NumberFormatter.cs
+│   │       └── TimeUtilities.cs
+│   ├── Game/
+│   │   ├── Models/
+│   │   ├── Views/
+│   │   └── Presenters/
+│   └── Data/
+│       ├── ScriptableObjects/
+│       └── SaveSystem/
+```
+
+#### 1.2 Core Components
+
+**Singleton Base Class**
+```csharp
+public abstract class Singleton<T> : MonoBehaviour where T : Component
+{
+    private static T _instance;
+    public static T Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<T>();
+                if (_instance == null)
+                {
+                    GameObject obj = new GameObject();
+                    obj.name = typeof(T).Name;
+                    _instance = obj.AddComponent<T>();
+                }
+            }
+            return _instance;
+        }
+    }
+}
+```
+
+**Event System**
+```csharp
+public static class GameEvents
+{
+    public static event Action<int> OnMoneyChanged;
+    public static event Action<int> OnExperienceGained;
+    public static event Action<int> OnStageUnlocked;
+    public static event Action<UpgradeData> OnUpgradePurchased;
+}
+```
+
+### Phase 2: UI System Migration (Week 2)
+
+#### 2.1 Convert Prototype to UI Toolkit
+
+**USS Style Sheet (GameStyles.uss)**
+```css
+/* Header Styles */
+.header {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    -unity-backdrop-filter-blur-radius: 10px;
+}
+
+.stage-info {
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.stage-title {
+    font-size: 14px;
+    color: #ffd700;
+    margin-bottom: 5px;
+}
+
+.stage-name {
+    font-size: 24px;
+    -unity-font-style: bold;
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Click Zone */
+.click-zone {
+    width: 200px;
+    height: 200px;
+    background-color: rgb(230, 230, 230);
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 0.1s;
+}
+
+.click-zone:hover {
+    scale: 1.05;
+}
+
+.click-zone:active {
+    scale: 0.95;
+}
+
+/* Resources */
+.resource {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 10px;
+    flex-grow: 1;
+    align-items: center;
+}
+
+/* Progress Bar */
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #ffd700;
+    border-radius: 10px;
+    transition-duration: 0.3s;
+}
+```
+
+**UXML Structure (GameUI.uxml)**
+```xml
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:VisualElement name="root" class="container">
+        <!-- Header -->
+        <ui:VisualElement name="header" class="header">
+            <ui:VisualElement class="stage-info">
+                <ui:Label text="Current Stage" class="stage-title"/>
+                <ui:Label text="Indie Game Developer" name="stage-name" class="stage-name"/>
+            </ui:VisualElement>
+            
+            <ui:VisualElement class="resources">
+                <ui:VisualElement class="resource">
+                    <ui:Label text="💰 Money" class="resource-label"/>
+                    <ui:Label text="0" name="money-value" class="resource-value"/>
+                </ui:VisualElement>
+                <ui:VisualElement class="resource">
+                    <ui:Label text="⭐ Experience" class="resource-label"/>
+                    <ui:Label text="0" name="exp-value" class="resource-value"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        
+        <!-- Progress Bar -->
+        <ui:VisualElement class="progress-section">
+            <ui:VisualElement class="progress-bar">
+                <ui:VisualElement name="progress-fill" class="progress-fill"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        
+        <!-- Main Click Area -->
+        <ui:VisualElement class="main-area">
+            <ui:Button name="click-zone" class="click-zone">
+                <ui:Label text="💻" class="click-icon"/>
+                <ui:Label text="Develop!" class="click-text"/>
+            </ui:Button>
+        </ui:VisualElement>
+        
+        <!-- Upgrades -->
+        <ui:ScrollView class="upgrades">
+            <ui:VisualElement name="upgrade-list" class="upgrade-list"/>
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>
+```
+
+### Phase 3: Game Logic Implementation (Week 3)
+
+#### 3.1 Data Models
+
+**Game Data Structure**
+```csharp
+[System.Serializable]
+public class GameData
+{
+    public long money;
+    public long experience;
+    public int currentStage;
+    public float clickPower;
+    public float autoIncome;
+    public Dictionary<string, int> upgradeLevels;
+    public DateTime lastSaveTime;
+}
+
+[CreateAssetMenu(fileName = "StageData", menuName = "Game/Stage Data")]
+public class StageData : ScriptableObject
+{
+    public int stageId;
+    public string stageName;
+    public string stageIcon;
+    public long requiredExperience;
+    public float baseClickPower;
+    public UpgradeData[] availableUpgrades;
+}
+
+[CreateAssetMenu(fileName = "UpgradeData", menuName = "Game/Upgrade Data")]
+public class UpgradeData : ScriptableObject
+{
+    public string upgradeId;
+    public string upgradeName;
+    public string description;
+    public UpgradeType type;
+    public float basePrice;
+    public float priceMultiplier;
+    public float effectValue;
+    public int maxLevel;
+}
+```
+
+#### 3.2 MVP Implementation
+
+**Model**
+```csharp
+public class GameModel
+{
+    private GameData _data;
+    
+    public long Money => _data.money;
+    public long Experience => _data.experience;
+    public int CurrentStage => _data.currentStage;
+    
+    public void AddMoney(long amount)
+    {
+        _data.money += amount;
+        GameEvents.OnMoneyChanged?.Invoke(_data.money);
+    }
+    
+    public void AddExperience(long amount)
+    {
+        _data.experience += amount;
+        GameEvents.OnExperienceGained?.Invoke(_data.experience);
+        CheckStageProgress();
+    }
+}
+```
+
+**View**
+```csharp
+public class GameView : MonoBehaviour
+{
+    private UIDocument _uiDocument;
+    private Label _moneyLabel;
+    private Label _expLabel;
+    private VisualElement _progressFill;
+    
+    void Start()
+    {
+        _uiDocument = GetComponent<UIDocument>();
+        CacheUIElements();
+        RegisterCallbacks();
+    }
+    
+    private void CacheUIElements()
+    {
+        var root = _uiDocument.rootVisualElement;
+        _moneyLabel = root.Q<Label>("money-value");
+        _expLabel = root.Q<Label>("exp-value");
+        _progressFill = root.Q<VisualElement>("progress-fill");
+    }
+}
+```
+
+**Presenter**
+```csharp
+public class GamePresenter : MonoBehaviour
+{
+    private GameModel _model;
+    private GameView _view;
+    
+    void Start()
+    {
+        _model = new GameModel();
+        _view = GetComponent<GameView>();
+        
+        SubscribeToEvents();
+        InitializeGame();
+    }
+    
+    private void HandleClick()
+    {
+        long clickValue = CalculateClickValue();
+        _model.AddMoney(clickValue);
+        _model.AddExperience(clickValue);
+        
+        ShowClickEffect(clickValue);
+    }
+}
+```
+
+### Phase 4: Save System & Firebase Integration (Week 4)
+
+#### 4.1 Local Save System
+```csharp
+public class SaveManager : Singleton<SaveManager>
+{
+    private const string SAVE_KEY = "GameSaveData";
+    
+    public void SaveGame(GameData data)
+    {
+        data.lastSaveTime = DateTime.Now;
+        string json = JsonUtility.ToJson(data);
+        PlayerPrefs.SetString(SAVE_KEY, json);
+        PlayerPrefs.Save();
+    }
+    
+    public GameData LoadGame()
+    {
+        if (PlayerPrefs.HasKey(SAVE_KEY))
+        {
+            string json = PlayerPrefs.GetString(SAVE_KEY);
+            return JsonUtility.FromJson<GameData>(json);
+        }
+        return new GameData();
+    }
+}
+```
+
+#### 4.2 Firebase Integration
+```csharp
+public class FirebaseManager : Singleton<FirebaseManager>
+{
+    private FirebaseAuth _auth;
+    private DatabaseReference _database;
+    
+    public async Task<bool> InitializeFirebase()
+    {
+        var dependencyStatus = await FirebaseApp.CheckAndFixDependenciesAsync();
+        if (dependencyStatus == DependencyStatus.Available)
+        {
+            _auth = FirebaseAuth.DefaultInstance;
+            _database = FirebaseDatabase.DefaultInstance.RootReference;
+            return true;
+        }
+        return false;
+    }
+    
+    public async Task<bool> SaveToCloud(string userId, GameData data)
+    {
+        try
+        {
+            string json = JsonUtility.ToJson(data);
+            await _database.Child("users").Child(userId).SetRawJsonValueAsync(json);
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Failed to save to cloud: {e.Message}");
+            return false;
+        }
+    }
+}
+```
+
+### Phase 5: Advanced Features (Week 5)
+
+#### 5.1 Offline Progress
+```csharp
+public class OfflineProgressCalculator
+{
+    private const int MAX_OFFLINE_HOURS = 8;
+    
+    public OfflineEarnings CalculateOfflineEarnings(DateTime lastSave, float autoIncome)
+    {
+        TimeSpan timeDiff = DateTime.Now - lastSave;
+        double offlineSeconds = Math.Min(timeDiff.TotalSeconds, MAX_OFFLINE_HOURS * 3600);
+        
+        long earnings = (long)(autoIncome * offlineSeconds * 0.5f); // 50% efficiency
+        
+        return new OfflineEarnings
+        {
+            money = earnings,
+            experience = earnings,
+            timeOffline = timeDiff
+        };
+    }
+}
+```
+
+#### 5.2 Performance Optimization
+```csharp
+public class ClickEffectPool : ObjectPool<ClickEffect>
+{
+    protected override ClickEffect CreatePooledItem()
+    {
+        var go = new GameObject("ClickEffect");
+        return go.AddComponent<ClickEffect>();
+    }
+}
+
+public class NumberFormatter
+{
+    private static readonly Dictionary<long, string> _cache = new Dictionary<long, string>();
+    
+    public static string Format(long number)
+    {
+        if (_cache.TryGetValue(number, out string cached))
+            return cached;
+            
+        string formatted = FormatInternal(number);
+        if (_cache.Count < 1000) // Limit cache size
+            _cache[number] = formatted;
+            
+        return formatted;
+    }
+}
+```
+
+## Game Balance Configuration
+
+### Progression Formula
+```
+Stage Experience Required = 1000 * (1.5)^(stage-1)
+Upgrade Price = BasePrice * (1.15)^purchaseCount
+Click Power = BasePower * StageMultiplier * UpgradeMultiplier
+```
+
+### Stage Progression Times
+- Stage 1: 5-10 minutes (Tutorial)
+- Stage 2: 15-20 minutes
+- Stage 3: 30-40 minutes
+- Stage 4-10: Progressive increase up to 10-15 hours
+
+## Testing & Deployment Checklist
+
+- [ ] Unit tests for core systems
+- [ ] Integration tests for Firebase
+- [ ] Performance profiling (maintain 60 FPS)
+- [ ] Battery usage optimization
+- [ ] Offline mode testing
+- [ ] Cloud save sync verification
+- [ ] Ad integration testing
+- [ ] Analytics event tracking
+- [ ] Multi-resolution UI testing
+- [ ] Localization preparation
+
+## Additional Considerations
+
+1. **Anti-cheat measures**: Time validation, server-side verification for purchases
+2. **Analytics events**: First click, stage unlock, upgrade purchase, session length
+3. **A/B testing framework**: For balance adjustments
+4. **Push notifications**: For offline rewards and events
+5. **Social features**: Leaderboards, achievements (Phase 2)
+
+## Deliverables
+
+1. Fully functional Unity project with UI Toolkit implementation
+2. Firebase integration with auth and cloud save
+3. Modular, extensible codebase following MVP-Manager pattern
+4. Complete documentation and code comments
+5. Build configurations for iOS and Android
+
+This specification provides the complete context and technical details needed to develop the Game Dev Clicker from scratch, transforming the HTML/CSS/JS prototype into a full Unity mobile game.

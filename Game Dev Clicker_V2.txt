@@ -1,0 +1,634 @@
+# Game Dev Clicker - Complete Development Specification (v2.0)
+
+## Project Overview
+
+### Game Concept
+A clicker/idle game where players progress through the evolution of game development, starting as an indie developer and eventually conquering space-time. The game features a **dual-currency system** with Experience (EXP) and Money, creating strategic depth and meaningful player choices.
+
+**Core Progression**: 10 stages from Indie Game Developer to Time Machine & Space-Time Conquest
+
+### Progressive Dual Currency System
+- **⭐ Experience (EXP)**: Primary currency gained from clicking, used for learning skills and stage progression
+- **💰 Money**: Secondary currency unlocked at Level 10, used for equipment and team hiring
+
+**Currency Unlock Progression**:
+1. **Level 1-9**: Click generates EXP only ("Learning phase")
+2. **Level 10+**: Click generates EXP + Money ("Earning phase")
+3. **Stage 2+**: Additional revenue streams unlock (projects, ads, investments)
+
+### Core Gameplay
+- **Simple Controls**: One-click mechanics, no scene transitions, intuitive UI
+- **Quick Rewards**: Immediate numerical updates with dual currency gains
+- **Strategic Choices**: Balance between earning money and gaining experience
+- **Endless Growth**: Visual and numerical changes with each growth milestone
+
+### Monetization Model
+- Advertisement-based revenue (reward ads)
+- In-app purchases (permanent boosts, time skips)
+- VIP subscription tiers
+
+## Technical Stack
+
+### Platform
+- **Engine**: Unity 2022.3 LTS or newer
+- **UI System**: UI Toolkit (USS/UXML)
+- **Backend**: Firebase (Authentication, Realtime Database, Analytics)
+- **Architecture**: MVP-Manager pattern with modular structure
+
+### Key Technologies
+- **State Management**: Singleton pattern with Event System
+- **Data Persistence**: Local save + Cloud sync
+- **Resource Management**: Addressables
+- **Analytics**: Firebase Analytics + Custom Events
+
+## Development Scope
+
+### Phase 1: Core Systems (Week 1)
+
+#### 1.1 Updated Data Models
+
+**Game Data Structure with Dual Currency**
+```csharp
+[System.Serializable]
+public class GameData
+{
+    // Dual Currency
+    public long money;
+    public long experience;
+    
+    // Click Values
+    public float moneyPerClick;
+    public float expPerClick;
+    
+    // Auto Income
+    public float autoMoney;
+    public float autoExp;
+    
+    // Progression
+    public int currentStage;
+    public Dictionary<string, int> upgradeLevels;
+    public Dictionary<string, float> multipliers;
+    
+    // Meta
+    public DateTime lastSaveTime;
+    public long totalClicks;
+}
+
+[CreateAssetMenu(fileName = "UpgradeData", menuName = "Game/Upgrade Data")]
+public class UpgradeData : ScriptableObject
+{
+    public string upgradeId;
+    public string upgradeName;
+    public string description;
+    
+    public enum CurrencyType { Money, Experience }
+    public CurrencyType currencyType;
+    
+    public enum UpgradeCategory { Skills, Equipment, Team }
+    public UpgradeCategory category;
+    
+    public float basePrice;
+    public float priceMultiplier;
+    
+    public UpgradeEffect[] effects;
+    public int maxLevel;
+}
+
+[System.Serializable]
+public class UpgradeEffect
+{
+    public enum EffectType 
+    { 
+        MoneyPerClick, 
+        ExpPerClick, 
+        AutoMoney, 
+        AutoExp, 
+        AllMultiplier,
+        MoneyMultiplier,
+        ExpMultiplier
+    }
+    
+    public EffectType type;
+    public float value;
+    public bool isMultiplier;
+}
+```
+
+#### 1.2 Event System Update
+
+```csharp
+public static class GameEvents
+{
+    // Currency Events
+    public static event Action<long> OnMoneyChanged;
+    public static event Action<long> OnExperienceChanged;
+    public static event Action<float, float> OnClickValueChanged;
+    public static event Action<float, float> OnAutoIncomeChanged;
+    
+    // Progression Events
+    public static event Action<int> OnStageUnlocked;
+    public static event Action<UpgradeData> OnUpgradePurchased;
+    
+    // UI Events
+    public static event Action<UpgradeCategory> OnUpgradeTabChanged;
+}
+```
+
+### Phase 2: UI System Migration (Week 2)
+
+#### 2.1 Updated USS Styles
+
+**GameStyles.uss**
+```css
+/* Resource Display with Income */
+.resource {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 10px;
+    flex-grow: 1;
+    align-items: center;
+    min-width: 120px;
+}
+
+.resource-income {
+    font-size: 11px;
+    color: #4CAF50;
+    margin-top: 2px;
+}
+
+/* Currency-specific button styles */
+.upgrade-button {
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    min-width: 80px;
+}
+
+.upgrade-button.exp-button {
+    background-color: #9c27b0;
+}
+
+.upgrade-button.exp-button:hover:not(:disabled) {
+    background-color: #7b1fa2;
+}
+
+.upgrade-button.money-button {
+    background-color: #ff9800;
+}
+
+.upgrade-button.money-button:hover:not(:disabled) {
+    background-color: #f57c00;
+}
+
+/* Click effect for dual currency */
+.click-effect {
+    position: absolute;
+    color: #ffd700;
+    font-size: 20px;
+    font-weight: bold;
+    pointer-events: none;
+    animation: floatUp 1s ease-out forwards;
+    text-align: center;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+```
+
+<!-- Money display with lock state -->
+<ui:VisualElement class="resource" name="money-container">
+    <ui:Label text="💰 Money" class="resource-label"/>
+    <ui:Label text="---" name="money-value" class="resource-value"/>
+    <ui:Label text="Unlock at Lv.10" name="money-lock-text" class="lock-text"/>
+    <ui:Label text="+0/click" name="money-income" class="resource-income hidden"/>
+</ui:VisualElement>
+
+
+#### 2.2 Updated UXML Structure
+
+**GameUI.uxml**
+```xml
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:VisualElement name="root" class="container">
+        <!-- Header with Dual Currency Display -->
+        <ui:VisualElement name="header" class="header">
+            <ui:VisualElement class="stage-info">
+                <ui:Label text="Current Stage" class="stage-title"/>
+                <ui:Label text="Indie Game Developer" name="stage-name" class="stage-name"/>
+            </ui:VisualElement>
+            
+            <ui:VisualElement class="resources">
+                <ui:VisualElement class="resource">
+                    <ui:Label text="💰 Money" class="resource-label"/>
+                    <ui:Label text="0" name="money-value" class="resource-value"/>
+                    <ui:Label text="+1/click" name="money-income" class="resource-income"/>
+                </ui:VisualElement>
+                <ui:VisualElement class="resource">
+                    <ui:Label text="⭐ Experience" class="resource-label"/>
+                    <ui:Label text="0" name="exp-value" class="resource-value"/>
+                    <ui:Label text="+1/click" name="exp-income" class="resource-income"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        
+        <!-- Auto Income Display -->
+        <ui:VisualElement class="auto-income-display">
+            <ui:Label text="Auto Income: 💰 0/s | ⭐ 0/s" name="auto-income"/>
+        </ui:VisualElement>
+        
+        <!-- Categorized Upgrades -->
+        <ui:VisualElement class="upgrades">
+            <ui:VisualElement class="upgrade-tabs">
+                <ui:Button text="Skills (EXP)" name="skills-tab" class="tab active"/>
+                <ui:Button text="Equipment (💰)" name="equipment-tab" class="tab"/>
+                <ui:Button text="Team (💰)" name="team-tab" class="tab"/>
+            </ui:VisualElement>
+            <ui:ScrollView name="upgrade-content" class="upgrade-content"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
+```
+
+### Phase 3: Game Logic Implementation (Week 3)
+
+#### 3.1 Updated Model
+
+```csharp
+public class GameModel
+{
+    private GameData _data;
+    
+    // Properties
+    public long Money => _data.money;
+    public long Experience => _data.experience;
+    public float MoneyPerClick => _data.moneyPerClick;
+    public float ExpPerClick => _data.expPerClick;
+    
+    // Currency Management
+public void PerformClick()
+{
+    float expGain = CalculateExpGain();
+    AddExperience((long)expGain);
+    
+    // Money only after Level 10
+    if (_data.playerLevel >= 10)
+    {
+        float moneyGain = CalculateMoneyGain();
+        float levelBonus = Mathf.Min((_data.playerLevel - 10) * 0.1f, 1.0f);
+        moneyGain *= levelBonus;
+        AddMoney((long)moneyGain);
+    }
+    
+    GameEvents.OnClickPerformed?.Invoke(expGain, moneyGain);
+}
+    
+    private float CalculateMoneyGain()
+    {
+        return _data.moneyPerClick * 
+               _data.multipliers["money"] * 
+               _data.multipliers["all"];
+    }
+    
+    private float CalculateExpGain()
+    {
+        return _data.expPerClick * 
+               _data.multipliers["exp"] * 
+               _data.multipliers["all"];
+    }
+    
+    // Auto Income
+    public void ProcessAutoIncome(float deltaTime)
+    {
+        if (_data.autoMoney > 0)
+        {
+            _data.money += (long)(_data.autoMoney * deltaTime * 
+                          _data.multipliers["money"] * 
+                          _data.multipliers["all"]);
+        }
+        
+        if (_data.autoExp > 0)
+        {
+            _data.experience += (long)(_data.autoExp * deltaTime * 
+                               _data.multipliers["exp"] * 
+                               _data.multipliers["all"]);
+        }
+    }
+}
+```
+
+#### 3.2 Upgrade System Manager
+
+```csharp
+public class UpgradeManager : Singleton<UpgradeManager>
+{
+    [SerializeField] private UpgradeData[] allUpgrades;
+    private Dictionary<string, int> purchasedLevels;
+    
+    public bool CanAffordUpgrade(UpgradeData upgrade)
+    {
+        long cost = CalculateUpgradeCost(upgrade);
+        
+        switch (upgrade.currencyType)
+        {
+            case UpgradeData.CurrencyType.Money:
+                return GameModel.Instance.Money >= cost;
+            case UpgradeData.CurrencyType.Experience:
+                return GameModel.Instance.Experience >= cost;
+        }
+        return false;
+    }
+    
+    public void PurchaseUpgrade(UpgradeData upgrade)
+    {
+        if (!CanAffordUpgrade(upgrade)) return;
+        
+        long cost = CalculateUpgradeCost(upgrade);
+        
+        // Deduct cost
+        switch (upgrade.currencyType)
+        {
+            case UpgradeData.CurrencyType.Money:
+                GameModel.Instance.SpendMoney(cost);
+                break;
+            case UpgradeData.CurrencyType.Experience:
+                GameModel.Instance.SpendExperience(cost);
+                break;
+        }
+        
+        // Apply effects
+        foreach (var effect in upgrade.effects)
+        {
+            ApplyUpgradeEffect(effect);
+        }
+        
+        // Update level
+        purchasedLevels[upgrade.upgradeId]++;
+        GameEvents.OnUpgradePurchased?.Invoke(upgrade);
+    }
+    
+    private void ApplyUpgradeEffect(UpgradeEffect effect)
+    {
+        switch (effect.type)
+        {
+            case UpgradeEffect.EffectType.MoneyPerClick:
+                GameModel.Instance.AddMoneyPerClick(effect.value);
+                break;
+            case UpgradeEffect.EffectType.ExpPerClick:
+                GameModel.Instance.AddExpPerClick(effect.value);
+                break;
+            case UpgradeEffect.EffectType.AutoMoney:
+                GameModel.Instance.AddAutoMoney(effect.value);
+                break;
+            case UpgradeEffect.EffectType.AutoExp:
+                GameModel.Instance.AddAutoExp(effect.value);
+                break;
+            case UpgradeEffect.EffectType.AllMultiplier:
+                GameModel.Instance.MultiplyAll(effect.value);
+                break;
+            // etc...
+        }
+    }
+}
+```
+
+
+#### 3.5 Progressive Unlock System
+
+public class UnlockManager : Singleton<UnlockManager>
+{
+    [System.Serializable]
+    public class UnlockMilestone
+    {
+        public int requiredLevel;
+        public string unlockName;
+        public string unlockDescription;
+        public UnlockType type;
+        public System.Action onUnlock;
+    }
+    
+    public enum UnlockType
+    {
+        MoneyGeneration,    // Level 10
+        ProjectSystem,      // Stage 2
+        AdRevenue,         // Stage 2
+        InvestmentEvents,  // Stage 3
+        TeamManagement     // Stage 3
+    }
+    
+    private void CheckUnlocks()
+    {
+        // Level 10: First Money
+        if (_data.playerLevel == 10 && !_unlockedFeatures.Contains("money"))
+        {
+            ShowUnlockPopup("First Sale!", "Your first game sold! You now earn money from development!");
+            _unlockedFeatures.Add("money");
+            GameEvents.OnFeatureUnlocked?.Invoke(UnlockType.MoneyGeneration);
+        }
+    }
+}
+
+// Project Completion System
+public class ProjectSystem : MonoBehaviour
+{
+    [SerializeField] private float expRequiredForProject = 1000f;
+    private float currentProjectProgress;
+    
+    public void AddProgress(float exp)
+    {
+        if (!IsUnlocked) return;
+        
+        currentProjectProgress += exp;
+        if (currentProjectProgress >= expRequiredForProject)
+        {
+            CompleteProject();
+        }
+    }
+    
+    private void CompleteProject()
+    {
+        long reward = CalculateProjectReward();
+        GameModel.Instance.AddMoney(reward);
+        GameEvents.OnProjectCompleted?.Invoke(reward);
+        
+        currentProjectProgress = 0;
+        expRequiredForProject *= 1.5f; // Increase requirement
+    }
+}
+
+### Phase 4: Balance Configuration (Week 4)
+
+#### 4.1 Dual Currency Balance
+
+**Balance Settings**
+```csharp
+[CreateAssetMenu(fileName = "BalanceSettings", menuName = "Game/Balance Settings")]
+public class BalanceSettings : ScriptableObject
+{
+    [Header("Click Values")]
+    public AnimationCurve moneyPerClickCurve;
+    public AnimationCurve expPerClickCurve;
+    
+    [Header("Stage Requirements")]
+    public long[] stageExpRequirements = new long[]
+    {
+        1000,      // Stage 1
+        15000,     // Stage 2
+        225000,    // Stage 3
+        3375000,   // Stage 4
+        // ... etc
+    };
+    
+    [Header("Currency Ratios")]
+    public float baseMoneyToExpRatio = 1.0f;
+    public float[] stageMoneyMultipliers;
+    
+    [Header("Upgrade Categories")]
+    public UpgradeCategoryBalance skills;
+    public UpgradeCategoryBalance equipment;
+    public UpgradeCategoryBalance team;
+}
+
+[System.Serializable]
+public class UpgradeCategoryBalance
+{
+    public float basePriceMultiplier = 1.0f;
+    public float priceGrowthRate = 1.15f;
+    public float effectivenessMultiplier = 1.0f;
+}
+```
+
+#### 4.2 Example Upgrade Configurations
+
+```json
+{
+  "upgrades": [
+    {
+      "id": "skill_typing",
+      "name": "Typing Speed",
+      "category": "Skills",
+      "currency": "Experience",
+      "basePrice": 100,
+      "priceMultiplier": 1.15,
+      "effects": [
+        {"type": "ExpPerClick", "value": 2}
+      ]
+    },
+    {
+      "id": "equip_keyboard",
+      "name": "Better Keyboard",
+      "category": "Equipment",
+      "currency": "Money",
+      "basePrice": 200,
+      "priceMultiplier": 1.2,
+      "effects": [
+        {"type": "AllMultiplier", "value": 1.5}
+      ]
+    },
+    {
+      "id": "team_junior",
+      "name": "Junior Developer",
+      "category": "Team",
+      "currency": "Money",
+      "basePrice": 500,
+      "priceMultiplier": 1.25,
+      "effects": [
+        {"type": "AutoMoney", "value": 1},
+        {"type": "AutoExp", "value": 0.5}
+      ]
+    }
+  ]
+}
+```
+
+### Phase 5: Advanced Features (Week 5)
+
+#### 5.1 Currency Exchange System (Optional)
+
+```csharp
+public class CurrencyExchange : Singleton<CurrencyExchange>
+{
+    [SerializeField] private float exchangePenalty = 0.5f; // 50% efficiency
+    
+    public void ExchangeMoneyToExp(long amount)
+    {
+        if (GameModel.Instance.Money >= amount)
+        {
+            GameModel.Instance.SpendMoney(amount);
+            GameModel.Instance.AddExperience((long)(amount * exchangePenalty));
+        }
+    }
+    
+    public void ExchangeExpToMoney(long amount)
+    {
+        if (GameModel.Instance.Experience >= amount)
+        {
+            GameModel.Instance.SpendExperience(amount);
+            GameModel.Instance.AddMoney((long)(amount * exchangePenalty));
+        }
+    }
+}
+```
+
+#### 5.2 Strategic Decision Events
+
+```csharp
+public class StrategicEvent
+{
+    public string eventName;
+    public string description;
+    
+    public class Choice
+    {
+        public string text;
+        public long moneyCost;
+        public long expCost;
+        public UpgradeEffect[] rewards;
+    }
+    
+    public Choice[] choices;
+}
+```
+
+## Testing & Balance Considerations
+
+### Dual Currency Balance Points
+1. **Early Game (0-30 min)**
+   - Equal money and exp gains
+   - Introduce currency differences gradually
+   - Clear tutorial on both currencies
+
+2. **Mid Game (30 min - 2 hours)**
+   - Money becomes more valuable for automation
+   - Exp gates stage progression
+   - Strategic choices become important
+
+3. **Late Game (2+ hours)**
+   - Multiplication effects dominate
+   - Currency exchange becomes viable
+   - Prestige planning begins
+
+
+### Key Unlock Analytics
+- Time to reach Level 10 (money unlock)
+- Player retention after money unlock
+- Click frequency change after unlock
+- Revenue source distribution by stage
+- Player level when reaching each stage
+
+### Key Metrics to Track
+- Money vs Exp earning ratios per stage
+- Upgrade purchase patterns
+- Currency bottleneck points
+- Player progression speed with dual currency
+
+## Deliverables
+
+1. Unity project with dual currency system implemented
+2. UI Toolkit setup with currency-specific visual indicators
+3. Balanced upgrade system across three categories
+4. Firebase integration supporting both currencies
+5. Comprehensive analytics tracking both currencies
+6. Complete documentation on dual currency mechanics
+
+This specification provides the complete implementation details for the Game Dev Clicker with the new dual currency system, maintaining all previous features while adding strategic depth through the money/experience split.

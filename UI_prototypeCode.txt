@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Dev Clicker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            height: 100vh;
+            overflow: hidden;
+            color: white;
+            user-select: none;
+        }
+        
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        /* 상단 정보 영역 */
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stage-info {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .stage-title {
+            font-size: 14px;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+        
+        .stage-name {
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .resources {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+        }
+        
+        .resource {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 10px;
+            flex: 1;
+            text-align: center;
+            min-width: 120px;
+        }
+        
+        .resource-label {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 3px;
+        }
+        
+        .resource-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* 메인 클릭 영역 */
+        .main-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .click-zone {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(145deg, #fff, #e6e6e6);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.1s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .click-zone:active {
+            transform: scale(0.95);
+        }
+        
+        .click-zone-content {
+            text-align: center;
+            z-index: 2;
+        }
+        
+        .click-zone-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+        
+        .click-zone-text {
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .click-effect {
+            position: absolute;
+            color: #ffd700;
+            font-size: 20px;
+            font-weight: bold;
+            pointer-events: none;
+            animation: floatUp 1s ease-out forwards;
+            text-align: center;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-70px);
+            }
+        }
+        
+        .auto-income {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .auto-income span {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        /* 하단 업그레이드 영역 */
+        .upgrades {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            max-height: 40vh;
+            overflow-y: auto;
+        }
+        
+        .upgrade-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .tab.active {
+            background: rgba(255, 215, 0, 0.3);
+        }
+        
+        .upgrade-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .upgrade-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .upgrade-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .upgrade-info {
+            flex: 1;
+        }
+        
+        .upgrade-name {
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        
+        .upgrade-desc {
+            font-size: 12px;
+            color: #aaa;
+        }
+        
+        .resource-income {
+            font-size: 11px;
+            color: #4CAF50;
+            margin-top: 2px;
+        }
+        
+        .upgrade-button {
+            background: #4CAF50;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            min-width: 80px;
+        }
+        
+        .upgrade-button.exp-button {
+            background: #9c27b0;
+        }
+        
+        .upgrade-button.exp-button:hover:not(:disabled) {
+            background: #7b1fa2;
+        }
+        
+        .upgrade-button.money-button {
+            background: #ff9800;
+        }
+        
+        .upgrade-button.money-button:hover:not(:disabled) {
+            background: #f57c00;
+        }
+        
+        .upgrade-button:hover:not(:disabled) {
+            background: #45a049;
+        }
+        
+        .upgrade-button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .upgrade-lists {
+            min-height: 200px;
+        }
+        
+        /* 진행도 바 */
+        .progress-section {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .progress-label {
+            font-size: 12px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            width: 0%;
+            transition: width 0.3s;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        /* 프로젝트 시스템 */
+        .project-section {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        
+        .project-section.unlocked {
+            display: block;
+        }
+        
+        .project-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .project-title {
+            font-size: 14px;
+            color: #ffd700;
+        }
+        
+        .project-reward {
+            font-size: 12px;
+            color: #4CAF50;
+        }
+        
+        .resource.locked {
+            opacity: 0.5;
+        }
+        
+        .resource-lock {
+            font-size: 11px;
+            color: #ff9800;
+            font-style: italic;
+            margin-top: 2px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* 레벨업 효과 */
+        .level-up-effect {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 215, 0, 0.9);
+            color: #333;
+            padding: 20px 40px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 1000;
+            animation: levelUpPulse 2s ease-out forwards;
+        }
+        
+        @keyframes levelUpPulse {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        /* 해금 팝업 */
+        .unlock-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            z-index: 1001;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: unlockBounce 0.5s ease-out;
+        }
+        
+        @keyframes unlockBounce {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        .unlock-popup h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .unlock-popup p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        /* 플로팅 파티클 효과 */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 3s linear infinite;
+        }
+        
+        .project-section .progress-label {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 12px;
+            color: #aaa;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 정보 영역 -->
+        <div class="header">
+            <div class="stage-info">
+                <div class="stage-title">현재 단계</div>
+                <div class="stage-name">인디 게임 개발자</div>
+            </div>
+            <div class="resources">
+                <div class="resource">
+                    <div class="resource-label">💰 자금</div>
+                    <div class="resource-value" id="money">0</div>
+                </div>
+                <div class="resource">
+                    <div class="resource-label">⭐ 경험치</div>
+                    <div class="resource-value" id="exp">0</div>
+                </div>
+                <div class="resource">
+                    <div class="resource-label">🚀 스테이지</div>
+                    <div class="resource-value">1/10</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 진행도 -->
+        <div class="progress-section">
+            <div class="progress-label">
+                <span>다음 단계: 모바일 게임 개발</span>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+        </div>
+        
+        <!-- 메인 클릭 영역 -->
+        <div class="main-area">
+            <div class="click-zone" id="clickZone">
+                <div class="click-zone-content">
+                    <div class="click-zone-icon">💻</div>
+                    <div class="click-zone-text">개발하기!</div>
+                </div>
+            </div>
+            <div class="auto-income">
+                자동 수입: 💰 <span id="autoMoney">0</span>/초 | ⭐ <span id="autoExp">0</span>/초
+            </div>
+        </div>
+        
+        <!-- 프로젝트 시스템 (스테이지 2에서 해금) -->
+        <div class="project-section" id="project-section">
+            <div class="project-info">
+                <div class="project-title">🎮 프로젝트: <span id="project-name">간단한 퍼즐 게임</span></div>
+                <div class="project-reward">완성 보상: 💰 <span id="project-reward">1,000</span></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="project-progress" style="width: 0%"></div>
+            </div>
+            <div class="progress-label">
+                <span id="project-progress-text">0 / 100 EXP</span>
+            </div>
+        </div>
+        
+        <!-- 하단 업그레이드 영역 -->
+        <div class="upgrades">
+            <div class="upgrade-tabs">
+                <button class="tab active">개발 도구</button>
+                <button class="tab">팀원 고용</button>
+                <button class="tab">스킬 강화</button>
+            </div>
+            <div class="upgrade-list">
+                <div class="upgrade-item">
+                    <div class="upgrade-info">
+                        <div class="upgrade-name">더 좋은 키보드</div>
+                        <div class="upgrade-desc">클릭당 +2 수익</div>
+                    </div>
+                    <button class="upgrade-button" id="upgrade1">💰 100</button>
+                </div>
+                <div class="upgrade-item">
+                    <div class="upgrade-info">
+                        <div class="upgrade-name">듀얼 모니터</div>
+                        <div class="upgrade-desc">클릭당 +5 수익</div>
+                    </div>
+                    <button class="upgrade-button" id="upgrade2">💰 500</button>
+                </div>
+                <div class="upgrade-item">
+                    <div class="upgrade-info">
+                        <div class="upgrade-name">주니어 개발자</div>
+                        <div class="upgrade-desc">초당 +1 자동 수익</div>
+                    </div>
+                    <button class="upgrade-button" id="upgrade3">💰 1,000</button>
+                </div>
+                <div class="upgrade-item">
+                    <div class="upgrade-info">
+                        <div class="upgrade-name">고성능 PC</div>
+                        <div class="upgrade-desc">모든 수익 2배</div>
+                    </div>
+                    <button class="upgrade-button" id="upgrade4">💰 10,000</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 게임 상태
+        let gameState = {
+            money: 0,
+            exp: 0,
+            playerLevel: 1,
+            moneyPerClick: 0,
+            expPerClick: 1,
+            autoMoney: 0,
+            autoExp: 0,
+            stage: 1,
+            stageProgress: 0,
+            totalExp: 0,
+            multipliers: {
+                all: 1,
+                money: 1,
+                exp: 1
+            },
+            unlockedFeatures: [],
+            projectProgress: 0,
+            projectRequired: 100,
+            projectsCompleted: 0
+        };
+        
+        // 요소 참조
+        const moneyEl = document.getElementById('money');
+        const expEl = document.getElementById('exp');
+        const moneyPerClickEl = document.getElementById('money-per-click');
+        const expPerClickEl = document.getElementById('exp-per-click');
+        const playerLevelEl = document.getElementById('player-level');
+        const currentStageEl = document.getElementById('current-stage');
+        const clickZone = document.getElementById('clickZone');
+        const autoMoneyEl = document.getElementById('autoMoney');
+        const autoExpEl = document.getElementById('autoExp');
+        const progressEl = document.getElementById('progress');
+        const progressPercentEl = document.getElementById('progress-percent');
+        const moneyContainer = document.getElementById('money-container');
+        const moneyLock = document.getElementById('money-lock');
+        const moneyIncomeDisplay = document.getElementById('money-income-display');
+        
+        // 숫자 포맷팅
+        function formatNumber(num) {
+            if (num >= 1e9) return (num / 1e9).toFixed(1) + 'B';
+            if (num >= 1e6) return (num / 1e6).toFixed(1) + 'M';
+            if (num >= 1e3) return (num / 1e3).toFixed(1) + 'K';
+            return Math.floor(num).toString();
+        }
+        
+        // 레벨 업 체크
+        function checkLevelUp() {
+            const expForNextLevel = gameState.playerLevel * 100;
+            if (gameState.totalExp >= expForNextLevel) {
+                gameState.playerLevel++;
+                playerLevelEl.textContent = gameState.playerLevel;
+                
+                // 레벨업 효과
+                showLevelUpEffect();
+                
+                // 레벨 10 도달 시 돈 해금
+                if (gameState.playerLevel === 10 && !gameState.unlockedFeatures.includes('money')) {
+                    unlockMoney();
+                }
+            }
+        }
+        
+        // 레벨업 효과 표시
+        function showLevelUpEffect() {
+            const effect = document.createElement('div');
+            effect.className = 'level-up-effect';
+            effect.textContent = `LEVEL UP! Lv.${gameState.playerLevel}`;
+            document.body.appendChild(effect);
+            
+            setTimeout(() => effect.remove(), 2000);
+        }
+        
+        // 돈 해금
+        function unlockMoney() {
+            gameState.unlockedFeatures.push('money');
+            gameState.moneyPerClick = 1;
+            
+            // UI 업데이트
+            moneyContainer.classList.remove('locked');
+            moneyLock.classList.add('hidden');
+            moneyIncomeDisplay.classList.remove('hidden');
+            moneyEl.textContent = '0';
+            
+            // 해금 팝업 표시
+            showUnlockPopup('🎉 첫 수익 달성!', '축하합니다! 이제 게임 개발로 돈을 벌 수 있습니다!');
+            
+            // 업그레이드 탭 활성화
+            updateUpgradeAvailability();
+        }
+        
+        // 해금 팝업 표시
+        function showUnlockPopup(title, message) {
+            const popup = document.createElement('div');
+            popup.className = 'unlock-popup';
+            popup.innerHTML = `
+                <h2>${title}</h2>
+                <p>${message}</p>
+                <button onclick="this.parentElement.remove()">확인</button>
+            `;
+            document.body.appendChild(popup);
+        }
+        
+        // 프로젝트 시스템 체크
+        function checkProjectUnlock() {
+            if (gameState.stage >= 2 && !gameState.unlockedFeatures.includes('projects')) {
+                gameState.unlockedFeatures.push('projects');
+                document.getElementById('project-section').classList.add('unlocked');
+                showUnlockPopup('🎮 프로젝트 시스템 해금!', '경험치를 모아 프로젝트를 완성하고 큰 보상을 받으세요!');
+            }
+        }
+        
+        // 프로젝트 진행
+        function updateProjectProgress(expGained) {
+            if (!gameState.unlockedFeatures.includes('projects')) return;
+            
+            gameState.projectProgress += expGained;
+            
+            if (gameState.projectProgress >= gameState.projectRequired) {
+                completeProject();
+            } else {
+                // 프로젝트 진행도 UI 업데이트
+                const progress = (gameState.projectProgress / gameState.projectRequired) * 100;
+                document.getElementById('project-progress').style.width = progress + '%';
+                document.getElementById('project-progress-text').textContent = 
+                    `${Math.floor(gameState.projectProgress)} / ${gameState.projectRequired} EXP`;
+            }
+        }
+        
+        // 프로젝트 완성
+        function completeProject() {
+            const reward = 1000 * Math.pow(1.5, gameState.projectsCompleted);
+            gameState.money += reward;
+            gameState.projectsCompleted++;
+            
+            // 다음 프로젝트 설정
+            gameState.projectProgress = 0;
+            gameState.projectRequired *= 1.5;
+            
+            // UI 업데이트
+            document.getElementById('project-reward').textContent = formatNumber(reward * 1.5);
+            document.getElementById('project-progress').style.width = '0%';
+            
+            // 완성 효과
+            const effect = document.createElement('div');
+            effect.className = 'level-up-effect';
+            effect.innerHTML = `프로젝트 완성!<br>+${formatNumber(reward)} 💰`;
+            effect.style.background = 'rgba(76, 175, 80, 0.9)';
+            document.body.appendChild(effect);
+            
+            setTimeout(() => effect.remove(), 2000);
+            
+            updateUI();
+        }
+        
+        // UI 업데이트
+        function updateUI() {
+            moneyEl.textContent = gameState.unlockedFeatures.includes('money') ? 
+                formatNumber(gameState.money) : '---';
+            expEl.textContent = formatNumber(gameState.exp);
+            
+            if (gameState.unlockedFeatures.includes('money')) {
+                const levelBonus = Math.min((gameState.playerLevel - 10) * 0.1, 1);
+                const actualMoneyPerClick = gameState.moneyPerClick * (1 + levelBonus) * 
+                    gameState.multipliers.money * gameState.multipliers.all;
+                moneyPerClickEl.textContent = formatNumber(actualMoneyPerClick);
+            }
+            
+            expPerClickEl.textContent = formatNumber(gameState.expPerClick * 
+                gameState.multipliers.exp * gameState.multipliers.all);
+            autoMoneyEl.textContent = formatNumber(gameState.autoMoney * 
+                gameState.multipliers.money * gameState.multipliers.all);
+            autoExpEl.textContent = formatNumber(gameState.autoExp * 
+                gameState.multipliers.exp * gameState.multipliers.all);
+            
+            // 스테이지 진행도 업데이트
+            const progressPercent = Math.min((gameState.exp / (gameState.stage * 1000)) * 100, 100);
+            progressEl.style.width = progressPercent + '%';
+            progressPercentEl.textContent = Math.floor(progressPercent) + '%';
+            
+            // 스테이지 체크
+            if (gameState.exp >= gameState.stage * 1000) {
+                levelUpStage();
+            }
+            
+            // 업그레이드 버튼 상태
+            updateUpgradeButtons();
+        }
+        
+        // 스테이지 레벨업
+        function levelUpStage() {
+            gameState.stage++;
+            currentStageEl.textContent = gameState.stage;
+            
+            // 스테이지 2 도달 시 프로젝트 해금
+            checkProjectUnlock();
+            
+            showLevelUpEffect();
+        }
+        
+        // 클릭 이벤트
+        clickZone.addEventListener('click', (e) => {
+            const expGain = gameState.expPerClick * gameState.multipliers.exp * gameState.multipliers.all;
+            
+            gameState.exp += expGain;
+            gameState.totalExp += expGain;
+            
+            let moneyGain = 0;
+            if (gameState.unlockedFeatures.includes('money')) {
+                const levelBonus = Math.min((gameState.playerLevel - 10) * 0.1, 1);
+                moneyGain = gameState.moneyPerClick * (1 + levelBonus) * 
+                    gameState.multipliers.money * gameState.multipliers.all;
+                gameState.money += moneyGain;
+            }
+            
+            // 클릭 효과
+            const effect = document.createElement('div');
+            effect.className = 'click-effect';
+            if (moneyGain > 0) {
+                effect.innerHTML = `+${formatNumber(expGain)} ⭐<br>+${formatNumber(moneyGain)} 💰`;
+            } else {
+                effect.innerHTML = `+${formatNumber(expGain)} ⭐`;
+            }
+            effect.style.left = (e.offsetX - 30) + 'px';
+            effect.style.top = (e.offsetY - 20) + 'px';
+            clickZone.appendChild(effect);
+            
+            setTimeout(() => effect.remove(), 1000);
+            
+            // 프로젝트 진행
+            updateProjectProgress(expGain);
+            
+            // 레벨업 체크
+            checkLevelUp();
+            
+            updateUI();
+        });
+        
+        // 자동 수입
+        setInterval(() => {
+            if (gameState.autoMoney > 0 || gameState.autoExp > 0) {
+                gameState.money += gameState.autoMoney * gameState.multipliers.money * gameState.multipliers.all;
+                gameState.exp += gameState.autoExp * gameState.multipliers.exp * gameState.multipliers.all;
+                gameState.totalExp += gameState.autoExp * gameState.multipliers.exp * gameState.multipliers.all;
+                
+                updateProjectProgress(gameState.autoExp * gameState.multipliers.exp * gameState.multipliers.all);
+                checkLevelUp();
+                updateUI();
+            }
+        }, 1000);
+        
+        // 업그레이드 탭 전환
+        function showUpgradeTab(tabName) {
+            document.querySelectorAll('.upgrade-list').forEach(list => {
+                list.style.display = 'none';
+            });
+            
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(tabName + '-upgrades').style.display = 'block';
+            event.target.classList.add('active');
+        }
+        
+        // 업그레이드 가능 여부 체크
+        function updateUpgradeAvailability() {
+            // 돈 관련 탭 활성화/비활성화
+            const equipTab = document.querySelector('[onclick*="equipment"]');
+            const teamTab = document.querySelector('[onclick*="team"]');
+            
+            if (gameState.unlockedFeatures.includes('money')) {
+                if (equipTab) equipTab.disabled = false;
+                if (teamTab) teamTab.disabled = false;
+            } else {
+                if (equipTab) equipTab.disabled = true;
+                if (teamTab) teamTab.disabled = true;
+            }
+        }
+        
+        // 업그레이드 버튼 업데이트
+        function updateUpgradeButtons() {
+            // 스킬 업그레이드 (경험치)
+            const skillUpgrades = [
+                { id: 'skill1', cost: 100 },
+                { id: 'skill2', cost: 500 },
+                { id: 'skill3', cost: 1000 }
+            ];
+            
+            skillUpgrades.forEach(upgrade => {
+                const btn = document.getElementById(upgrade.id);
+                if (btn) btn.disabled = gameState.exp < upgrade.cost;
+            });
+            
+            // 장비 업그레이드 (돈) - 해금된 경우만
+            if (gameState.unlockedFeatures.includes('money')) {
+                const equipUpgrades = [
+                    { id: 'equip1', cost: 200 },
+                    { id: 'equip2', cost: 1000 },
+                    { id: 'equip3', cost: 10000 }
+                ];
+                
+                equipUpgrades.forEach(upgrade => {
+                    const btn = document.getElementById(upgrade.id);
+                    if (btn) btn.disabled = gameState.money < upgrade.cost;
+                });
+                
+                // 팀원 업그레이드 (돈)
+                const teamUpgrades = [
+                    { id: 'team1', cost: 500 },
+                    { id: 'team2', cost: 2000 },
+                    { id: 'team3', cost: 15000 }
+                ];
+                
+                teamUpgrades.forEach(upgrade => {
+                    const btn = document.getElementById(upgrade.id);
+                    if (btn) btn.disabled = gameState.money < upgrade.cost;
+                });
+            }
+        }
+        
+        // 스킬 업그레이드 (경험치 사용)
+        document.getElementById('skill1').addEventListener('click', () => {
+            if (gameState.exp >= 100) {
+                gameState.exp -= 100;
+                gameState.expPerClick += 2;
+                updateUI();
+            }
+        });
+        
+        document.getElementById('skill2').addEventListener('click', () => {
+            if (gameState.exp >= 500) {
+                gameState.exp -= 500;
+                gameState.expPerClick += 5;
+                updateUI();
+            }
+        });
+        
+        document.getElementById('skill3').addEventListener('click', () => {
+            if (gameState.exp >= 1000) {
+                gameState.exp -= 1000;
+                if (gameState.unlockedFeatures.includes('money')) {
+                    gameState.moneyPerClick += 3;
+                }
+                updateUI();
+            }
+        });
+        
+        // 장비 업그레이드 (돈 사용)
+        document.getElementById('equip1').addEventListener('click', () => {
+            if (gameState.unlockedFeatures.includes('money') && gameState.money >= 200) {
+                gameState.money -= 200;
+                gameState.multipliers.all *= 1.5;
+                updateUI();
+            }
+        });
+        
+        document.getElementById('equip2').addEventListener('click', () => {
+            if (gameState.unlockedFeatures.includes('money') && gameState.money >= 1000) {
+                gameState.money -= 1000;
+                gameState.multipliers.all *= 1.3;
+                updateUI();
+            }
+        });
+        
+        document.getElementById('equip3').addEventListener('click', () => {
+            if (gameState.unlockedFeatures.includes('money') && gameState.money >= 10000) {
+                gameState.money -= 10000;
+                gameState.multipliers.all *= 2;
+                updateUI();
+            }
+        });
+        
+        // 팀원 고용 (돈 사용)
+        document.getElementById('team1').addEventListener('click', () => {
+            if (gameState.unlockedFeatures.includes('money') && gameState.money >= 500) {
+                gameState.money -= 500;
+                gameState.autoMoney += 1;
+                gameState.autoExp += 0.5;
+                updateUI();
+            }
+        });
+        
+        document.getElementById('team2').addEventListener('click', () => {
+            if (gameState.unlockedFeatures.includes('money') && gameState.money >= 2000) {
+                gameState.money -= 2000;
+                gameState.autoMoney += 3;
+                updateUI();
+            }
+        });
+        
+        document.getElementById('team3').addEventListener('click', () => {
+            if (gameState.unlockedFeatures.includes('money') && gameState.money >= 15000) {
+                gameState.money -= 15000;
+                gameState.autoMoney += 5;
+                gameState.autoExp += 3;
+                updateUI();
+            }
+        });
+        
+        // 파티클 효과
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 3000);
+        }
+        
+        // 파티클 생성
+        setInterval(createParticle, 500);
+        
+        // 초기 UI 업데이트
+        updateUI();
+        updateUpgradeAvailability();
+        
+        // 글로벌 함수로 등록
+        window.showUpgradeTab = showUpgradeTab;
+    </script>
+</body>
+</html>

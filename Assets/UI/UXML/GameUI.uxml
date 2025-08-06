@@ -1,0 +1,124 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" 
+         xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" 
+         editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" 
+         editor-extension-mode="False">
+
+    <ui:VisualElement name="root" class="container">
+        
+        <!-- Header with Dual Currency Display -->
+        <ui:VisualElement name="header" class="header">
+            <ui:VisualElement name="stage-info" class="stage-info">
+                <ui:Label text="Current Stage" name="stage-title" class="stage-title"/>
+                <ui:Label text="Indie Game Developer" name="stage-name" class="stage-name"/>
+            </ui:VisualElement>
+            
+            <ui:VisualElement name="resources" class="resources">
+                <ui:VisualElement name="money-container" class="resource">
+                    <ui:Label text="💰 Money" name="money-label" class="resource-label"/>
+                    <ui:Label text="---" name="money-value" class="resource-value"/>
+                    <ui:Label text="Unlock at Lv.10" name="money-lock-text" class="resource-lock"/>
+                    <ui:Label text="+0/click" name="money-income" class="resource-income hidden"/>
+                </ui:VisualElement>
+                
+                <ui:VisualElement name="exp-container" class="resource">
+                    <ui:Label text="⭐ Experience" name="exp-label" class="resource-label"/>
+                    <ui:Label text="0" name="exp-value" class="resource-value"/>
+                    <ui:Label text="+1/click" name="exp-income" class="resource-income"/>
+                </ui:VisualElement>
+                
+                <ui:VisualElement name="stage-container" class="resource">
+                    <ui:Label text="🚀 Stage" name="stage-label" class="resource-label"/>
+                    <ui:Label text="1/10" name="stage-value" class="resource-value"/>
+                    <ui:Label text="Level 1" name="player-level" class="resource-income"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        
+        <!-- Progress Bar -->
+        <ui:VisualElement name="progress-section" class="progress-section">
+            <ui:VisualElement name="progress-label" class="progress-label">
+                <ui:Label text="Next Stage: Mobile Game Development" name="progress-next-stage"/>
+                <ui:Label text="0%" name="progress-percent"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="progress-bar" class="progress-bar">
+                <ui:VisualElement name="progress-fill" class="progress-fill"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        
+        <!-- Main Click Area -->
+        <ui:VisualElement name="main-area" class="main-area">
+            <ui:Button name="click-zone" class="click-zone">
+                <ui:VisualElement name="click-zone-content" class="click-zone-content">
+                    <ui:Label text="💻" name="click-zone-icon" class="click-zone-icon"/>
+                    <ui:Label text="Develop!" name="click-zone-text" class="click-zone-text"/>
+                </ui:VisualElement>
+            </ui:Button>
+            
+            <!-- Auto Income Display -->
+            <ui:VisualElement name="auto-income-display" class="auto-income-display">
+                <ui:Label name="auto-income" class="auto-income">
+                    <ui:Label text="Auto Income: 💰 " />
+                    <ui:Label text="0" name="auto-money-value" class="auto-income-value"/>
+                    <ui:Label text="/s | ⭐ " />
+                    <ui:Label text="0" name="auto-exp-value" class="auto-income-value"/>
+                    <ui:Label text="/s" />
+                </ui:Label>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        
+        <!-- Project Section (Initially Hidden) -->
+        <ui:VisualElement name="project-section" class="project-section">
+            <ui:VisualElement name="project-info" class="project-info">
+                <ui:Label name="project-title" class="project-title">
+                    <ui:Label text="🎮 Project: " />
+                    <ui:Label text="Simple Mobile Game" name="project-name"/>
+                </ui:Label>
+                <ui:Label name="project-reward" class="project-reward">
+                    <ui:Label text="Complete Reward: 💰 " />
+                    <ui:Label text="1,000" name="project-reward-value"/>
+                </ui:Label>
+            </ui:VisualElement>
+            <ui:VisualElement name="project-progress-bar" class="progress-bar">
+                <ui:VisualElement name="project-progress-fill" class="progress-fill"/>
+            </ui:VisualElement>
+            <ui:Label name="project-progress-text" class="project-progress-text">0 / 100 EXP</ui:Label>
+        </ui:VisualElement>
+        
+        <!-- Upgrades Section -->
+        <ui:VisualElement name="upgrades" class="upgrades">
+            <ui:VisualElement name="upgrade-tabs" class="upgrade-tabs">
+                <ui:Button text="Skills (EXP)" name="skills-tab" class="tab active"/>
+                <ui:Button text="Equipment (💰)" name="equipment-tab" class="tab"/>
+                <ui:Button text="Team (💰)" name="team-tab" class="tab"/>
+            </ui:VisualElement>
+            
+            <ui:ScrollView name="upgrade-content" class="upgrade-content">
+                <!-- Skills Upgrades (Experience) -->
+                <ui:VisualElement name="skills-upgrades" class="upgrade-list">
+                    <!-- Dynamic content will be populated by GameView -->
+                </ui:VisualElement>
+                
+                <!-- Equipment Upgrades (Money) -->
+                <ui:VisualElement name="equipment-upgrades" class="upgrade-list hidden">
+                    <!-- Dynamic content will be populated by GameView -->
+                </ui:VisualElement>
+                
+                <!-- Team Upgrades (Money) -->
+                <ui:VisualElement name="team-upgrades" class="upgrade-list hidden">
+                    <!-- Dynamic content will be populated by GameView -->
+                </ui:VisualElement>
+            </ui:ScrollView>
+        </ui:VisualElement>
+        
+        <!-- Popup Overlay (Initially Hidden) -->
+        <ui:VisualElement name="popup-overlay" class="popup-overlay hidden">
+            <ui:VisualElement name="unlock-popup" class="unlock-popup">
+                <ui:Label text="🎉 Feature Unlocked!" name="popup-title" class="unlock-popup-title"/>
+                <ui:Label text="Congratulations! You've unlocked a new feature!" name="popup-message" class="unlock-popup-message"/>
+                <ui:Button text="OK" name="popup-button" class="unlock-popup-button"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        
+    </ui:VisualElement>
+    
+</ui:UXML>
