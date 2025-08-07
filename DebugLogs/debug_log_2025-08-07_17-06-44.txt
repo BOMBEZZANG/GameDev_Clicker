@@ -1,0 +1,438 @@
+=== DEBUG LOG EXPORT ===
+Date: 2025-08-07 17:06:44
+Total Entries: 143
+Unity Version: 6000.0.45f1
+===================================================
+
+[16:59:48.805] [Log]
+[SaveManager] Saving on application focus lost...
+-----------------------------------------
+[16:59:48.806] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[16:59:48.808] [Log]
+[SaveManager] Game saved successfully. Save count: 284
+-----------------------------------------
+[16:59:51.367] [Log]
+=== UPGRADE DEBUGGER ===
+-----------------------------------------
+[16:59:51.368] [Log]
+Player Level: 50
+-----------------------------------------
+[16:59:51.368] [Log]
+Player Stage: 10
+-----------------------------------------
+[16:59:51.370] [Log]
+Player Experience: 6000
+-----------------------------------------
+[16:59:51.371] [Log]
+Player Money: 2000
+-----------------------------------------
+[16:59:51.372] [Log]
+
+--- Skills CATEGORY ---
+-----------------------------------------
+[16:59:51.373] [Log]
+Total Skills upgrades loaded: 5
+-----------------------------------------
+[16:59:51.374] [Log]
+✅ UNLOCKED skill_01: Typing Speed
+-----------------------------------------
+[16:59:51.374] [Log]
+  └ Requires: Level 1, Stage 1 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.375] [Log]
+✅ UNLOCKED skill_02: Algorithm Study
+-----------------------------------------
+[16:59:51.375] [Log]
+  └ Requires: Level 5, Stage 1 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.376] [Log]
+✅ UNLOCKED skill_03: Design Sense
+-----------------------------------------
+[16:59:51.376] [Log]
+  └ Requires: Level 10, Stage 1 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.376] [Log]
+✅ UNLOCKED skill_04: Project Management
+-----------------------------------------
+[16:59:51.378] [Log]
+  └ Requires: Level 20, Stage 1 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.378] [Log]
+✅ UNLOCKED skill_05: Innovative Thinking
+-----------------------------------------
+[16:59:51.379] [Log]
+  └ Requires: Level 30, Stage 1 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.380] [Log]
+
+--- Equipment CATEGORY ---
+-----------------------------------------
+[16:59:51.380] [Log]
+Total Equipment upgrades loaded: 5
+-----------------------------------------
+[16:59:51.381] [Log]
+✅ UNLOCKED equip_01: Better Keyboard
+-----------------------------------------
+[16:59:51.381] [Log]
+  └ Requires: Level 10, Stage 1 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.381] [Log]
+✅ UNLOCKED equip_02: Dual Monitor
+-----------------------------------------
+[16:59:51.382] [Log]
+  └ Requires: Level 15, Stage 1 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.383] [Log]
+✅ UNLOCKED equip_03: High-end PC
+-----------------------------------------
+[16:59:51.383] [Log]
+  └ Requires: Level 20, Stage 1 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.384] [Log]
+✅ UNLOCKED equip_04: Server Farm
+-----------------------------------------
+[16:59:51.384] [Log]
+  └ Requires: Level 1, Stage 3 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.385] [Log]
+✅ UNLOCKED equip_05: AI Workstation
+-----------------------------------------
+[16:59:51.386] [Log]
+  └ Requires: Level 1, Stage 5 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.386] [Log]
+
+--- Team CATEGORY ---
+-----------------------------------------
+[16:59:51.387] [Log]
+Total Team upgrades loaded: 5
+-----------------------------------------
+[16:59:51.388] [Log]
+✅ UNLOCKED team_01: Junior Developer
+-----------------------------------------
+[16:59:51.388] [Log]
+  └ Requires: Level 10, Stage 1 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.389] [Log]
+✅ UNLOCKED team_02: Graphic Designer
+-----------------------------------------
+[16:59:51.389] [Log]
+  └ Requires: Level 15, Stage 1 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.389] [Log]
+✅ UNLOCKED team_03: Senior Developer
+-----------------------------------------
+[16:59:51.389] [Log]
+  └ Requires: Level 25, Stage 1 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.391] [Log]
+✅ UNLOCKED team_04: Project Manager
+-----------------------------------------
+[16:59:51.391] [Log]
+  └ Requires: Level 1, Stage 3 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.392] [Log]
+✅ UNLOCKED team_05: AI Researcher
+-----------------------------------------
+[16:59:51.392] [Log]
+  └ Requires: Level 1, Stage 5 | Current Level: 0 | Can Afford: False
+-----------------------------------------
+[16:59:51.393] [Log]
+=== DEBUG COMPLETE ===
+-----------------------------------------
+[16:59:54.268] [Log]
+[GamePresenter] Checking Equipment category - Found 5 total upgrades
+-----------------------------------------
+[16:59:54.269] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 10
+-----------------------------------------
+[16:59:54.270] [Log]
+[GamePresenter] equip_01 (Better Keyboard) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[16:59:54.271] [Log]
+[GamePresenter] equip_02 (Dual Monitor) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[16:59:54.271] [Log]
+[GamePresenter] equip_03 (High-end PC) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[16:59:54.272] [Log]
+[GamePresenter] equip_04 (Server Farm) - Unlocked: True (Requires: Level 1, Stage 3)
+-----------------------------------------
+[16:59:54.272] [Log]
+[GamePresenter] equip_05 (AI Workstation) - Unlocked: True (Requires: Level 1, Stage 5)
+-----------------------------------------
+[16:59:54.274] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Equipment
+-----------------------------------------
+[16:59:54.274] [Log]
+[GameViewUI] Creating upgrade element for equip_01 in parent Viewport
+-----------------------------------------
+[16:59:54.277] [Log]
+[GameViewUI] Successfully created upgrade UI for Better Keyboard
+-----------------------------------------
+[16:59:54.278] [Log]
+[GameViewUI] Creating upgrade element for equip_02 in parent Viewport
+-----------------------------------------
+[16:59:54.280] [Log]
+[GameViewUI] Successfully created upgrade UI for Dual Monitor
+-----------------------------------------
+[16:59:54.280] [Log]
+[GameViewUI] Creating upgrade element for equip_03 in parent Viewport
+-----------------------------------------
+[16:59:54.283] [Log]
+[GameViewUI] Successfully created upgrade UI for High-end PC
+-----------------------------------------
+[16:59:54.284] [Log]
+[GameViewUI] Creating upgrade element for equip_04 in parent Viewport
+-----------------------------------------
+[16:59:54.285] [Log]
+[GameViewUI] Successfully created upgrade UI for Server Farm
+-----------------------------------------
+[16:59:54.287] [Log]
+[GameViewUI] Creating upgrade element for equip_05 in parent Viewport
+-----------------------------------------
+[16:59:54.288] [Log]
+[GameViewUI] Successfully created upgrade UI for AI Workstation
+-----------------------------------------
+[16:59:54.292] [Warning]
+The character with Unicode value \U0001F4B0 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:54.293] [Warning]
+The character with Unicode value \U0001F4B0 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:54.294] [Warning]
+The character with Unicode value \U0001F4B0 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:54.295] [Warning]
+The character with Unicode value \U0001F4B0 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:54.297] [Warning]
+The character with Unicode value \U0001F4B0 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:55.369] [Log]
+[GamePresenter] Checking Skills category - Found 5 total upgrades
+-----------------------------------------
+[16:59:55.370] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 10
+-----------------------------------------
+[16:59:55.371] [Log]
+[GamePresenter] skill_01 (Typing Speed) - Unlocked: True (Requires: Level 1, Stage 1)
+-----------------------------------------
+[16:59:55.371] [Log]
+[GamePresenter] skill_02 (Algorithm Study) - Unlocked: True (Requires: Level 5, Stage 1)
+-----------------------------------------
+[16:59:55.372] [Log]
+[GamePresenter] skill_03 (Design Sense) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[16:59:55.373] [Log]
+[GamePresenter] skill_04 (Project Management) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[16:59:55.373] [Log]
+[GamePresenter] skill_05 (Innovative Thinking) - Unlocked: True (Requires: Level 30, Stage 1)
+-----------------------------------------
+[16:59:55.374] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Skills
+-----------------------------------------
+[16:59:55.374] [Log]
+[GameViewUI] Creating upgrade element for skill_01 in parent Viewport
+-----------------------------------------
+[16:59:55.375] [Log]
+[GameViewUI] Successfully created upgrade UI for Typing Speed
+-----------------------------------------
+[16:59:55.376] [Log]
+[GameViewUI] Creating upgrade element for skill_02 in parent Viewport
+-----------------------------------------
+[16:59:55.378] [Log]
+[GameViewUI] Successfully created upgrade UI for Algorithm Study
+-----------------------------------------
+[16:59:55.378] [Log]
+[GameViewUI] Creating upgrade element for skill_03 in parent Viewport
+-----------------------------------------
+[16:59:55.379] [Log]
+[GameViewUI] Successfully created upgrade UI for Design Sense
+-----------------------------------------
+[16:59:55.380] [Log]
+[GameViewUI] Creating upgrade element for skill_04 in parent Viewport
+-----------------------------------------
+[16:59:55.381] [Log]
+[GameViewUI] Successfully created upgrade UI for Project Management
+-----------------------------------------
+[16:59:55.382] [Log]
+[GameViewUI] Creating upgrade element for skill_05 in parent Viewport
+-----------------------------------------
+[16:59:55.383] [Log]
+[GameViewUI] Successfully created upgrade UI for Innovative Thinking
+-----------------------------------------
+[16:59:55.385] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:55.386] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:55.388] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:55.388] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:55.389] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:55.776] [Log]
+[GamePresenter] Checking Team category - Found 5 total upgrades
+-----------------------------------------
+[16:59:55.776] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 10
+-----------------------------------------
+[16:59:55.777] [Log]
+[GamePresenter] team_01 (Junior Developer) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[16:59:55.778] [Log]
+[GamePresenter] team_02 (Graphic Designer) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[16:59:55.778] [Log]
+[GamePresenter] team_03 (Senior Developer) - Unlocked: True (Requires: Level 25, Stage 1)
+-----------------------------------------
+[16:59:55.779] [Log]
+[GamePresenter] team_04 (Project Manager) - Unlocked: True (Requires: Level 1, Stage 3)
+-----------------------------------------
+[16:59:55.779] [Log]
+[GamePresenter] team_05 (AI Researcher) - Unlocked: True (Requires: Level 1, Stage 5)
+-----------------------------------------
+[16:59:55.781] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Team
+-----------------------------------------
+[16:59:55.781] [Log]
+[GameViewUI] Creating upgrade element for team_01 in parent Viewport
+-----------------------------------------
+[16:59:55.795] [Log]
+[GameViewUI] Successfully created upgrade UI for Junior Developer
+-----------------------------------------
+[16:59:55.796] [Log]
+[GameViewUI] Creating upgrade element for team_02 in parent Viewport
+-----------------------------------------
+[16:59:55.796] [Log]
+[GameViewUI] Successfully created upgrade UI for Graphic Designer
+-----------------------------------------
+[16:59:55.797] [Log]
+[GameViewUI] Creating upgrade element for team_03 in parent Viewport
+-----------------------------------------
+[16:59:55.799] [Log]
+[GameViewUI] Successfully created upgrade UI for Senior Developer
+-----------------------------------------
+[16:59:55.799] [Log]
+[GameViewUI] Creating upgrade element for team_04 in parent Viewport
+-----------------------------------------
+[16:59:55.800] [Log]
+[GameViewUI] Successfully created upgrade UI for Project Manager
+-----------------------------------------
+[16:59:55.801] [Log]
+[GameViewUI] Creating upgrade element for team_05 in parent Viewport
+-----------------------------------------
+[16:59:55.802] [Log]
+[GameViewUI] Successfully created upgrade UI for AI Researcher
+-----------------------------------------
+[16:59:55.803] [Warning]
+The character with Unicode value \U0001F4B0 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:55.805] [Warning]
+The character with Unicode value \U0001F4B0 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:55.805] [Warning]
+The character with Unicode value \U0001F4B0 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:55.806] [Warning]
+The character with Unicode value \U0001F4B0 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[16:59:55.807] [Warning]
+The character with Unicode value \U0001F4B0 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[17:00:02.729] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:00:02.730] [Log]
+[SaveManager] Game saved successfully. Save count: 285
+-----------------------------------------
+[17:00:11.268] [Log]
+[DebugLogExporter] Saved 116 log entries to: C:/Projects/Developer_Clicker/Assets\..\DebugLogs\debug_log_2025-08-07_17-00-10.txt
+-----------------------------------------
+[17:00:33.516] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:00:33.518] [Log]
+[SaveManager] Game saved successfully. Save count: 286
+-----------------------------------------
+[17:01:03.527] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:01:03.528] [Log]
+[SaveManager] Game saved successfully. Save count: 287
+-----------------------------------------
+[17:01:33.539] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:01:33.540] [Log]
+[SaveManager] Game saved successfully. Save count: 288
+-----------------------------------------
+[17:02:03.546] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:02:03.547] [Log]
+[SaveManager] Game saved successfully. Save count: 289
+-----------------------------------------
+[17:02:33.562] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:02:33.562] [Log]
+[SaveManager] Game saved successfully. Save count: 290
+-----------------------------------------
+[17:03:03.566] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:03:03.566] [Log]
+[SaveManager] Game saved successfully. Save count: 291
+-----------------------------------------
+[17:03:33.579] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:03:33.594] [Log]
+[SaveManager] Game saved successfully. Save count: 292
+-----------------------------------------
+[17:04:03.579] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:04:03.594] [Log]
+[SaveManager] Game saved successfully. Save count: 293
+-----------------------------------------
+[17:04:33.588] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:04:33.589] [Log]
+[SaveManager] Game saved successfully. Save count: 294
+-----------------------------------------
+[17:05:03.605] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:05:03.605] [Log]
+[SaveManager] Game saved successfully. Save count: 295
+-----------------------------------------
+[17:05:33.617] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:05:33.617] [Log]
+[SaveManager] Game saved successfully. Save count: 296
+-----------------------------------------
+[17:06:03.629] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:06:03.630] [Log]
+[SaveManager] Game saved successfully. Save count: 297
+-----------------------------------------
+[17:06:33.638] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[17:06:33.640] [Log]
+[SaveManager] Game saved successfully. Save count: 298
+-----------------------------------------

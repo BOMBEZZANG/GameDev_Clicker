@@ -1,0 +1,966 @@
+=== DEBUG LOG EXPORT ===
+Date: 2025-08-07 17:08:58
+Total Entries: 300
+Unity Version: 6000.0.45f1
+===================================================
+
+[17:08:49.045] [Log]
+[Adaptive Performance] No Provider was configured for use. Make sure you added at least one Provider in the Adaptive Performance Settings.
+-----------------------------------------
+[17:08:49.083] [Log]
+[TimeUtilities] Initialized at 8/7/2025 5:08:49 PM
+-----------------------------------------
+[17:08:49.087] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[17:08:49.090] [Log]
+[CSVLoader] Awake - Instance set
+-----------------------------------------
+[17:08:49.092] [Log]
+[CSVLoader] Instance created
+-----------------------------------------
+[17:08:49.093] [Log]
+[BalanceManager] Loading balance data from CSV files...
+-----------------------------------------
+[17:08:49.095] [Log]
+[CSVLoader] Starting to load all CSV data...
+-----------------------------------------
+[17:08:49.097] [Log]
+[CSVLoader] Loaded 15 rows from Upgrades.csv
+-----------------------------------------
+[17:08:49.098] [Log]
+[CSVLoader] Loaded 50 rows from Levels.csv
+-----------------------------------------
+[17:08:49.100] [Log]
+[CSVLoader] Loaded 15 rows from Projects.csv
+-----------------------------------------
+[17:08:49.102] [Log]
+[CSVLoader] Loaded 10 rows from Stage.csv
+-----------------------------------------
+[17:08:49.103] [Log]
+[CSVLoader] Loaded 7 rows from DualCurrency.csv
+-----------------------------------------
+[17:08:49.104] [Log]
+[CSVLoader] Loaded 10 rows from ExpectedTime.csv
+-----------------------------------------
+[17:08:49.106] [Log]
+[CSVLoader] Parsed 15 upgrades
+-----------------------------------------
+[17:08:49.109] [Log]
+[CSVLoader] Parsed 50 levels
+-----------------------------------------
+[17:08:49.111] [Log]
+[CSVLoader] Parsed 15 projects
+-----------------------------------------
+[17:08:49.113] [Log]
+[CSVLoader] Parsed 10 stages
+-----------------------------------------
+[17:08:49.114] [Log]
+[CSVLoader] Parsed 7 dual currency settings
+-----------------------------------------
+[17:08:49.116] [Log]
+[CSVLoader] All CSV data loaded successfully!
+-----------------------------------------
+[17:08:49.116] [Log]
+[BalanceManager] Balance data loaded successfully!
+-----------------------------------------
+[17:08:49.118] [Log]
+[Singleton] An instance of GameDevClicker.Core.Managers.BalanceManager is needed in the scene, so '[Singleton] BalanceManager (UnityEngine.GameObject)' was created with DontDestroyOnLoad.
+-----------------------------------------
+[17:08:49.119] [Log]
+[BalanceManager] Loading balance data from CSV files...
+-----------------------------------------
+[17:08:49.119] [Log]
+[CSVLoader] Starting to load all CSV data...
+-----------------------------------------
+[17:08:49.121] [Log]
+[CSVLoader] Loaded 15 rows from Upgrades.csv
+-----------------------------------------
+[17:08:49.122] [Log]
+[CSVLoader] Loaded 50 rows from Levels.csv
+-----------------------------------------
+[17:08:49.123] [Log]
+[CSVLoader] Loaded 15 rows from Projects.csv
+-----------------------------------------
+[17:08:49.124] [Log]
+[CSVLoader] Loaded 10 rows from Stage.csv
+-----------------------------------------
+[17:08:49.125] [Log]
+[CSVLoader] Loaded 7 rows from DualCurrency.csv
+-----------------------------------------
+[17:08:49.127] [Log]
+[CSVLoader] Loaded 10 rows from ExpectedTime.csv
+-----------------------------------------
+[17:08:49.127] [Log]
+[CSVLoader] Parsed 15 upgrades
+-----------------------------------------
+[17:08:49.128] [Log]
+[CSVLoader] Parsed 50 levels
+-----------------------------------------
+[17:08:49.129] [Log]
+[CSVLoader] Parsed 15 projects
+-----------------------------------------
+[17:08:49.129] [Log]
+[CSVLoader] Parsed 10 stages
+-----------------------------------------
+[17:08:49.130] [Log]
+[CSVLoader] Parsed 7 dual currency settings
+-----------------------------------------
+[17:08:49.131] [Log]
+[CSVLoader] All CSV data loaded successfully!
+-----------------------------------------
+[17:08:49.131] [Log]
+[BalanceManager] Balance data loaded successfully!
+-----------------------------------------
+[17:08:49.132] [Log]
+[GameManager] Balance data initialization started
+-----------------------------------------
+[17:08:49.133] [Log]
+[GameManager] Game initialized successfully
+-----------------------------------------
+[17:08:49.134] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[17:08:49.140] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[17:08:49.140] [Log]
+[Singleton] Using instance already created: SaveManager
+-----------------------------------------
+[17:08:49.141] [Log]
+[GameModel] No saved data found, creating new game data
+-----------------------------------------
+[17:08:49.142] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[17:08:49.143] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[17:08:49.146] [Log]
+[UpgradeManager] Loaded 15 upgrades from Resources
+-----------------------------------------
+[17:08:49.149] [Log]
+[UpgradeManager] Initialized with 15 upgrades
+-----------------------------------------
+[17:08:49.150] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[17:08:49.151] [Log]
+[ProjectSystem] Initialized with default project requirement: 1000
+-----------------------------------------
+[17:08:49.152] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[17:08:49.153] [Log]
+[UnlockManager] Initialized with 0 unlock milestones
+-----------------------------------------
+[17:08:49.154] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[17:08:49.582] [Log]
+[SaveManager] Game loaded successfully. Save version: 2
+-----------------------------------------
+[17:08:49.583] [Log]
+[GameManager] Game state changed: MainMenu -> Playing
+-----------------------------------------
+[17:08:49.583] [Log]
+[GameController] Initializing Game Dev Clicker...
+-----------------------------------------
+[17:08:49.584] [Log]
+[GameController] Statistics System initialized
+-----------------------------------------
+[17:08:49.585] [Log]
+[GameController] Achievement System initialized
+-----------------------------------------
+[17:08:49.585] [Log]
+[GameController] Offline Progression System initialized
+-----------------------------------------
+[17:08:49.586] [Log]
+[GameController] UI System initialized
+-----------------------------------------
+[17:08:49.587] [Log]
+[GameController] Systems connected
+-----------------------------------------
+[17:08:49.588] [Log]
+[SaveManager] Game loaded successfully. Save version: 2
+-----------------------------------------
+[17:08:49.588] [Log]
+[GameController] Loaded existing save
+-----------------------------------------
+[17:08:49.591] [Log]
+[GamePresenter] Checking Skills category - Found 5 total upgrades
+-----------------------------------------
+[17:08:49.592] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 10
+-----------------------------------------
+[17:08:49.595] [Log]
+[GamePresenter] skill_01 (Typing Speed) - Unlocked: True (Requires: Level 1, Stage 1)
+-----------------------------------------
+[17:08:49.595] [Log]
+[GamePresenter] skill_02 (Algorithm Study) - Unlocked: True (Requires: Level 5, Stage 1)
+-----------------------------------------
+[17:08:49.596] [Log]
+[GamePresenter] skill_03 (Design Sense) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[17:08:49.596] [Log]
+[GamePresenter] skill_04 (Project Management) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[17:08:49.596] [Log]
+[GamePresenter] skill_05 (Innovative Thinking) - Unlocked: True (Requires: Level 30, Stage 1)
+-----------------------------------------
+[17:08:49.597] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Skills
+-----------------------------------------
+[17:08:49.599] [Log]
+[GameViewUI] Creating upgrade element for skill_01 in parent Viewport
+-----------------------------------------
+[17:08:49.605] [Log]
+[GameViewUI] Successfully created upgrade UI for Typing Speed
+-----------------------------------------
+[17:08:49.606] [Log]
+[GameViewUI] Creating upgrade element for skill_02 in parent Viewport
+-----------------------------------------
+[17:08:49.606] [Log]
+[GameViewUI] Successfully created upgrade UI for Algorithm Study
+-----------------------------------------
+[17:08:49.608] [Log]
+[GameViewUI] Creating upgrade element for skill_03 in parent Viewport
+-----------------------------------------
+[17:08:49.609] [Log]
+[GameViewUI] Successfully created upgrade UI for Design Sense
+-----------------------------------------
+[17:08:49.609] [Log]
+[GameViewUI] Creating upgrade element for skill_04 in parent Viewport
+-----------------------------------------
+[17:08:49.610] [Log]
+[GameViewUI] Successfully created upgrade UI for Project Management
+-----------------------------------------
+[17:08:49.611] [Log]
+[GameViewUI] Creating upgrade element for skill_05 in parent Viewport
+-----------------------------------------
+[17:08:49.612] [Log]
+[GameViewUI] Successfully created upgrade UI for Innovative Thinking
+-----------------------------------------
+[17:08:49.612] [Log]
+[GamePresenter] Checking Equipment category - Found 5 total upgrades
+-----------------------------------------
+[17:08:49.614] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 10
+-----------------------------------------
+[17:08:49.614] [Log]
+[GamePresenter] equip_01 (Better Keyboard) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[17:08:49.615] [Log]
+[GamePresenter] equip_02 (Dual Monitor) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[17:08:49.616] [Log]
+[GamePresenter] equip_03 (High-end PC) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[17:08:49.616] [Log]
+[GamePresenter] equip_04 (Server Farm) - Unlocked: True (Requires: Level 1, Stage 3)
+-----------------------------------------
+[17:08:49.617] [Log]
+[GamePresenter] equip_05 (AI Workstation) - Unlocked: True (Requires: Level 1, Stage 5)
+-----------------------------------------
+[17:08:49.617] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Equipment
+-----------------------------------------
+[17:08:49.618] [Log]
+[GamePresenter] Checking Team category - Found 5 total upgrades
+-----------------------------------------
+[17:08:49.618] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 10
+-----------------------------------------
+[17:08:49.619] [Log]
+[GamePresenter] team_01 (Junior Developer) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[17:08:49.619] [Log]
+[GamePresenter] team_02 (Graphic Designer) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[17:08:49.620] [Log]
+[GamePresenter] team_03 (Senior Developer) - Unlocked: True (Requires: Level 25, Stage 1)
+-----------------------------------------
+[17:08:49.621] [Log]
+[GamePresenter] team_04 (Project Manager) - Unlocked: True (Requires: Level 1, Stage 3)
+-----------------------------------------
+[17:08:49.621] [Log]
+[GamePresenter] team_05 (AI Researcher) - Unlocked: True (Requires: Level 1, Stage 5)
+-----------------------------------------
+[17:08:49.622] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Team
+-----------------------------------------
+[17:08:49.622] [Log]
+[GameController] Game loop started
+-----------------------------------------
+[17:08:49.622] [Log]
+[GameController] Game Dev Clicker initialized successfully!
+-----------------------------------------
+[17:08:49.624] [Log]
+[OfflineProgression] Not enough offline time: 0.0366159 seconds
+-----------------------------------------
+[17:08:49.626] [Log]
+[GamePresenter] Connections established successfully
+-----------------------------------------
+[17:08:49.626] [Log]
+[GamePresenter] Checking Skills category - Found 5 total upgrades
+-----------------------------------------
+[17:08:49.633] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 10
+-----------------------------------------
+[17:08:49.634] [Log]
+[GamePresenter] skill_01 (Typing Speed) - Unlocked: True (Requires: Level 1, Stage 1)
+-----------------------------------------
+[17:08:49.634] [Log]
+[GamePresenter] skill_02 (Algorithm Study) - Unlocked: True (Requires: Level 5, Stage 1)
+-----------------------------------------
+[17:08:49.634] [Log]
+[GamePresenter] skill_03 (Design Sense) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[17:08:49.635] [Log]
+[GamePresenter] skill_04 (Project Management) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[17:08:49.636] [Log]
+[GamePresenter] skill_05 (Innovative Thinking) - Unlocked: True (Requires: Level 30, Stage 1)
+-----------------------------------------
+[17:08:49.636] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Skills
+-----------------------------------------
+[17:08:49.638] [Log]
+[GameViewUI] Creating upgrade element for skill_01 in parent Viewport
+-----------------------------------------
+[17:08:49.639] [Log]
+[GameViewUI] Successfully created upgrade UI for Typing Speed
+-----------------------------------------
+[17:08:49.640] [Log]
+[GameViewUI] Creating upgrade element for skill_02 in parent Viewport
+-----------------------------------------
+[17:08:49.641] [Log]
+[GameViewUI] Successfully created upgrade UI for Algorithm Study
+-----------------------------------------
+[17:08:49.641] [Log]
+[GameViewUI] Creating upgrade element for skill_03 in parent Viewport
+-----------------------------------------
+[17:08:49.643] [Log]
+[GameViewUI] Successfully created upgrade UI for Design Sense
+-----------------------------------------
+[17:08:49.643] [Log]
+[GameViewUI] Creating upgrade element for skill_04 in parent Viewport
+-----------------------------------------
+[17:08:49.644] [Log]
+[GameViewUI] Successfully created upgrade UI for Project Management
+-----------------------------------------
+[17:08:49.645] [Log]
+[GameViewUI] Creating upgrade element for skill_05 in parent Viewport
+-----------------------------------------
+[17:08:49.646] [Log]
+[GameViewUI] Successfully created upgrade UI for Innovative Thinking
+-----------------------------------------
+[17:08:49.647] [Log]
+[GamePresenter] Checking Equipment category - Found 5 total upgrades
+-----------------------------------------
+[17:08:49.647] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 10
+-----------------------------------------
+[17:08:49.647] [Log]
+[GamePresenter] equip_01 (Better Keyboard) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[17:08:49.649] [Log]
+[GamePresenter] equip_02 (Dual Monitor) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[17:08:49.649] [Log]
+[GamePresenter] equip_03 (High-end PC) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[17:08:49.650] [Log]
+[GamePresenter] equip_04 (Server Farm) - Unlocked: True (Requires: Level 1, Stage 3)
+-----------------------------------------
+[17:08:49.651] [Log]
+[GamePresenter] equip_05 (AI Workstation) - Unlocked: True (Requires: Level 1, Stage 5)
+-----------------------------------------
+[17:08:49.651] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Equipment
+-----------------------------------------
+[17:08:49.652] [Log]
+[GamePresenter] Checking Team category - Found 5 total upgrades
+-----------------------------------------
+[17:08:49.652] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 10
+-----------------------------------------
+[17:08:49.653] [Log]
+[GamePresenter] team_01 (Junior Developer) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[17:08:49.653] [Log]
+[GamePresenter] team_02 (Graphic Designer) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[17:08:49.654] [Log]
+[GamePresenter] team_03 (Senior Developer) - Unlocked: True (Requires: Level 25, Stage 1)
+-----------------------------------------
+[17:08:49.654] [Log]
+[GamePresenter] team_04 (Project Manager) - Unlocked: True (Requires: Level 1, Stage 3)
+-----------------------------------------
+[17:08:49.655] [Log]
+[GamePresenter] team_05 (AI Researcher) - Unlocked: True (Requires: Level 1, Stage 5)
+-----------------------------------------
+[17:08:49.656] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Team
+-----------------------------------------
+[17:08:49.752] [Warning]
+The character with Unicode value \U0001F4B0 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Auto Income Text].
+-----------------------------------------
+[17:08:49.753] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Auto Income Text].
+-----------------------------------------
+[17:08:49.759] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[17:08:49.763] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[17:08:49.763] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[17:08:49.764] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[17:08:49.765] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[17:08:58.264] [Log]
+=== UI VISIBILITY DEBUG ===
+-----------------------------------------
+[17:08:58.264] [Log]
+✅ GameViewUI found
+-----------------------------------------
+[17:08:58.266] [Error]
+❌ No Canvas found for GameViewUI!
+Stack Trace:
+0x00007ffec52eb9dd (Unity) StackWalker::ShowCallstack
+0x00007ffec52fb999 (Unity) PlatformStacktrace::GetStacktrace
+0x00007ffec656f9de (Unity) Stacktrace::GetStacktrace
+0x00007ffec6b194cf (Unity) DebugStringToFile
+0x00007ffec444c305 (Unity) DebugLogHandler_CUSTOM_Internal_Log
+0x00000240fc02f9cd (Mono JIT Code) (wrapper managed-to-native) UnityEngine.DebugLogHandler:Internal_Log_Injected (UnityEngine.LogType,UnityEngine.LogOption,UnityEngine.Bindings.ManagedSpanWrapper&,intptr)
+0x00000240fc02f883 (Mono JIT Code) UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+0x00000240fc02f49b (Mono JIT Code) UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+0x00000240fc02f1e0 (Mono JIT Code) UnityEngine.Logger:Log (UnityEngine.LogType,object)
+0x000002412ac3e225 (Mono JIT Code) UnityEngine.Debug:LogError (object)
+0x000002412ac3de63 (Mono JIT Code) GameDevClicker.Editor.UIVisibilityDebugger:DebugUpgradeUIVisibility () (at C:/Projects/Developer_Clicker/Assets/Scripts/Editor/UIVisibilityDebugger.cs:92)
+0x000002412ac38b53 (Mono JIT Code) GameDevClicker.Editor.UIVisibilityDebugger:OnGUI () (at C:/Projects/Developer_Clicker/Assets/Scripts/Editor/UIVisibilityDebugger.cs:39)
+0x0000023e346c823a (Mono JIT Code) UnityEditor.HostView:InvokeOnGUI (UnityEngine.Rect)
+0x0000023e346c7f83 (Mono JIT Code) UnityEditor.DockArea:DrawView (UnityEngine.Rect)
+0x0000023e346b7973 (Mono JIT Code) UnityEditor.DockArea:OldOnGUI ()
+0x0000023e3469cbbf (Mono JIT Code) UnityEngine.UIElements.IMGUIContainer:DoOnGUI (UnityEngine.Event,UnityEngine.Matrix4x4,UnityEngine.Rect,bool,UnityEngine.Rect,System.Action,bool)
+0x0000023e3469bc9b (Mono JIT Code) UnityEngine.UIElements.IMGUIContainer:HandleIMGUIEvent (UnityEngine.Event,UnityEngine.Matrix4x4,UnityEngine.Rect,System.Action,bool)
+0x0000023e3469b15b (Mono JIT Code) UnityEngine.UIElements.IMGUIContainer:HandleIMGUIEvent (UnityEngine.Event,System.Action,bool)
+0x0000023e3469afb3 (Mono JIT Code) UnityEngine.UIElements.IMGUIContainer:HandleIMGUIEvent (UnityEngine.Event,bool)
+0x0000023e3469aacb (Mono JIT Code) UnityEngine.UIElements.IMGUIContainer:SendEventToIMGUIRaw (UnityEngine.UIElements.EventBase,bool,bool)
+0x0000023e3469a983 (Mono JIT Code) UnityEngine.UIElements.IMGUIContainer:SendEventToIMGUI (UnityEngine.UIElements.EventBase,bool,bool)
+0x00000240541801d3 (Mono JIT Code) UnityEngine.UIElements.IMGUIContainer:HandleEventBubbleUp (UnityEngine.UIElements.EventBase)
+0x000002412ac0cc1c (Mono JIT Code) UnityEngine.UIElements.EventDispatchUtilities:HandleEventAcrossPropagationPathWithCompatibilityEvent (UnityEngine.UIElements.EventBase,UnityEngine.UIElements.EventBase,UnityEngine.UIElements.BaseVisualElementPanel,UnityEngine.UIElements.VisualElement,bool)
+0x000002412ac0b72b (Mono JIT Code) UnityEngine.UIElements.EventDispatchUtilities:DispatchToCapturingElementOrElementUnderPointer (UnityEngine.UIElements.EventBase,UnityEngine.UIElements.BaseVisualElementPanel,int,UnityEngine.Vector2)
+0x000002412ac0b33b (Mono JIT Code) UnityEngine.UIElements.PointerEventBase`1<T_REF>:Dispatch (UnityEngine.UIElements.BaseVisualElementPanel)
+0x0000024054242286 (Mono JIT Code) UnityEngine.UIElements.EventDispatcher:ProcessEvent (UnityEngine.UIElements.EventBase,UnityEngine.UIElements.BaseVisualElementPanel)
+0x0000024054241df3 (Mono JIT Code) UnityEngine.UIElements.EventDispatcher:Dispatch (UnityEngine.UIElements.EventBase,UnityEngine.UIElements.BaseVisualElementPanel,UnityEngine.UIElements.DispatchMode)
+0x0000024054241c93 (Mono JIT Code) UnityEngine.UIElements.BaseVisualElementPanel:SendEvent (UnityEngine.UIElements.EventBase,UnityEngine.UIElements.DispatchMode)
+0x0000023e3467161b (Mono JIT Code) UnityEngine.UIElements.UIElementsUtility:DoDispatch (UnityEngine.UIElements.BaseVisualElementPanel)
+0x0000023e34671023 (Mono JIT Code) UnityEngine.UIElements.UIElementsUtility:UnityEngine.UIElements.IUIElementsUtility.ProcessEvent (int,intptr,bool&)
+0x0000023e34670e3f (Mono JIT Code) UnityEngine.UIElements.UIEventRegistration:ProcessEvent (int,intptr)
+0x0000023e34670d5b (Mono JIT Code) UnityEngine.UIElements.UIEventRegistration/<>c:<.cctor>b__1_2 (int,intptr)
+0x0000023e3466fd6a (Mono JIT Code) UnityEngine.GUIUtility:ProcessEvent (int,intptr,bool&)
+0x0000023e3466ff26 (Mono JIT Code) (wrapper runtime-invoke) <Module>:runtime_invoke_void_int_intptr_intptr& (object,intptr,intptr,intptr)
+0x00007ffeb85e68de (mono-2.0-bdwgc) mono_jit_runtime_invoke (at C:/build/output/Unity-Technologies/mono/mono/mini/mini-runtime.c:3445)
+0x00007ffeb8528404 (mono-2.0-bdwgc) do_runtime_invoke (at C:/build/output/Unity-Technologies/mono/mono/metadata/object.c:3068)
+0x00007ffeb85284f0 (mono-2.0-bdwgc) mono_runtime_invoke (at C:/build/output/Unity-Technologies/mono/mono/metadata/object.c:3115)
+0x00007ffec520f844 (Unity) scripting_method_invoke
+0x00007ffec51e75c3 (Unity) ScriptingInvocation::Invoke
+0x00007ffec51e2885 (Unity) ScriptingInvocation::Invoke<void>
+0x00007ffec532711d (Unity) Scripting::UnityEngine::GUIUtilityProxy::ProcessEvent
+0x00007ffec6525314 (Unity) GUIView::ProcessRetainedMode
+0x00007ffec65b0b6a (Unity) GUIView::OnInputEvent
+0x00007ffec6525243 (Unity) GUIView::ProcessInputEventInternal
+0x00007ffec65250d1 (Unity) GUIView::ProcessInputEvent
+0x00007ffec65b17b1 (Unity) GUIViewPlatform::ProcessEventMessages
+0x00007ffec65add5f (Unity) GUIViewPlatform::GUIViewWndProc
+0x00007fff7e6081d6 (USER32) CallWindowProcW
+0x00007fff7e605d2d (USER32) IsWindowUnicode
+0x00007ffec6574563 (Unity) MainMessageLoop
+0x00007ffec657a384 (Unity) UnityMain
+0x00007ff60ef02fba (Unity) __scrt_common_main_seh
+0x00007fff7f69e8d7 (KERNEL32) BaseThreadInitThunk
+0x00007fff7fdfc34c (ntdll) RtlUserThreadStart
+
+-----------------------------------------
+[17:08:58.266] [Log]
+Found 5 UpgradeItemUI components in scene
+-----------------------------------------
+[17:08:58.267] [Log]
+
+--- Upgrade Item #1: UpgradeItem_skill_05 ---
+-----------------------------------------
+[17:08:58.267] [Log]
+GameObject: UpgradeItem_skill_05
+-----------------------------------------
+[17:08:58.268] [Log]
+  Active in Hierarchy: True
+-----------------------------------------
+[17:08:58.269] [Log]
+  Active Self: True
+-----------------------------------------
+[17:08:58.270] [Log]
+  Layer: UI (5)
+-----------------------------------------
+[17:08:58.270] [Log]
+  Parent 0: Viewport (Active: True)
+-----------------------------------------
+[17:08:58.270] [Log]
+  Parent 1: Scroll View (Active: True)
+-----------------------------------------
+[17:08:58.272] [Log]
+  Parent 2: Upgrade List (Active: True)
+-----------------------------------------
+[17:08:58.272] [Log]
+  Parent 3: Upgrade Content (Active: True)
+-----------------------------------------
+[17:08:58.273] [Log]
+  Parent 4: Upgrades Panel (Active: True)
+-----------------------------------------
+[17:08:58.274] [Log]
+  Parent 5: Canvas (Active: True)
+-----------------------------------------
+[17:08:58.275] [Log]
+  RectTransform:
+-----------------------------------------
+[17:08:58.275] [Log]
+    Position: (450.00, -750.00, 0.00)
+-----------------------------------------
+[17:08:58.276] [Log]
+    Size: (900.00, 100.00)
+-----------------------------------------
+[17:08:58.278] [Log]
+    Anchors: Min(0.00, 1.00) Max(0.00, 1.00)
+-----------------------------------------
+[17:08:58.278] [Log]
+    Pivot: (0.50, 0.50)
+-----------------------------------------
+[17:08:58.279] [Log]
+    Scale: (1.00, 1.00, 1.00)
+-----------------------------------------
+[17:08:58.279] [Log]
+    World Corners:
+-----------------------------------------
+[17:08:58.280] [Log]
+      [0] (7.84, -99.21, 0.00)
+-----------------------------------------
+[17:08:58.280] [Log]
+      [1] (7.84, -79.60, 0.00)
+-----------------------------------------
+[17:08:58.280] [Log]
+      [2] (184.35, -79.60, 0.00)
+-----------------------------------------
+[17:08:58.282] [Log]
+      [3] (184.35, -99.21, 0.00)
+-----------------------------------------
+[17:08:58.283] [Log]
+    Potentially Visible on Screen: ❌ NO
+-----------------------------------------
+[17:08:58.284] [Log]
+  Text Component (Name Text):
+-----------------------------------------
+[17:08:58.284] [Log]
+    Enabled: True
+-----------------------------------------
+[17:08:58.285] [Log]
+    Text: 'Innovative Thinking'
+-----------------------------------------
+[17:08:58.285] [Log]
+    Color: RGBA(0.000, 0.000, 0.000, 1.000)
+-----------------------------------------
+[17:08:58.286] [Log]
+    Font Size: 36
+-----------------------------------------
+[17:08:58.286] [Log]
+    Alpha: 1
+-----------------------------------------
+[17:08:58.287] [Log]
+  Text Component (Description Text):
+-----------------------------------------
+[17:08:58.288] [Log]
+    Enabled: True
+-----------------------------------------
+[17:08:58.288] [Log]
+    Text: 'All EXP +50%'
+-----------------------------------------
+[17:08:58.289] [Log]
+    Color: RGBA(0.000, 0.000, 0.000, 1.000)
+-----------------------------------------
+[17:08:58.290] [Log]
+    Font Size: 30
+-----------------------------------------
+[17:08:58.290] [Log]
+    Alpha: 1
+-----------------------------------------
+[17:08:58.290] [Log]
+  Text Component (Button Text):
+-----------------------------------------
+[17:08:58.292] [Log]
+    Enabled: True
+-----------------------------------------
+[17:08:58.292] [Log]
+    Text: '⭐ 20.0K'
+-----------------------------------------
+[17:08:58.293] [Log]
+    Color: RGBA(0.196, 0.196, 0.196, 1.000)
+-----------------------------------------
+[17:08:58.293] [Log]
+    Font Size: 24
+-----------------------------------------
+[17:08:58.294] [Log]
+    Alpha: 1
+-----------------------------------------
+[17:08:58.294] [Log]
+
+--- Upgrade Item #2: UpgradeItem_skill_04 ---
+-----------------------------------------
+[17:08:58.294] [Log]
+GameObject: UpgradeItem_skill_04
+-----------------------------------------
+[17:08:58.295] [Log]
+  Active in Hierarchy: True
+-----------------------------------------
+[17:08:58.295] [Log]
+  Active Self: True
+-----------------------------------------
+[17:08:58.296] [Log]
+  Layer: UI (5)
+-----------------------------------------
+[17:08:58.296] [Log]
+  Parent 0: Viewport (Active: True)
+-----------------------------------------
+[17:08:58.296] [Log]
+  Parent 1: Scroll View (Active: True)
+-----------------------------------------
+[17:08:58.298] [Log]
+  Parent 2: Upgrade List (Active: True)
+-----------------------------------------
+[17:08:58.298] [Log]
+  Parent 3: Upgrade Content (Active: True)
+-----------------------------------------
+[17:08:58.299] [Log]
+  Parent 4: Upgrades Panel (Active: True)
+-----------------------------------------
+[17:08:58.299] [Log]
+  Parent 5: Canvas (Active: True)
+-----------------------------------------
+[17:08:58.300] [Log]
+  RectTransform:
+-----------------------------------------
+[17:08:58.301] [Log]
+    Position: (450.00, -650.00, 0.00)
+-----------------------------------------
+[17:08:58.301] [Log]
+    Size: (900.00, 100.00)
+-----------------------------------------
+[17:08:58.301] [Log]
+    Anchors: Min(0.00, 1.00) Max(0.00, 1.00)
+-----------------------------------------
+[17:08:58.305] [Log]
+    Pivot: (0.50, 0.50)
+-----------------------------------------
+[17:08:58.306] [Log]
+    Scale: (1.00, 1.00, 1.00)
+-----------------------------------------
+[17:08:58.306] [Log]
+    World Corners:
+-----------------------------------------
+[17:08:58.307] [Log]
+      [0] (7.84, -79.60, 0.00)
+-----------------------------------------
+[17:08:58.308] [Log]
+      [1] (7.84, -59.99, 0.00)
+-----------------------------------------
+[17:08:58.308] [Log]
+      [2] (184.35, -59.99, 0.00)
+-----------------------------------------
+[17:08:58.308] [Log]
+      [3] (184.35, -79.60, 0.00)
+-----------------------------------------
+[17:08:58.309] [Log]
+    Potentially Visible on Screen: ❌ NO
+-----------------------------------------
+[17:08:58.310] [Log]
+  Text Component (Name Text):
+-----------------------------------------
+[17:08:58.311] [Log]
+    Enabled: True
+-----------------------------------------
+[17:08:58.311] [Log]
+    Text: 'Project Management'
+-----------------------------------------
+[17:08:58.311] [Log]
+    Color: RGBA(0.000, 0.000, 0.000, 1.000)
+-----------------------------------------
+[17:08:58.312] [Log]
+    Font Size: 36
+-----------------------------------------
+[17:08:58.312] [Log]
+    Alpha: 1
+-----------------------------------------
+[17:08:58.313] [Log]
+  Text Component (Description Text):
+-----------------------------------------
+[17:08:58.314] [Log]
+    Enabled: True
+-----------------------------------------
+[17:08:58.314] [Log]
+    Text: 'Project speed +20%'
+-----------------------------------------
+[17:08:58.315] [Log]
+    Color: RGBA(0.000, 0.000, 0.000, 1.000)
+-----------------------------------------
+[17:08:58.315] [Log]
+    Font Size: 30
+-----------------------------------------
+[17:08:58.316] [Log]
+    Alpha: 1
+-----------------------------------------
+[17:08:58.316] [Log]
+  Text Component (Button Text):
+-----------------------------------------
+[17:08:58.316] [Log]
+    Enabled: True
+-----------------------------------------
+[17:08:58.317] [Log]
+    Text: '⭐ 5.00K'
+-----------------------------------------
+[17:08:58.318] [Log]
+    Color: RGBA(0.196, 0.196, 0.196, 1.000)
+-----------------------------------------
+[17:08:58.318] [Log]
+    Font Size: 24
+-----------------------------------------
+[17:08:58.318] [Log]
+    Alpha: 1
+-----------------------------------------
+[17:08:58.320] [Log]
+
+--- Upgrade Item #3: UpgradeItem_skill_03 ---
+-----------------------------------------
+[17:08:58.320] [Log]
+GameObject: UpgradeItem_skill_03
+-----------------------------------------
+[17:08:58.320] [Log]
+  Active in Hierarchy: True
+-----------------------------------------
+[17:08:58.321] [Log]
+  Active Self: True
+-----------------------------------------
+[17:08:58.321] [Log]
+  Layer: UI (5)
+-----------------------------------------
+[17:08:58.322] [Log]
+  Parent 0: Viewport (Active: True)
+-----------------------------------------
+[17:08:58.322] [Log]
+  Parent 1: Scroll View (Active: True)
+-----------------------------------------
+[17:08:58.323] [Log]
+  Parent 2: Upgrade List (Active: True)
+-----------------------------------------
+[17:08:58.324] [Log]
+  Parent 3: Upgrade Content (Active: True)
+-----------------------------------------
+[17:08:58.324] [Log]
+  Parent 4: Upgrades Panel (Active: True)
+-----------------------------------------
+[17:08:58.325] [Log]
+  Parent 5: Canvas (Active: True)
+-----------------------------------------
+[17:08:58.325] [Log]
+  RectTransform:
+-----------------------------------------
+[17:08:58.326] [Log]
+    Position: (450.00, -550.00, 0.00)
+-----------------------------------------
+[17:08:58.326] [Log]
+    Size: (900.00, 100.00)
+-----------------------------------------
+[17:08:58.327] [Log]
+    Anchors: Min(0.00, 1.00) Max(0.00, 1.00)
+-----------------------------------------
+[17:08:58.327] [Log]
+    Pivot: (0.50, 0.50)
+-----------------------------------------
+[17:08:58.328] [Log]
+    Scale: (1.00, 1.00, 1.00)
+-----------------------------------------
+[17:08:58.328] [Log]
+    World Corners:
+-----------------------------------------
+[17:08:58.329] [Log]
+      [0] (7.84, -59.99, 0.00)
+-----------------------------------------
+[17:08:58.330] [Log]
+      [1] (7.84, -40.38, 0.00)
+-----------------------------------------
+[17:08:58.330] [Log]
+      [2] (184.35, -40.38, 0.00)
+-----------------------------------------
+[17:08:58.331] [Log]
+      [3] (184.35, -59.99, 0.00)
+-----------------------------------------
+[17:08:58.331] [Log]
+    Potentially Visible on Screen: ❌ NO
+-----------------------------------------
+[17:08:58.332] [Log]
+  Text Component (Name Text):
+-----------------------------------------
+[17:08:58.332] [Log]
+    Enabled: True
+-----------------------------------------
+[17:08:58.333] [Log]
+    Text: 'Design Sense'
+-----------------------------------------
+[17:08:58.334] [Log]
+    Color: RGBA(0.000, 0.000, 0.000, 1.000)
+-----------------------------------------
+[17:08:58.334] [Log]
+    Font Size: 36
+-----------------------------------------
+[17:08:58.335] [Log]
+    Alpha: 1
+-----------------------------------------
+[17:08:58.335] [Log]
+  Text Component (Description Text):
+-----------------------------------------
+[17:08:58.336] [Log]
+    Enabled: True
+-----------------------------------------
+[17:08:58.336] [Log]
+    Text: '+3 Money per click (from Lv.10)'
+-----------------------------------------
+[17:08:58.336] [Log]
+    Color: RGBA(0.000, 0.000, 0.000, 1.000)
+-----------------------------------------
+[17:08:58.337] [Log]
+    Font Size: 30
+-----------------------------------------
+[17:08:58.337] [Log]
+    Alpha: 1
+-----------------------------------------
+[17:08:58.338] [Log]
+  Text Component (Button Text):
+-----------------------------------------
+[17:08:58.338] [Log]
+    Enabled: True
+-----------------------------------------
+[17:08:58.338] [Log]
+    Text: '⭐ 1.00K'
+-----------------------------------------
+[17:08:58.340] [Log]
+    Color: RGBA(0.196, 0.196, 0.196, 1.000)
+-----------------------------------------
+[17:08:58.341] [Log]
+    Font Size: 24
+-----------------------------------------
+[17:08:58.341] [Log]
+    Alpha: 1
+-----------------------------------------
+[17:08:58.342] [Log]
+
+--- Upgrade Item #4: UpgradeItem_skill_02 ---
+-----------------------------------------
+[17:08:58.343] [Log]
+GameObject: UpgradeItem_skill_02
+-----------------------------------------
+[17:08:58.344] [Log]
+  Active in Hierarchy: True
+-----------------------------------------
+[17:08:58.344] [Log]
+  Active Self: True
+-----------------------------------------
+[17:08:58.344] [Log]
+  Layer: UI (5)
+-----------------------------------------
+[17:08:58.345] [Log]
+  Parent 0: Viewport (Active: True)
+-----------------------------------------
+[17:08:58.345] [Log]
+  Parent 1: Scroll View (Active: True)
+-----------------------------------------
+[17:08:58.346] [Log]
+  Parent 2: Upgrade List (Active: True)
+-----------------------------------------
+[17:08:58.346] [Log]
+  Parent 3: Upgrade Content (Active: True)
+-----------------------------------------
+[17:08:58.347] [Log]
+  Parent 4: Upgrades Panel (Active: True)
+-----------------------------------------
+[17:08:58.348] [Log]
+  Parent 5: Canvas (Active: True)
+-----------------------------------------
+[17:08:58.348] [Log]
+  RectTransform:
+-----------------------------------------
+[17:08:58.348] [Log]
+    Position: (450.00, -450.00, 0.00)
+-----------------------------------------
+[17:08:58.349] [Log]
+    Size: (900.00, 100.00)
+-----------------------------------------
+[17:08:58.349] [Log]
+    Anchors: Min(0.00, 1.00) Max(0.00, 1.00)
+-----------------------------------------
+[17:08:58.350] [Log]
+    Pivot: (0.50, 0.50)
+-----------------------------------------
+[17:08:58.351] [Log]
+    Scale: (1.00, 1.00, 1.00)
+-----------------------------------------
+[17:08:58.351] [Log]
+    World Corners:
+-----------------------------------------
+[17:08:58.352] [Log]
+      [0] (7.84, -40.38, 0.00)
+-----------------------------------------
+[17:08:58.352] [Log]
+      [1] (7.84, -20.76, 0.00)
+-----------------------------------------
+[17:08:58.353] [Log]
+      [2] (184.35, -20.76, 0.00)
+-----------------------------------------
+[17:08:58.353] [Log]
+      [3] (184.35, -40.38, 0.00)
+-----------------------------------------
+[17:08:58.353] [Log]
+    Potentially Visible on Screen: ❌ NO
+-----------------------------------------
+[17:08:58.354] [Log]
+  Text Component (Name Text):
+-----------------------------------------
+[17:08:58.354] [Log]
+    Enabled: True
+-----------------------------------------
+[17:08:58.355] [Log]
+    Text: 'Algorithm Study'
+-----------------------------------------
+[17:08:58.355] [Log]
+    Color: RGBA(0.000, 0.000, 0.000, 1.000)
+-----------------------------------------
+[17:08:58.357] [Log]
+    Font Size: 36
+-----------------------------------------
+[17:08:58.357] [Log]
+    Alpha: 1
+-----------------------------------------
+[17:08:58.358] [Log]
+  Text Component (Description Text):
+-----------------------------------------
+[17:08:58.358] [Log]
+    Enabled: True
+-----------------------------------------
+[17:08:58.359] [Log]
+    Text: '+5 EXP per click'
+-----------------------------------------
+[17:08:58.359] [Log]
+    Color: RGBA(0.000, 0.000, 0.000, 1.000)
+-----------------------------------------

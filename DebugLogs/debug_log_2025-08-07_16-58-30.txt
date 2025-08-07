@@ -1,0 +1,27 @@
+=== DEBUG LOG EXPORT ===
+Date: 2025-08-07 16:58:30
+Total Entries: 7
+Unity Version: 6000.0.45f1
+===================================================
+
+[16:56:58.098] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[16:56:58.098] [Log]
+[SaveManager] Game saved successfully. Save count: 280
+-----------------------------------------
+[16:57:22.111] [Log]
+[DebugLogExporter] Saved 2 log entries to: C:/Projects/Developer_Clicker/Assets\..\DebugLogs\debug_log_2025-08-07_16-57-19.txt
+-----------------------------------------
+[16:57:32.871] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[16:57:32.871] [Log]
+[SaveManager] Game saved successfully. Save count: 281
+-----------------------------------------
+[16:58:03.654] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[16:58:03.654] [Log]
+[SaveManager] Game saved successfully. Save count: 282
+-----------------------------------------

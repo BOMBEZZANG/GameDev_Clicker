@@ -257,19 +257,37 @@ namespace GameDevClicker.Game.Presenters
 
         private void PopulateUpgradeList(UpgradeData.UpgradeCategory category)
         {
-            if (UpgradeManager.Instance == null) return;
+            if (UpgradeManager.Instance == null) 
+            {
+                Debug.LogWarning("[GamePresenter] UpgradeManager.Instance is null!");
+                return;
+            }
 
             var upgrades = UpgradeManager.Instance.GetUpgradesByCategory(category);
             var availableUpgrades = new List<UpgradeData>();
 
+            Debug.Log($"[GamePresenter] Checking {category} category - Found {upgrades.Count} total upgrades");
+            
+            // Get current player state for debugging
+            var gameData = SaveManager.Instance?.CurrentGameData;
+            int playerLevel = gameData?.playerLevel ?? 1;
+            int playerStage = gameData?.currentStage ?? 1;
+            
+            Debug.Log($"[GamePresenter] Player State - Level: {playerLevel}, Stage: {playerStage}");
+
             foreach (var upgrade in upgrades)
             {
-                if (UpgradeManager.Instance.IsUpgradeUnlocked(upgrade))
+                bool isUnlocked = UpgradeManager.Instance.IsUpgradeUnlocked(upgrade);
+                string unlockInfo = $"Level {upgrade.requiredLevel}, Stage {upgrade.requiredStage}";
+                Debug.Log($"[GamePresenter] {upgrade.upgradeId} ({upgrade.upgradeName}) - Unlocked: {isUnlocked} (Requires: {unlockInfo})");
+                
+                if (isUnlocked)
                 {
                     availableUpgrades.Add(upgrade);
                 }
             }
 
+            Debug.Log($"[GamePresenter] Showing {availableUpgrades.Count} unlocked upgrades for {category}");
             gameViewUI.PopulateUpgradeList(category, availableUpgrades);
         }
 
