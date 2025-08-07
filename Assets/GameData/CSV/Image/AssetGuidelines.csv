@@ -1,0 +1,48 @@
+guideline_id,category,guideline_name,specification,requirements,notes
+# General Guidelines
+guide_01,general,File Naming,snake_case_only,No spaces or special characters,Use asset_id from main list
+guide_02,general,Color Space,sRGB,All UI and sprites in sRGB,Backgrounds can be linear
+guide_03,general,Transparency,PNG with alpha,Clean edges no fringing,Use premultiplied alpha
+guide_04,general,Optimization,Texture Atlas,Group similar assets,Max 2048x2048 per atlas
+
+# Resolution Guidelines  
+guide_05,resolution,Mobile Target,1920x1080 base,Design for 16:9 aspect,Support 18:9 with safe areas
+guide_06,resolution,UI Scaling,Vector when possible,Minimum 2x resolution,Export at 1x 2x 3x
+guide_07,resolution,Click Zones,512x512 standard,Power of 2 textures,Can downscale for performance
+guide_08,resolution,Icons,128x128 base,Export multiple sizes,64x64 256x256 versions
+
+# Art Style Guidelines
+guide_09,style,Visual Theme,Casual friendly,Bright and colorful,Tech progression visible
+guide_10,style,Stage Progression,Simple to complex,Indie->Corporate->Futuristic,Clear visual evolution
+guide_11,style,UI Consistency,Flat design base,Subtle gradients OK,Consistent corner radius
+guide_12,style,Color Palette,Blue primary #1a73e8,Gold accent #ffd700,Stage-specific secondaries
+
+# Animation Guidelines
+guide_13,animation,Frame Timing,30 or 60 fps,Match game framerate,Consistent timing
+guide_14,animation,Sprite Sheets,Horizontal layout,Equal frame sizes,Include frame data JSON
+guide_15,animation,Particle Specs,Max 100 particles,Mobile performance,Pooling friendly
+guide_16,animation,File Size,Under 100KB per,Compress where possible,Quality vs size balance
+
+# Stage-Specific Guidelines
+guide_17,stage,Early Stages 1-3,Realistic style,Modern day tech,Relatable environments
+guide_18,stage,Mid Stages 4-6,Semi-futuristic,Clean high-tech,Corporate aesthetic
+guide_19,stage,Late Stages 7-9,Full sci-fi,Space themes,Cosmic elements
+guide_20,stage,Final Stage 10,Abstract concept,Time/space themes,Otherworldly feel
+
+# Effect Guidelines
+guide_21,effects,Click Feedback,Instant response,Under 100ms,Clear visual impact
+guide_22,effects,Currency Effects,Upward movement,1-2 second duration,Don't block gameplay
+guide_23,effects,Level Up Effects,Full screen OK,Under 1 second,Celebration feel
+guide_24,effects,Unlock Effects,Draw attention,2-3 seconds max,One-time special
+
+# Technical Requirements
+guide_25,technical,Compression,PNG for sprites,JPG for backgrounds,WebP if supported
+guide_26,technical,Mipmaps,Required for 3D,Not for UI,Improves performance
+guide_27,technical,Draw Calls,Batch when possible,Same material/atlas,Under 100 total
+guide_28,technical,Memory Budget,Under 100MB total,50MB for backgrounds,Compress textures
+
+# Platform Specific
+guide_29,platform,iOS Requirements,No sharp pixels,Apple design friendly,Rounded corners
+guide_30,platform,Android Support,Wide device range,Test on low-end,Fallback options
+guide_31,platform,Web Build,Small file sizes,Progressive loading,CDN friendly
+guide_32,platform,Aspect Ratios,16:9 to 21:9,Safe area defined,UI anchor points

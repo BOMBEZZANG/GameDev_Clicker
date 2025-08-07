@@ -42,15 +42,26 @@ namespace GameDevClicker.Core.Managers
             
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             
+            InitializeBalanceData();
+            
             _isInitialized = true;
             OnGameInitialized?.Invoke();
             
             Debug.Log("[GameManager] Game initialized successfully");
         }
+        
+        private void InitializeBalanceData()
+        {
+            if (BalanceManager.Instance != null)
+            {
+                BalanceManager.Instance.LoadBalanceData();
+                Debug.Log("[GameManager] Balance data initialization started");
+            }
+        }
 
         private void Start()
         {
-            if (SaveManager.Instance.HasSavedGame())
+            if (SaveManager.Instance != null && SaveManager.Instance.HasSavedGame())
             {
                 SaveManager.Instance.LoadGame();
                 ChangeGameState(GameState.Playing);
@@ -78,7 +89,10 @@ namespace GameDevClicker.Core.Managers
 
             if (_timeSinceLastSave >= _autoSaveInterval)
             {
-                SaveManager.Instance.SaveGame();
+                if (SaveManager.Instance != null)
+                {
+                    SaveManager.Instance.SaveGame();
+                }
                 _timeSinceLastSave = 0f;
             }
         }
@@ -162,13 +176,16 @@ namespace GameDevClicker.Core.Managers
 
         public void StartNewGame()
         {
-            SaveManager.Instance.DeleteSave();
+            if (SaveManager.Instance != null)
+            {
+                SaveManager.Instance.DeleteSave();
+            }
             ChangeGameState(GameState.Playing);
         }
 
         public void QuitGame()
         {
-            if (_currentState == GameState.Playing)
+            if (_currentState == GameState.Playing && SaveManager.Instance != null)
             {
                 SaveManager.Instance.SaveGame();
             }
@@ -182,7 +199,7 @@ namespace GameDevClicker.Core.Managers
 
         private void OnApplicationPause(bool pauseStatus)
         {
-            if (pauseStatus && _currentState == GameState.Playing)
+            if (pauseStatus && _currentState == GameState.Playing && SaveManager.Instance != null)
             {
                 SaveManager.Instance.SaveGame();
             }
@@ -190,7 +207,7 @@ namespace GameDevClicker.Core.Managers
 
         private void OnApplicationFocus(bool hasFocus)
         {
-            if (!hasFocus && _currentState == GameState.Playing && Application.isMobilePlatform)
+            if (!hasFocus && _currentState == GameState.Playing && Application.isMobilePlatform && SaveManager.Instance != null)
             {
                 SaveManager.Instance.SaveGame();
             }
@@ -198,7 +215,7 @@ namespace GameDevClicker.Core.Managers
 
         protected override void OnDestroy()
         {
-            if (_currentState == GameState.Playing)
+            if (_currentState == GameState.Playing && SaveManager.Instance != null)
             {
                 SaveManager.Instance.SaveGame();
             }

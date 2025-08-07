@@ -102,7 +102,30 @@ namespace GameDevClicker.Game.Views
             if (mainCanvas == null)
                 mainCanvas = GetComponentInParent<Canvas>();
 
+            SetupTabButtonTexts();
             SetupUICallbacks();
+        }
+
+        private void SetupTabButtonTexts()
+        {
+            // Set tab button texts
+            if (skillsTabButton != null)
+            {
+                var skillsText = skillsTabButton.GetComponentInChildren<TextMeshProUGUI>();
+                if (skillsText != null) skillsText.text = "Skills";
+            }
+            
+            if (equipmentTabButton != null)
+            {
+                var equipmentText = equipmentTabButton.GetComponentInChildren<TextMeshProUGUI>();
+                if (equipmentText != null) equipmentText.text = "Equipment";
+            }
+            
+            if (teamTabButton != null)
+            {
+                var teamText = teamTabButton.GetComponentInChildren<TextMeshProUGUI>();
+                if (teamText != null) teamText.text = "Team";
+            }
         }
 
         private void SetupUICallbacks()
@@ -307,15 +330,29 @@ namespace GameDevClicker.Game.Views
 
         private void CreateUpgradeElement(UpgradeData upgrade)
         {
-            if (upgradeItemPrefab == null || upgradeListParent == null) return;
+            if (upgradeItemPrefab == null || upgradeListParent == null) 
+            {
+                Debug.LogError($"[GameViewUI] Cannot create upgrade element: prefab={upgradeItemPrefab?.name ?? "null"}, parent={upgradeListParent?.name ?? "null"}");
+                return;
+            }
 
+            Debug.Log($"[GameViewUI] Creating upgrade element for {upgrade.upgradeId} in parent {upgradeListParent.name}");
+            
             var upgradeObject = Instantiate(upgradeItemPrefab, upgradeListParent);
+            upgradeObject.name = $"UpgradeItem_{upgrade.upgradeId}"; // Better naming
+            
             var upgradeItem = upgradeObject.GetComponent<UpgradeItemUI>();
             
             if (upgradeItem != null)
             {
                 upgradeItem.Setup(upgrade, () => OnUpgradePurchaseRequested?.Invoke(upgrade));
                 _upgradeElements[upgrade.upgradeId] = upgradeObject;
+                Debug.Log($"[GameViewUI] Successfully created upgrade UI for {upgrade.upgradeName}");
+            }
+            else
+            {
+                Debug.LogError($"[GameViewUI] UpgradeItemUI component not found on prefab {upgradeItemPrefab.name}");
+                Destroy(upgradeObject);
             }
         }
 

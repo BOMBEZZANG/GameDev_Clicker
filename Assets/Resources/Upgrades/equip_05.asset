@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0d3160160fcc2c45a3b2acc116b7a2e, type: 3}
-  m_Name: UpgradeData
+  m_Name: equip_05
   m_EditorClassIdentifier: 
-  upgradeId: 
-  upgradeName: 
-  description: 
+  upgradeId: equip_05
+  upgradeName: AI Workstation
+  description: All income x10
   icon: {fileID: 0}
   currencyType: 0
-  category: 0
-  basePrice: 0
+  category: 1
+  basePrice: 10000000
   priceMultiplier: 1.15
   effects:
-  - type: 0
-    value: 0
-    isMultiplier: 0
-    scalesWithLevel: 0
-    scalingMultiplier: 0
-  maxLevel: -1
-  requiredStage: 1
+  - type: 4
+    value: 10
+    isMultiplier: 1
+    scalesWithLevel: 1
+    scalingMultiplier: 1
+  maxLevel: 1
+  requiredStage: 5
   requiredLevel: 1
   requiredUpgrades: []

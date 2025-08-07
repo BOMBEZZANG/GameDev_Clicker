@@ -58,12 +58,38 @@ namespace GameDevClicker.Game.Models
 
         private void InitializeData()
         {
-            _data = SaveManager.Instance.CurrentGameData;
+            if (SaveManager.Instance != null)
+            {
+                _data = SaveManager.Instance.CurrentGameData;
+            }
+            
             if (_data == null)
             {
-                Debug.LogError("[GameModel] No game data available from SaveManager");
-                return;
+                Debug.Log("[GameModel] No saved data found, creating new game data");
+                CreateNewGameData();
             }
+        }
+        
+        private void CreateNewGameData()
+        {
+            _data = new GameData
+            {
+                money = 0,
+                experience = 0,
+                moneyPerClick = 0f,
+                expPerClick = 1f,
+                autoMoney = 0f,
+                autoExp = 0f,
+                currentStage = 1,
+                playerLevel = 1,
+                multipliers = new Dictionary<string, float>
+                {
+                    ["exp"] = 1f,
+                    ["money"] = 1f,
+                    ["all"] = 1f
+                },
+                unlockedFeatures = new HashSet<string>()
+            };
         }
 
         private void SubscribeToEvents()
@@ -251,17 +277,18 @@ namespace GameDevClicker.Game.Models
             float baseValue = _data.moneyPerClick;
             float levelBonus = Mathf.Min((PlayerLevel - 10) * 0.1f, 1.0f);
             
-            return baseValue * 
-                   (1f + levelBonus) * 
-                   _data.multipliers["money"] * 
-                   _data.multipliers["all"];
+            float moneyMultiplier = _data.multipliers.ContainsKey("money") ? _data.multipliers["money"] : 1f;
+            float allMultiplier = _data.multipliers.ContainsKey("all") ? _data.multipliers["all"] : 1f;
+            
+            return baseValue * (1f + levelBonus) * moneyMultiplier * allMultiplier;
         }
 
         private float CalculateExpGain()
         {
-            return _data.expPerClick * 
-                   _data.multipliers["exp"] * 
-                   _data.multipliers["all"];
+            float expMultiplier = _data.multipliers.ContainsKey("exp") ? _data.multipliers["exp"] : 1f;
+            float allMultiplier = _data.multipliers.ContainsKey("all") ? _data.multipliers["all"] : 1f;
+            
+            return _data.expPerClick * expMultiplier * allMultiplier;
         }
 
         private float GetCriticalChance()

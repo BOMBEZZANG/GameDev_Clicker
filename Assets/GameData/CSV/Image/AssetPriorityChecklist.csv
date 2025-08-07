@@ -1,0 +1,40 @@
+priority_level,phase,asset_group,specific_assets,deadline,blocking_features,notes
+# Phase 1 - Core Gameplay (Week 1)
+critical,phase_1,UI Currency Icons,ui_icon_exp ui_icon_money,Day 1,All gameplay,Must have for basic UI
+critical,phase_1,Main Click Button,ui_btn_click click_zone_01,Day 2,Core loop,Includes animation states
+critical,phase_1,Click Effects,fx_click_normal fx_exp_gain,Day 3,Feedback system,Basic version OK
+critical,phase_1,Stage 1 Background,bg_stage_01,Day 3,First impression,Sets the tone
+critical,phase_1,Basic UI Elements,ui_frame_main ui_progress_bar,Day 4,UI functionality,9-slice borders ready
+critical,phase_1,Number Effects,fx_exp_gain particle_exp,Day 5,Visual feedback,Floating numbers
+
+# Phase 2 - Progression System (Week 2) 
+high,phase_2,Upgrade Icons Pack 1,icon_skill_01-03 icon_equip_01,Day 8,Upgrade system,Skills and basic equipment
+high,phase_2,Level Up Effect,fx_levelup anim_fx_05,Day 9,Major milestone,Celebration moment
+high,phase_2,Stage 2 Assets,bg_stage_02 click_zone_02,Day 10,Stage progression,Mobile theme
+high,phase_2,Money Unlock Effect,fx_money_gain event_first_money,Day 10,Key moment,Level 10 unlock
+high,phase_2,Team Icons Basic,icon_team_01 icon_team_02,Day 12,Team system,Junior and designer
+
+# Phase 3 - Polish & Content (Week 3)
+medium,phase_3,Remaining Stages,bg_stage_03-05 click_zones,Day 15,Full progression,Can use placeholders
+medium,phase_3,Project Icons,icon_proj_01-03,Day 16,Project system,Stage 2 feature
+medium,phase_3,Advanced Effects,fx_stage_unlock fx_project_complete,Day 17,Polish,Enhancement effects
+medium,phase_3,More Upgrades,icon_skill_04-05 icon_equip_02-03,Day 18,Late game,Advanced options
+medium,phase_3,Tutorial Assets,tutorial_hand guide screens,Day 20,Onboarding,FTUE requirement
+
+# Phase 4 - Late Game (Week 4)
+low,phase_4,Space Stages,bg_stage_06-09,Day 22,Late game,Sci-fi themes
+low,phase_4,Advanced Click Zones,click_zone_06-09,Day 23,Visual variety,High stages
+low,phase_4,Prestige System,fx_prestige ui_btn_prestige,Day 25,End game,Special effects
+low,phase_4,Final Stage,bg_stage_10 click_zone_10,Day 27,Completion,Time dimension theme
+low,phase_4,Achievement System,event_achievement icons,Day 28,Retention,Social features
+
+# Phase 5 - Launch Polish (Week 5)
+polish,phase_5,App Branding,logo_game icon_app,Day 30,Store presence,Marketing materials
+polish,phase_5,Loading Screens,splash_screen loading_bar,Day 32,First launch,Professional look
+polish,phase_5,Particle Polish,All particle effects,Day 33,Performance,Optimization pass
+polish,phase_5,Animation Polish,All animations smooth,Day 35,Feel,60 fps target
+
+# Asset Dependencies
+dependency,all,Font Files,Main UI font Number font,ASAP,Text rendering,2 fonts maximum
+dependency,all,Sound Effects,Click sounds Level up,With assets,Audio feedback,Sync with visuals
+dependency,all,Shader Files,Glow shader Distortion,With effects,Special effects,Mobile optimized

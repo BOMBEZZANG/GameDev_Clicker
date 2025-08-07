@@ -1,0 +1,99 @@
+asset_id,category,subcategory,name_en,name_ko,file_format,size,animation_required,animation_type,priority,notes
+# UI Icons - Currency & Resources
+ui_icon_exp,ui,currency,Experience Icon,경험치 아이콘,png,64x64,no,none,critical,Star or XP symbol
+ui_icon_money,ui,currency,Money Icon,돈 아이콘,png,64x64,no,none,critical,Coin or dollar symbol
+ui_icon_level,ui,status,Level Icon,레벨 아이콘,png,64x64,no,none,high,Level badge
+ui_icon_stage,ui,status,Stage Icon,스테이지 아이콘,png,64x64,no,none,high,Rocket or progress symbol
+
+# UI Icons - Buttons
+ui_btn_click,ui,button,Main Click Button,메인 클릭 버튼,png,256x256,yes,press_release,critical,Different states for pressed
+ui_btn_upgrade,ui,button,Upgrade Button,업그레이드 버튼,png,128x64,yes,hover_press,high,Normal/hover/pressed/disabled
+ui_btn_prestige,ui,button,Prestige Button,환생 버튼,png,128x64,yes,glow_pulse,medium,Glowing effect
+ui_btn_settings,ui,button,Settings Button,설정 버튼,png,64x64,no,none,low,Gear icon
+ui_btn_achievement,ui,button,Achievement Button,업적 버튼,png,64x64,no,none,low,Trophy icon
+
+# Stage Backgrounds
+bg_stage_01,background,stage,Indie Developer Room,인디 개발자 방,jpg,1920x1080,no,none,critical,Simple desk with old computer
+bg_stage_02,background,stage,Mobile Dev Office,모바일 개발 사무실,jpg,1920x1080,no,none,critical,Small office space
+bg_stage_03,background,stage,PC Game Studio,PC 게임 스튜디오,jpg,1920x1080,no,none,high,Professional studio
+bg_stage_04,background,stage,VR Lab,VR 연구실,jpg,1920x1080,no,none,high,High-tech VR equipment
+bg_stage_05,background,stage,AI Research Center,AI 연구센터,jpg,1920x1080,no,none,medium,Server rooms and screens
+bg_stage_06,background,stage,Robot Factory,로봇 공장,jpg,1920x1080,no,none,medium,Assembly lines
+bg_stage_07,background,stage,Rocket Launch Site,로켓 발사장,jpg,1920x1080,no,none,medium,Space center
+bg_stage_08,background,stage,Space Station,우주 정거장,jpg,1920x1080,no,none,low,Earth view from space
+bg_stage_09,background,stage,Black Hole Observatory,블랙홀 관측소,jpg,1920x1080,no,none,low,Deep space view
+bg_stage_10,background,stage,Time Dimension,시공간 차원,jpg,1920x1080,yes,animated_bg,low,Animated abstract background
+
+# Click Zone Visuals
+click_zone_01,gameplay,click_zone,Computer Screen,컴퓨터 화면,png,512x512,yes,idle_animation,critical,Old CRT monitor
+click_zone_02,gameplay,click_zone,Smartphone,스마트폰,png,512x512,yes,idle_animation,critical,Modern phone
+click_zone_03,gameplay,click_zone,Gaming PC,게이밍 PC,png,512x512,yes,idle_animation,high,RGB lighting effects
+click_zone_04,gameplay,click_zone,VR Headset,VR 헤드셋,png,512x512,yes,idle_animation,high,Futuristic VR device
+click_zone_05,gameplay,click_zone,AI Core,AI 코어,png,512x512,yes,glow_pulse,medium,Glowing AI brain
+click_zone_06,gameplay,click_zone,Robot Assembly,로봇 조립,png,512x512,yes,mechanical,medium,Robot being built
+click_zone_07,gameplay,click_zone,Rocket,로켓,png,512x512,yes,smoke_effect,medium,Rocket with exhaust
+click_zone_08,gameplay,click_zone,Spaceship Console,우주선 콘솔,png,512x512,yes,hologram,low,Holographic controls
+click_zone_09,gameplay,click_zone,Black Hole Device,블랙홀 장치,png,512x512,yes,rotation,low,Spinning singularity
+click_zone_10,gameplay,click_zone,Time Machine,타임머신,png,512x512,yes,time_warp,low,Distortion effects
+
+# Upgrade Icons - Skills
+icon_skill_01,upgrade,skill,Typing Speed,타이핑 속도,png,128x128,no,none,high,Keyboard icon
+icon_skill_02,upgrade,skill,Algorithm Study,알고리즘 학습,png,128x128,no,none,high,Brain or code icon
+icon_skill_03,upgrade,skill,Design Sense,디자인 감각,png,128x128,no,none,high,Palette icon
+icon_skill_04,upgrade,skill,Project Management,프로젝트 관리,png,128x128,no,none,medium,Gantt chart icon
+icon_skill_05,upgrade,skill,Innovative Thinking,혁신적 사고,png,128x128,no,none,medium,Lightbulb icon
+
+# Upgrade Icons - Equipment
+icon_equip_01,upgrade,equipment,Better Keyboard,더 좋은 키보드,png,128x128,no,none,high,Mechanical keyboard
+icon_equip_02,upgrade,equipment,Dual Monitor,듀얼 모니터,png,128x128,no,none,high,Two screens
+icon_equip_03,upgrade,equipment,High-end PC,고성능 PC,png,128x128,no,none,high,Gaming PC tower
+icon_equip_04,upgrade,equipment,Server Farm,서버팜,png,128x128,no,none,medium,Server racks
+icon_equip_05,upgrade,equipment,AI Workstation,AI 워크스테이션,png,128x128,no,none,medium,Quantum computer
+
+# Upgrade Icons - Team
+icon_team_01,upgrade,team,Junior Developer,주니어 개발자,png,128x128,no,none,high,Rookie programmer avatar
+icon_team_02,upgrade,team,Graphic Designer,그래픽 디자이너,png,128x128,no,none,high,Artist avatar
+icon_team_03,upgrade,team,Senior Developer,시니어 개발자,png,128x128,no,none,high,Expert programmer avatar
+icon_team_04,upgrade,team,Project Manager,프로젝트 매니저,png,128x128,no,none,medium,Manager avatar
+icon_team_05,upgrade,team,AI Researcher,AI 연구원,png,128x128,no,none,medium,Scientist avatar
+
+# Project Icons
+icon_proj_01,project,icon,Puzzle Game,퍼즐 게임,png,96x96,no,none,high,Puzzle piece
+icon_proj_02,project,icon,Action Game,액션 게임,png,96x96,no,none,high,Sword or gun
+icon_proj_03,project,icon,RPG Game,RPG 게임,png,96x96,no,none,high,Sword and shield
+icon_proj_04,project,icon,VR Experience,VR 체험,png,96x96,no,none,medium,VR goggles
+icon_proj_05,project,icon,AI Game,AI 게임,png,96x96,no,none,medium,Robot face
+icon_proj_06,project,icon,Space Sim,우주 시뮬레이션,png,96x96,no,none,low,Planet or galaxy
+
+# Effects & Animations
+fx_click_normal,effect,click,Click Effect Normal,일반 클릭 효과,png,256x256,yes,sprite_sheet,critical,8 frame animation
+fx_click_critical,effect,click,Click Effect Critical,크리티컬 클릭 효과,png,256x256,yes,sprite_sheet,high,12 frame animation
+fx_money_gain,effect,currency,Money Gain Effect,돈 획득 효과,png,128x128,yes,sprite_sheet,critical,Coin sparkle animation
+fx_exp_gain,effect,currency,Exp Gain Effect,경험치 획득 효과,png,128x128,yes,sprite_sheet,critical,Star burst animation
+fx_levelup,effect,special,Level Up Effect,레벨업 효과,png,512x512,yes,sprite_sheet,high,Golden explosion
+fx_stage_unlock,effect,special,Stage Unlock Effect,스테이지 해금 효과,png,512x512,yes,sprite_sheet,medium,Portal opening
+fx_project_complete,effect,special,Project Complete,프로젝트 완성,png,512x512,yes,sprite_sheet,high,Celebration effect
+fx_prestige,effect,special,Prestige Effect,환생 효과,png,1024x1024,yes,sprite_sheet,low,Time rewind effect
+
+# Particle Effects
+particle_money,effect,particle,Money Particle,돈 파티클,png,32x32,yes,particle_system,high,Floating coins
+particle_exp,effect,particle,Exp Particle,경험치 파티클,png,32x32,yes,particle_system,high,Floating stars
+particle_code,effect,particle,Code Particle,코드 파티클,png,64x64,yes,particle_system,medium,Matrix-like text
+particle_space,effect,particle,Space Particle,우주 파티클,png,64x64,yes,particle_system,low,Stars and nebula
+
+# UI Elements
+ui_frame_main,ui,frame,Main UI Frame,메인 UI 프레임,png,variable,no,none,critical,9-slice border
+ui_frame_popup,ui,frame,Popup Frame,팝업 프레임,png,variable,no,none,high,9-slice with shadow
+ui_progress_bar,ui,element,Progress Bar,진행 바,png,variable,yes,fill_animation,critical,Empty and filled states
+ui_tab_bg,ui,element,Tab Background,탭 배경,png,variable,no,none,high,Active/inactive states
+
+# Special Events
+event_first_money,event,special,First Money Unlock,첫 수익 해금,jpg,1024x576,yes,entrance_animation,high,Celebration image
+event_prestige_unlock,event,special,Prestige Unlock,환생 해금,jpg,1024x576,yes,glow_effect,medium,Epic moment image
+event_achievement,event,special,Achievement Popup,업적 달성,png,512x256,yes,slide_bounce,medium,Trophy celebration
+
+# Misc Assets
+logo_game,misc,branding,Game Logo,게임 로고,png,512x256,no,none,critical,Game Dev Clicker logo
+icon_app,misc,branding,App Icon,앱 아이콘,png,1024x1024,no,none,critical,Multiple sizes needed
+splash_screen,misc,loading,Splash Screen,스플래시 화면,jpg,2048x2048,yes,fade_in_out,critical,Loading screen image
+tutorial_hand,misc,tutorial,Tutorial Hand,튜토리얼 손,png,256x256,yes,tap_animation,high,Pointing finger animation

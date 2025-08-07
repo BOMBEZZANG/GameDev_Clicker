@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0d3160160fcc2c45a3b2acc116b7a2e, type: 3}
-  m_Name: UpgradeData
+  m_Name: skill_05
   m_EditorClassIdentifier: 
-  upgradeId: 
-  upgradeName: 
-  description: 
+  upgradeId: skill_05
+  upgradeName: Innovative Thinking
+  description: All EXP +50%
   icon: {fileID: 0}
-  currencyType: 0
+  currencyType: 1
   category: 0
-  basePrice: 0
-  priceMultiplier: 1.15
+  basePrice: 20000
+  priceMultiplier: 1.25
   effects:
-  - type: 0
-    value: 0
-    isMultiplier: 0
-    scalesWithLevel: 0
-    scalingMultiplier: 0
-  maxLevel: -1
+  - type: 6
+    value: 0.5
+    isMultiplier: 1
+    scalesWithLevel: 1
+    scalingMultiplier: 1
+  maxLevel: 5
   requiredStage: 1
-  requiredLevel: 1
+  requiredLevel: 30
   requiredUpgrades: []

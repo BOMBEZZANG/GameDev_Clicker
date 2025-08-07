@@ -1,0 +1,55 @@
+category,subcategory,count,size_per_asset_kb,total_size_kb,total_size_mb,compression,notes
+# UI Assets
+ui,icons,20,50,1000,0.98,PNG-8,Shared palette possible
+ui,buttons,10,100,1000,0.98,PNG-24,Need transparency
+ui,frames,5,150,750,0.73,9-slice,Stretchable borders
+ui,progress_bars,3,80,240,0.23,PNG-24,Animated fill
+
+# Backgrounds
+backgrounds,stages,10,500,5000,4.88,JPG-80%,High quality needed
+backgrounds,events,3,300,900,0.88,JPG-70%,One-time display
+backgrounds,menus,2,400,800,0.78,JPG-75%,Blurred is OK
+
+# Click Zones
+gameplay,click_zones,10,200,2000,1.95,PNG-24,Need transparency
+gameplay,animations,10,300,3000,2.93,PNG sprite,Multiple frames
+
+# Effects
+effects,click_effects,5,150,750,0.73,PNG-24,Additive blend
+effects,currency,4,100,400,0.39,PNG-24,Small size OK
+effects,special,5,400,2000,1.95,PNG-24,High impact
+effects,particles,10,20,200,0.20,PNG-8,Tiny sprites
+
+# Upgrades
+upgrades,skills,10,80,800,0.78,PNG-24,Icon quality
+upgrades,equipment,10,80,800,0.78,PNG-24,Detailed items
+upgrades,team,8,100,800,0.78,PNG-24,Character portraits
+upgrades,projects,15,60,900,0.88,PNG-24,Simpler icons
+
+# Animations
+animations,sprite_sheets,20,500,10000,9.77,PNG-24,Major size concern
+animations,particles,10,100,1000,0.98,PNG-8,Can optimize
+animations,ui_effects,5,200,1000,0.98,PNG-24,Short duration
+
+# Misc
+misc,branding,3,300,900,0.88,PNG-24,High quality
+misc,tutorial,5,150,750,0.73,PNG-24,Clear visibility
+misc,fonts,2,200,400,0.39,TTF,Subset possible
+
+# Platform Targets
+target,mobile_low,all,n/a,30000,29.30,Max compressed,2G/3G networks
+target,mobile_high,all,n/a,50000,48.83,Medium compressed,4G/WiFi
+target,desktop,all,n/a,80000,78.13,Low compressed,No limit
+target,initial_download,critical,n/a,15000,14.65,High compressed,App store limit
+
+# Optimization Potential
+optimization,texture_atlas,ui_icons,n/a,-2000,-1.95,Combined sheets,20% saving
+optimization,color_reduction,particles,n/a,-500,-0.49,PNG-8 conversion,25% saving
+optimization,resolution_scaling,backgrounds,n/a,-1000,-0.98,Dynamic loading,20% saving
+optimization,sprite_trimming,all_sprites,n/a,-1500,-1.46,Remove empty pixels,15% saving
+
+# Final Budget
+total,raw_assets,all,n/a,40420,39.47,Uncompressed,Before optimization
+total,after_optimization,all,n/a,35420,34.59,Compressed,Target size
+total,downloaded_assets,critical,n/a,15000,14.65,First launch,Streaming ready
+total,additional_content,optional,n/a,20420,19.94,Post-launch,Progressive download

@@ -1,0 +1,47 @@
+animation_id,asset_id,animation_name,type,frame_count,fps,duration_sec,loop,trigger_event,description,technical_notes
+# Button Animations
+anim_btn_01,ui_btn_click,Click Button Press,sprite_sheet,3,30,0.1,no,on_mouse_down,Normal->Pressed->Release states,Scale 95% on press
+anim_btn_02,ui_btn_upgrade,Upgrade Hover,state_change,2,instant,0,no,on_hover,Normal and hover states,Brightness +20% on hover
+anim_btn_03,ui_btn_prestige,Prestige Glow,shader_effect,continuous,60,continuous,yes,always,Pulsing golden glow,Use emission map
+
+# Click Zone Animations
+anim_click_01,click_zone_01,CRT Monitor Idle,sprite_sheet,4,8,0.5,yes,always,Screen flicker effect,Subtle scanline animation
+anim_click_02,click_zone_02,Phone Screen Idle,sprite_sheet,6,12,0.5,yes,always,App icons floating,Parallax effect
+anim_click_03,click_zone_05,AI Core Pulse,shader_effect,continuous,60,continuous,yes,always,Energy core pulsing,Sine wave intensity
+anim_click_04,click_zone_07,Rocket Smoke,particle_system,continuous,30,continuous,yes,always,Exhaust smoke effect,Use smoke particles
+anim_click_05,click_zone_09,Black Hole Spin,rotation,continuous,60,continuous,yes,always,Constant rotation,Add distortion shader
+anim_click_06,click_zone_10,Time Warp Effect,shader_effect,continuous,60,continuous,yes,always,Time distortion waves,Vertex displacement
+
+# Click Effects
+anim_fx_01,fx_click_normal,Normal Click,sprite_sheet,8,60,0.133,no,on_click,Expanding ring effect,Additive blending
+anim_fx_02,fx_click_critical,Critical Click,sprite_sheet,12,60,0.2,no,on_critical,Explosive burst,Screen shake optional
+anim_fx_03,fx_money_gain,Money Sparkle,sprite_sheet,10,30,0.333,no,on_money_gain,Coin with sparkles,Float upward
+anim_fx_04,fx_exp_gain,Exp Starburst,sprite_sheet,10,30,0.333,no,on_exp_gain,Star explosion,Radial burst pattern
+
+# Special Effects
+anim_fx_05,fx_levelup,Level Up Burst,sprite_sheet,16,60,0.267,no,on_level_up,Golden energy burst,Full screen flash
+anim_fx_06,fx_stage_unlock,Stage Portal,sprite_sheet,24,30,0.8,no,on_stage_unlock,Portal opening sequence,Warp effect in center
+anim_fx_07,fx_project_complete,Project Confetti,particle_system,60,30,2,no,on_project_done,Confetti celebration,Multiple emitters
+anim_fx_08,fx_prestige,Prestige Rewind,sprite_sheet,30,60,0.5,no,on_prestige,Time rewind effect,Reverse motion blur
+
+# Particle Animations
+anim_part_01,particle_money,Floating Coins,particle_loop,continuous,30,continuous,yes,when_earning,Coins floating up,Random X drift
+anim_part_02,particle_exp,Star Particles,particle_loop,continuous,30,continuous,yes,when_learning,Stars twinkling up,Rotation + scale
+anim_part_03,particle_code,Matrix Rain,particle_loop,continuous,24,continuous,yes,stage_3_plus,Code characters falling,Green tint fade
+anim_part_04,particle_space,Space Dust,particle_loop,continuous,15,continuous,yes,stage_7_plus,Nebula particles,Slow parallax
+
+# UI Animations
+anim_ui_01,ui_progress_bar,Progress Fill,programmatic,continuous,60,variable,no,on_progress,Smooth fill animation,Use fillAmount
+anim_ui_02,event_first_money,Money Unlock Popup,entrance,20,60,0.333,no,on_unlock,Slide + bounce in,Elastic easing
+anim_ui_03,event_achievement,Achievement Slide,entrance,15,60,0.25,no,on_achieve,Slide from right,Ease out quad
+anim_ui_04,tutorial_hand,Tutorial Tap,sprite_sheet,8,16,0.5,yes,during_tutorial,Hand tapping motion,Include shadow
+
+# Background Animations
+anim_bg_01,bg_stage_10,Time Dimension BG,shader_effect,continuous,30,continuous,yes,stage_10,Flowing time streams,Multiple UV scrolling
+anim_bg_02,bg_stage_08,Space Station Stars,parallax,continuous,1,continuous,yes,stage_8,Star field parallax,3 depth layers
+anim_bg_03,bg_stage_05,AI Server Lights,sprite_sheet,8,4,2,yes,stage_5,Blinking server LEDs,Random timing
+
+# Transition Effects
+anim_trans_01,generic,Stage Transition,fade,30,60,0.5,no,on_stage_change,Fade to black and back,Cross-fade backgrounds
+anim_trans_02,generic,Money System Unlock,special,60,60,1,no,level_10,Screen flash + zoom,Camera shake effect
+anim_trans_03,generic,Prestige Transition,special,90,60,1.5,no,on_prestige,Spiral wipe effect,Post-processing

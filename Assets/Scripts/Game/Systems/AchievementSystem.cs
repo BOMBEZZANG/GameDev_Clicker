@@ -764,26 +764,32 @@ namespace GameDevClicker.Game.Systems
             if (saveData != null)
             {
                 // Restore unlocked achievements
-                foreach (string id in saveData.unlockedAchievementIds)
+                if (saveData.unlockedAchievementIds != null)
                 {
-                    var achievement = GetAchievement(id);
-                    if (achievement != null)
+                    foreach (string id in saveData.unlockedAchievementIds)
                     {
-                        achievement.isUnlocked = true;
-                        if (!unlockedAchievements.Contains(achievement))
+                        var achievement = GetAchievement(id);
+                        if (achievement != null)
                         {
-                            unlockedAchievements.Add(achievement);
+                            achievement.isUnlocked = true;
+                            if (!unlockedAchievements.Contains(achievement))
+                            {
+                                unlockedAchievements.Add(achievement);
+                            }
                         }
                     }
                 }
                 
                 // Restore progress
-                foreach (var kvp in saveData.achievementProgress)
+                if (saveData.achievementProgress != null)
                 {
-                    var achievement = GetAchievement(kvp.Key);
-                    if (achievement != null && !achievement.isUnlocked)
+                    foreach (var kvp in saveData.achievementProgress)
                     {
-                        achievement.currentValue = kvp.Value;
+                        var achievement = GetAchievement(kvp.Key);
+                        if (achievement != null && !achievement.isUnlocked)
+                        {
+                            achievement.currentValue = kvp.Value;
+                        }
                     }
                 }
             }
