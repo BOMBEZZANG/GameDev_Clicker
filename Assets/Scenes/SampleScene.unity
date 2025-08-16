@@ -806,7 +806,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 485271824}
   m_HandleRect: {fileID: 485271823}
   m_Direction: 2
-  m_Value: 1.0000012
+  m_Value: 1
   m_Size: 0.8333333
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1497,6 +1497,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &327069699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 327069700}
+  m_Layer: 0
+  m_Name: '[Managers]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &327069700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327069699}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 856185094}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &331265753
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,6 +2087,177 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &461660574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 461660576}
+  - component: {fileID: 461660575}
+  m_Layer: 0
+  m_Name: HTMLBackgroundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &461660575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461660574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf950161898371e40815896d971bd146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundPanel: {fileID: 1418313693}
+  uiCamera: {fileID: 0}
+  stageData:
+  - stageName: stage10_Timemachine
+    htmlFileName: stage10_Timemachine.html
+    clickZones:
+    - zoneName: Center
+      topLeft: {x: 0.3, y: 0.3}
+      bottomRight: {x: 0.7, y: 0.7}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+  - stageName: stage1_indie_room
+    htmlFileName: stage1_indie_room.html
+    clickZones:
+    - zoneName: Laptop
+      topLeft: {x: 0.35, y: 0.4}
+      bottomRight: {x: 0.65, y: 0.7}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - zoneName: Coffee
+      topLeft: {x: 0.65, y: 0.4}
+      bottomRight: {x: 0.75, y: 0.6}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - zoneName: Cat
+      topLeft: {x: 0.75, y: 0.6}
+      bottomRight: {x: 0.9, y: 0.8}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - zoneName: Bookshelf
+      topLeft: {x: 0.8, y: 0.2}
+      bottomRight: {x: 0.95, y: 0.6}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+  - stageName: stage2_mobile_dev
+    htmlFileName: stage2_mobile_dev.html
+    clickZones:
+    - zoneName: Phone
+      topLeft: {x: 0.4, y: 0.4}
+      bottomRight: {x: 0.6, y: 0.7}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - zoneName: Tablet
+      topLeft: {x: 0.2, y: 0.3}
+      bottomRight: {x: 0.4, y: 0.6}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+  - stageName: stage3_PC_Game_dev
+    htmlFileName: stage3_PC_Game_dev.html
+    clickZones:
+    - zoneName: PC
+      topLeft: {x: 0.3, y: 0.2}
+      bottomRight: {x: 0.7, y: 0.8}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+    - zoneName: Monitor
+      topLeft: {x: 0.25, y: 0.1}
+      bottomRight: {x: 0.75, y: 0.5}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+  - stageName: stage4_VR_lab
+    htmlFileName: stage4_VR_lab.html
+    clickZones:
+    - zoneName: Center
+      topLeft: {x: 0.3, y: 0.3}
+      bottomRight: {x: 0.7, y: 0.7}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+  - stageName: stage5_Ai
+    htmlFileName: stage5_Ai.html
+    clickZones:
+    - zoneName: Center
+      topLeft: {x: 0.3, y: 0.3}
+      bottomRight: {x: 0.7, y: 0.7}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+  - stageName: stage6_lobot
+    htmlFileName: stage6_lobot.html
+    clickZones:
+    - zoneName: Center
+      topLeft: {x: 0.3, y: 0.3}
+      bottomRight: {x: 0.7, y: 0.7}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+  - stageName: stage7_rocket
+    htmlFileName: stage7_rocket.html
+    clickZones:
+    - zoneName: Center
+      topLeft: {x: 0.3, y: 0.3}
+      bottomRight: {x: 0.7, y: 0.7}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+  - stageName: stage8_space
+    htmlFileName: stage8_space.html
+    clickZones:
+    - zoneName: Center
+      topLeft: {x: 0.3, y: 0.3}
+      bottomRight: {x: 0.7, y: 0.7}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+  - stageName: stage9_blackhole
+    htmlFileName: stage9_blackhole.html
+    clickZones:
+    - zoneName: Center
+      topLeft: {x: 0.3, y: 0.3}
+      bottomRight: {x: 0.7, y: 0.7}
+      onClickEvent:
+        m_PersistentCalls:
+          m_Calls: []
+  clickZoneLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  clickDetectionDepth: 100
+--- !u!4 &461660576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461660574}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &471792049
 GameObject:
   m_ObjectHideFlags: 0
@@ -4044,6 +4247,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 851427067}
   m_CullTransparentMesh: 1
+--- !u!1 &856185093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 856185094}
+  - component: {fileID: 856185095}
+  m_Layer: 0
+  m_Name: BalanceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &856185094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856185093}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 327069700}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &856185095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856185093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5066ab91c009474b8611400e71610be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoLoadOnStart: 1
+  useLocalizedText: 0
 --- !u!1 &861005992
 GameObject:
   m_ObjectHideFlags: 0
@@ -10196,3 +10445,5 @@ SceneRoots:
   - {fileID: 12201425}
   - {fileID: 1420475186}
   - {fileID: 1032740777}
+  - {fileID: 461660576}
+  - {fileID: 327069700}

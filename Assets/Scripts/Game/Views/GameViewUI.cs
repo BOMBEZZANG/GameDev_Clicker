@@ -78,6 +78,7 @@ namespace GameDevClicker.Game.Views
         // State
         private UpgradeData.UpgradeCategory _currentUpgradeTab = UpgradeData.UpgradeCategory.Skills;
         private Dictionary<string, GameObject> _upgradeElements = new Dictionary<string, GameObject>();
+        private Dictionary<UpgradeData.UpgradeCategory, List<GameObject>> _cachedUpgradeElements = new Dictionary<UpgradeData.UpgradeCategory, List<GameObject>>();
         private List<Coroutine> _activeClickEffects = new List<Coroutine>();
 
         // Events
@@ -273,11 +274,40 @@ namespace GameDevClicker.Game.Views
 
         private void SwitchUpgradeTab(UpgradeData.UpgradeCategory category)
         {
+            // Hide current tab elements
+            HideCurrentTabElements();
+            
             // Update tab visual state
             UpdateTabVisuals(category);
             
             _currentUpgradeTab = category;
+            
+            // Show new tab elements
+            ShowTabElements(category);
+            
             OnUpgradeTabChanged?.Invoke(category);
+        }
+        
+        private void HideCurrentTabElements()
+        {
+            if (_cachedUpgradeElements.TryGetValue(_currentUpgradeTab, out var elements))
+            {
+                foreach (var element in elements)
+                {
+                    if (element != null) element.SetActive(false);
+                }
+            }
+        }
+        
+        private void ShowTabElements(UpgradeData.UpgradeCategory category)
+        {
+            if (_cachedUpgradeElements.TryGetValue(category, out var elements))
+            {
+                foreach (var element in elements)
+                {
+                    if (element != null) element.SetActive(true);
+                }
+            }
         }
 
         private void UpdateTabVisuals(UpgradeData.UpgradeCategory activeCategory)
@@ -309,26 +339,89 @@ namespace GameDevClicker.Game.Views
 
         public void PopulateUpgradeList(UpgradeData.UpgradeCategory category, List<UpgradeData> upgrades)
         {
-            if (category != _currentUpgradeTab) return;
+            // Check if we already have cached elements for this category
+            if (_cachedUpgradeElements.ContainsKey(category))
+            {
+                // Update existing elements instead of recreating
+                UpdateCachedElements(category, upgrades);
+                
+                // If this is the current tab, show the elements
+                if (category == _currentUpgradeTab)
+                {
+                    ShowTabElements(category);
+                }
+                return;
+            }
             
-            ClearUpgradeList();
+            // First time creating elements for this category
+            if (!_cachedUpgradeElements.ContainsKey(category))
+            {
+                _cachedUpgradeElements[category] = new List<GameObject>();
+            }
             
             foreach (var upgrade in upgrades)
             {
-                CreateUpgradeElement(upgrade);
+                CreateUpgradeElement(upgrade, category);
+            }
+            
+            // Only show if this is the current tab
+            if (category == _currentUpgradeTab)
+            {
+                ShowTabElements(category);
+            }
+            else
+            {
+                HideTabElementsForCategory(category);
+            }
+        }
+        
+        private void UpdateCachedElements(UpgradeData.UpgradeCategory category, List<UpgradeData> upgrades)
+        {
+            var cachedElements = _cachedUpgradeElements[category];
+            
+            // Update existing elements
+            for (int i = 0; i < upgrades.Count && i < cachedElements.Count; i++)
+            {
+                var upgradeItem = cachedElements[i].GetComponent<UpgradeItemUI>();
+                if (upgradeItem != null)
+                {
+                    upgradeItem.Setup(upgrades[i], () => OnUpgradePurchaseRequested?.Invoke(upgrades[i]));
+                }
+            }
+            
+            // Create any additional elements if needed
+            for (int i = cachedElements.Count; i < upgrades.Count; i++)
+            {
+                CreateUpgradeElement(upgrades[i], category);
+            }
+        }
+        
+        private void HideTabElementsForCategory(UpgradeData.UpgradeCategory category)
+        {
+            if (_cachedUpgradeElements.TryGetValue(category, out var elements))
+            {
+                foreach (var element in elements)
+                {
+                    if (element != null) element.SetActive(false);
+                }
             }
         }
 
         private void ClearUpgradeList()
         {
-            foreach (var element in _upgradeElements.Values)
+            // Clear all cached elements for all categories
+            foreach (var kvp in _cachedUpgradeElements)
             {
-                if (element != null) Destroy(element);
+                foreach (var element in kvp.Value)
+                {
+                    if (element != null) Destroy(element);
+                }
             }
+            _cachedUpgradeElements.Clear();
             _upgradeElements.Clear();
         }
 
-        private void CreateUpgradeElement(UpgradeData upgrade)
+        private void CreateUpgradeElement(UpgradeData upgrade, UpgradeData.UpgradeCategory category)
         {
             if (upgradeItemPrefab == null || upgradeListParent == null) 
             {
@@ -347,6 +440,7 @@ namespace GameDevClicker.Game.Views
             {
                 upgradeItem.Setup(upgrade, () => OnUpgradePurchaseRequested?.Invoke(upgrade));
                 _upgradeElements[upgrade.upgradeId] = upgradeObject;
+                _cachedUpgradeElements[category].Add(upgradeObject);
                 Debug.Log($"[GameViewUI] Successfully created upgrade UI for {upgrade.upgradeName}");
             }
             else
@@ -354,6 +448,12 @@ namespace GameDevClicker.Game.Views
                 Debug.LogError($"[GameViewUI] UpgradeItemUI component not found on prefab {upgradeItemPrefab.name}");
                 Destroy(upgradeObject);
             }
+        }
+        
+        // Overload for backward compatibility
+        private void CreateUpgradeElement(UpgradeData upgrade)
+        {
+            CreateUpgradeElement(upgrade, _currentUpgradeTab);
         }
 
         public void UpdateUpgradeElement(UpgradeData upgrade)

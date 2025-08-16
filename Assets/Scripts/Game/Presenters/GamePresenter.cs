@@ -287,6 +287,15 @@ namespace GameDevClicker.Game.Presenters
                 }
             }
 
+            // Sort upgrades by required level (ascending - lowest level first)
+            // Secondary sort by name if levels are the same
+            availableUpgrades.Sort((a, b) => 
+            {
+                int levelComparison = a.requiredLevel.CompareTo(b.requiredLevel);
+                if (levelComparison != 0) return levelComparison;
+                return string.Compare(a.upgradeName, b.upgradeName, System.StringComparison.Ordinal);
+            });
+            
             Debug.Log($"[GamePresenter] Showing {availableUpgrades.Count} unlocked upgrades for {category}");
             gameViewUI.PopulateUpgradeList(category, availableUpgrades);
         }

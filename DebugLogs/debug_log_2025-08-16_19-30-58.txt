@@ -1,0 +1,12 @@
+=== DEBUG LOG EXPORT ===
+Date: 2025-08-16 19:30:58
+Total Entries: 2
+Unity Version: 6000.0.45f1
+===================================================
+
+[19:30:36.160] [Log]
+[DebugLogExporter] Logs cleared
+-----------------------------------------
+[19:30:52.625] [Log]
+WebView plugin setup completed!
+-----------------------------------------

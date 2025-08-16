@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 7: Rocket Development Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #581c87 100%);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .game-scene {
+            width: 800px;
+            height: 600px;
+            position: relative;
+            background: linear-gradient(180deg, #0c0a1d 0%, #1e1b4b 50%, #312e81 100%);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 
+                        inset 0 0 100px rgba(168,85,247,0.1);
+            overflow: hidden;
+        }
+        
+        /* 우주 센터 배경 - 석양/황혼 */
+        .space-center-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                #0f0c29 0%, 
+                #302b63 30%, 
+                #614385 60%, 
+                #ff6b6b 85%, 
+                #feca57 100%);
+        }
+        
+        /* 별이 빛나는 하늘 */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            top: 0;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .star:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+        .star:nth-child(2) { top: 20%; left: 40%; animation-delay: 0.5s; }
+        .star:nth-child(3) { top: 15%; left: 60%; animation-delay: 1s; }
+        .star:nth-child(4) { top: 25%; left: 80%; animation-delay: 1.5s; }
+        .star:nth-child(5) { top: 30%; left: 30%; animation-delay: 2s; }
+        .star:nth-child(6) { top: 5%; left: 70%; animation-delay: 0.3s; }
+        .star:nth-child(7) { top: 35%; left: 50%; animation-delay: 1.2s; }
+        
+        /* 메인 로켓 */
+        .main-rocket {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 300px;
+            z-index: 10;
+        }
+        
+        .rocket-body {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(180deg, #e0e7ff 0%, #c7d2fe 50%, #a5b4fc 100%);
+            border-radius: 50px 50px 10px 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .rocket-nose {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 50px solid #e0e7ff;
+        }
+        
+        .rocket-window {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #60a5fa 0%, #2563eb 100%);
+            border: 4px solid #c7d2fe;
+            border-radius: 50%;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+        }
+        
+        .rocket-flag {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 25px;
+            background: linear-gradient(90deg, #ef4444 0%, #ef4444 33%, #ffffff 33%, #ffffff 66%, #3b82f6 66%, #3b82f6 100%);
+            border-radius: 2px;
+        }
+        
+        .rocket-fins {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+        }
+        
+        .fin {
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        
+        .fin.left {
+            left: -25px;
+            border-width: 0 0 60px 25px;
+            border-color: transparent transparent #6366f1 transparent;
+        }
+        
+        .fin.right {
+            right: -25px;
+            border-width: 0 25px 60px 0;
+            border-color: transparent transparent #6366f1 transparent;
+        }
+        
+        .rocket-engine {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 30px;
+            background: linear-gradient(180deg, #475569 0%, #1e293b 100%);
+            border-radius: 5px 5px 50% 50%;
+        }
+        
+        .engine-fire {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 30%, #ef4444 60%, #dc2626 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            opacity: 0;
+            animation: ignition 4s ease-in-out infinite;
+            filter: blur(5px);
+        }
+        
+        @keyframes ignition {
+            0%, 70% { 
+                opacity: 0; 
+                transform: translateX(-50%) scaleY(0.5);
+            }
+            80%, 100% { 
+                opacity: 1; 
+                transform: translateX(-50%) scaleY(1);
+            }
+            85% {
+                transform: translateX(-50%) scaleY(1.2);
+            }
+        }
+        
+        /* 발사대 */
+        .launch-pad {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 50px;
+            background: linear-gradient(180deg, #94a3b8 0%, #64748b 100%);
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        
+        .launch-tower {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 350px;
+        }
+        
+        .tower-arm {
+            position: absolute;
+            width: 80px;
+            height: 10px;
+            background: #dc2626;
+            animation: tower-retract 4s ease-in-out infinite;
+        }
+        
+        @keyframes tower-retract {
+            0%, 60% {
+                width: 80px;
+                opacity: 1;
+            }
+            70%, 100% {
+                width: 0;
+                opacity: 0;
+            }
+        }
+        
+        .tower-arm.left {
+            left: 0;
+            top: 100px;
+            transform-origin: left center;
+        }
+        
+        .tower-arm.right {
+            right: 0;
+            top: 100px;
+            transform-origin: right center;
+        }
+        
+        .tower-structure {
+            position: absolute;
+            width: 15px;
+            bottom: 0;
+            height: 300px;
+            background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+        }
+        
+        .tower-structure.left { left: 0; }
+        .tower-structure.right { right: 0; }
+        
+        /* 연료 탱크 */
+        .fuel-tanks {
+            position: absolute;
+            bottom: 80px;
+            left: 100px;
+            width: 100px;
+            height: 150px;
+        }
+        
+        .fuel-tank {
+            position: absolute;
+            width: 40px;
+            height: 120px;
+            background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .fuel-tank:nth-child(1) { left: 0; }
+        .fuel-tank:nth-child(2) { right: 0; }
+        
+        .fuel-pipe {
+            position: absolute;
+            bottom: 30px;
+            width: 100px;
+            height: 8px;
+            background: #64748b;
+            left: -10px;
+        }
+        
+        .fuel-level {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 80px;
+            background: linear-gradient(180deg, transparent 0%, #10b981 100%);
+            border-radius: 15px;
+            animation: fuel-fill 4s ease-in-out infinite;
+        }
+        
+        @keyframes fuel-fill {
+            0%, 100% { height: 20px; }
+            50% { height: 80px; }
+        }
+        
+        /* 관제 센터 */
+        .control-center {
+            position: absolute;
+            top: 200px;
+            right: 50px;
+            width: 180px;
+            height: 120px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            padding: 10px;
+        }
+        
+        .control-windows {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .window-light {
+            flex: 1;
+            height: 20px;
+            background: #fbbf24;
+            border-radius: 3px;
+            animation: window-flicker 2s ease-in-out infinite;
+        }
+        
+        @keyframes window-flicker {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .window-light:nth-child(2) { animation-delay: 0.5s; }
+        .window-light:nth-child(3) { animation-delay: 1s; }
+        
+        .radar-dish {
+            position: absolute;
+            top: -30px;
+            right: 20px;
+            width: 40px;
+            height: 30px;
+            background: #94a3b8;
+            border-radius: 50% 50% 0 0;
+            transform-origin: bottom center;
+            animation: dish-rotate 4s ease-in-out infinite;
+        }
+        
+        @keyframes dish-rotate {
+            0%, 100% { transform: rotate(-20deg); }
+            50% { transform: rotate(20deg); }
+        }
+        
+        /* 카운트다운 디스플레이 */
+        .countdown-display {
+            position: absolute;
+            top: 100px;
+            left: 50px;
+            width: 150px;
+            height: 80px;
+            background: #1e293b;
+            border: 3px solid #64748b;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .countdown-text {
+            color: #ef4444;
+            font-size: 36px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 20px rgba(239,68,68,0.5);
+            animation: countdown 4s steps(4) infinite;
+        }
+        
+        @keyframes countdown {
+            0% { content: "3"; }
+            25% { content: "2"; }
+            50% { content: "1"; }
+            75% { content: "GO"; }
+            100% { content: "3"; }
+        }
+        
+        .countdown-text::after {
+            content: "3";
+            animation: countdown-change 4s steps(1) infinite;
+        }
+        
+        @keyframes countdown-change {
+            0% { content: "3"; }
+            25% { content: "2"; }
+            50% { content: "1"; }
+            75% { content: "GO"; }
+        }
+        
+        /* 증기/연기 효과 */
+        .smoke-effect {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 100px;
+            pointer-events: none;
+        }
+        
+        .smoke {
+            position: absolute;
+            bottom: 0;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: smoke-rise 3s ease-out infinite;
+        }
+        
+        @keyframes smoke-rise {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) scale(2);
+                opacity: 0;
+            }
+        }
+        
+        .smoke:nth-child(1) { left: 30%; animation-delay: 0s; }
+        .smoke:nth-child(2) { left: 45%; animation-delay: 0.5s; }
+        .smoke:nth-child(3) { left: 60%; animation-delay: 1s; }
+        .smoke:nth-child(4) { left: 50%; animation-delay: 1.5s; }
+        
+        /* 위성 */
+        .satellite {
+            position: absolute;
+            top: 80px;
+            right: 150px;
+            width: 60px;
+            height: 40px;
+            animation: satellite-orbit 10s linear infinite;
+        }
+        
+        @keyframes satellite-orbit {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -10px); }
+            50% { transform: translate(0, -20px); }
+            75% { transform: translate(-30px, -10px); }
+            100% { transform: translate(0, 0); }
+        }
+        
+        .satellite-body {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 30px;
+            height: 10px;
+            background: #6366f1;
+            border-radius: 5px;
+        }
+        
+        .solar-panel {
+            position: absolute;
+            top: 10px;
+            width: 15px;
+            height: 20px;
+            background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+            border: 1px solid #1e40af;
+        }
+        
+        .solar-panel.left { left: 0; }
+        .solar-panel.right { right: 0; }
+        
+        /* 작은 로켓들 */
+        .mini-rocket {
+            position: absolute;
+            width: 20px;
+            height: 60px;
+        }
+        
+        .mini-rocket:nth-child(1) {
+            bottom: 100px;
+            right: 250px;
+        }
+        
+        .mini-rocket:nth-child(2) {
+            bottom: 120px;
+            left: 250px;
+            transform: rotate(-10deg);
+        }
+        
+        .mini-rocket-body {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 45px;
+            background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 10px 10px 3px 3px;
+        }
+        
+        .mini-rocket-tip {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #fbbf24;
+        }
+        
+        /* 기술자 플랫폼 */
+        .engineer-platform {
+            position: absolute;
+            bottom: 180px;
+            right: 180px;
+            width: 80px;
+            height: 100px;
+        }
+        
+        .platform {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 10px;
+            background: #94a3b8;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .platform-ladder {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 90px;
+            background: repeating-linear-gradient(
+                180deg,
+                #64748b 0px,
+                #64748b 5px,
+                transparent 5px,
+                transparent 10px
+            );
+            border-left: 2px solid #64748b;
+            border-right: 2px solid #64748b;
+        }
+        
+        /* 우주선 힌트 (다음 스테이지) */
+        .spaceship-hint {
+            position: absolute;
+            top: 50px;
+            left: 100px;
+            width: 40px;
+            height: 40px;
+            opacity: 0.4;
+            animation: float-hint 3s ease-in-out infinite;
+        }
+        
+        @keyframes float-hint {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .spaceship-hull {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%);
+            border-radius: 50% 50% 40% 40%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .spaceship-window {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 10px;
+            background: #60a5fa;
+            border-radius: 50%;
+        }
+        
+        /* 지면 마커 */
+        .ground-markers {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            height: 20px;
+        }
+        
+        .marker-line {
+            position: absolute;
+            bottom: 0;
+            height: 10px;
+            width: 40px;
+            background: #fbbf24;
+            border-radius: 2px;
+        }
+        
+        .marker-line:nth-child(1) { left: 20%; }
+        .marker-line:nth-child(2) { left: 40%; }
+        .marker-line:nth-child(3) { left: 60%; }
+        .marker-line:nth-child(4) { left: 80%; }
+    </style>
+</head>
+<body>
+    <div class="game-scene">
+        <div class="space-center-background"></div>
+        
+        <!-- 별이 빛나는 하늘 -->
+        <div class="stars">
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+        </div>
+        
+        <!-- 우주선 힌트 -->
+        <div class="spaceship-hint">
+            <div class="spaceship-hull">
+                <div class="spaceship-window"></div>
+            </div>
+        </div>
+        
+        <!-- 카운트다운 디스플레이 -->
+        <div class="countdown-display">
+            <div class="countdown-text"></div>
+        </div>
+        
+        <!-- 위성 -->
+        <div class="satellite">
+            <div class="solar-panel left"></div>
+            <div class="satellite-body"></div>
+            <div class="solar-panel right"></div>
+        </div>
+        
+        <!-- 관제 센터 -->
+        <div class="control-center">
+            <div class="radar-dish"></div>
+            <div class="control-windows">
+                <div class="window-light"></div>
+                <div class="window-light"></div>
+                <div class="window-light"></div>
+            </div>
+        </div>
+        
+        <!-- 연료 탱크 -->
+        <div class="fuel-tanks">
+            <div class="fuel-tank">
+                <div class="fuel-level"></div>
+            </div>
+            <div class="fuel-tank">
+                <div class="fuel-level"></div>
+            </div>
+            <div class="fuel-pipe"></div>
+        </div>
+        
+        <!-- 기술자 플랫폼 -->
+        <div class="engineer-platform">
+            <div class="platform"></div>
+            <div class="platform-ladder"></div>
+        </div>
+        
+        <!-- 발사대와 타워 -->
+        <div class="launch-pad"></div>
+        <div class="launch-tower">
+            <div class="tower-structure left"></div>
+            <div class="tower-structure right"></div>
+            <div class="tower-arm left"></div>
+            <div class="tower-arm right"></div>
+        </div>
+        
+        <!-- 메인 로켓 -->
+        <div class="main-rocket">
+            <div class="rocket-nose"></div>
+            <div class="rocket-body">
+                <div class="rocket-window"></div>
+                <div class="rocket-flag"></div>
+            </div>
+            <div class="rocket-fins">
+                <div class="fin left"></div>
+                <div class="fin right"></div>
+            </div>
+            <div class="rocket-engine"></div>
+            <div class="engine-fire"></div>
+        </div>
+        
+        <!-- 미니 로켓들 -->
+        <div class="mini-rocket">
+            <div class="mini-rocket-tip"></div>
+            <div class="mini-rocket-body"></div>
+        </div>
+        <div class="mini-rocket">
+            <div class="mini-rocket-tip"></div>
+            <div class="mini-rocket-body"></div>
+        </div>
+        
+        <!-- 증기 효과 -->
+        <div class="smoke-effect">
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+            <div class="smoke"></div>
+        </div>
+        
+        <!-- 지면 마커 -->
+        <div class="ground-markers">
+            <div class="marker-line"></div>
+            <div class="marker-line"></div>
+            <div class="marker-line"></div>
+            <div class="marker-line"></div>
+        </div>
+    </div>
+</body>
+</html>

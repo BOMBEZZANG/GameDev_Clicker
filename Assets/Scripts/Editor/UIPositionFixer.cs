@@ -60,6 +60,53 @@ namespace GameDevClicker.Editor
                 FixParentAssignment();
             }
             EditorGUILayout.EndHorizontal();
+            
+            GUILayout.Space(10);
+            
+            if (GUILayout.Button("Diagnose UI Issues"))
+            {
+                DiagnoseUIIssues();
+            }
+        }
+        
+        private void DiagnoseUIIssues()
+        {
+            Debug.Log("=== DIAGNOSING UI ISSUES ===");
+            
+            var upgradeItems = FindObjectsOfType<UpgradeItemUI>(true);
+            Debug.Log($"Found {upgradeItems.Length} UpgradeItemUI objects (including inactive)");
+            
+            int missingRectTransform = 0;
+            int wrongParent = 0;
+            int inactive = 0;
+            
+            foreach (var item in upgradeItems)
+            {
+                if (item == null) continue;
+                
+                if (!item.gameObject.activeSelf)
+                    inactive++;
+                
+                var rectTransform = item.GetComponent<RectTransform>();
+                if (rectTransform == null)
+                {
+                    missingRectTransform++;
+                    Debug.LogWarning($"❌ {item.name} is missing RectTransform!");
+                }
+                
+                if (item.transform.parent != null && item.transform.parent.name == "Viewport")
+                {
+                    wrongParent++;
+                    Debug.LogWarning($"⚠️ {item.name} has wrong parent (Viewport instead of Content)");
+                }
+            }
+            
+            Debug.Log($"--- Diagnosis Summary ---");
+            Debug.Log($"Total Items: {upgradeItems.Length}");
+            Debug.Log($"Inactive Items: {inactive}");
+            Debug.Log($"Missing RectTransform: {missingRectTransform}");
+            Debug.Log($"Wrong Parent: {wrongParent}");
+            Debug.Log("=== DIAGNOSIS COMPLETE ===");
         }
         
         private void FixAllUIIssues()
@@ -160,7 +207,8 @@ namespace GameDevClicker.Editor
         {
             Debug.Log("--- Fixing Parent Assignment ---");
             
-            var upgradeItems = FindObjectsOfType<UpgradeItemUI>();
+            // Find both active and inactive upgrade items
+            var upgradeItems = FindObjectsOfType<UpgradeItemUI>(true); // Include inactive objects
             var scrollRect = FindObjectOfType<ScrollRect>();
             
             if (scrollRect?.content == null)
@@ -171,8 +219,14 @@ namespace GameDevClicker.Editor
             
             foreach (var item in upgradeItems)
             {
+                if (item == null || item.transform == null)
+                {
+                    Debug.LogWarning("⚠️ Found null UpgradeItemUI or transform, skipping...");
+                    continue;
+                }
+                
                 // Check if item is directly under Viewport (wrong parent)
-                if (item.transform.parent.name == "Viewport")
+                if (item.transform.parent != null && item.transform.parent.name == "Viewport")
                 {
                     // Move to Content instead
                     item.transform.SetParent(scrollRect.content, false);
@@ -185,11 +239,31 @@ namespace GameDevClicker.Editor
         {
             Debug.Log("--- Fixing Item Positioning ---");
             
-            var upgradeItems = FindObjectsOfType<UpgradeItemUI>();
+            // Find both active and inactive upgrade items
+            var upgradeItems = FindObjectsOfType<UpgradeItemUI>(true); // Include inactive objects
             
             foreach (var item in upgradeItems)
             {
+                if (item == null)
+                {
+                    Debug.LogWarning("⚠️ Found null UpgradeItemUI reference, skipping...");
+                    continue;
+                }
+                
                 var rectTransform = item.GetComponent<RectTransform>();
+                
+                // Check if RectTransform exists
+                if (rectTransform == null)
+                {
+                    Debug.LogWarning($"⚠️ No RectTransform found on {item.name}, attempting to add one...");
+                    rectTransform = item.gameObject.AddComponent<RectTransform>();
+                    
+                    if (rectTransform == null)
+                    {
+                        Debug.LogError($"❌ Failed to add RectTransform to {item.name}, skipping...");
+                        continue;
+                    }
+                }
                 
                 // Fix anchors - should be top-left anchor for vertical list
                 rectTransform.anchorMin = new Vector2(0, 1);
@@ -200,7 +274,7 @@ namespace GameDevClicker.Editor
                 rectTransform.anchoredPosition = Vector2.zero;
                 rectTransform.sizeDelta = new Vector2(0, 100); // Full width, 100px height
                 
-                Debug.Log($"✅ Fixed positioning for {item.name}");
+                Debug.Log($"✅ Fixed positioning for {item.name} (Active: {item.gameObject.activeSelf})");
             }
             
             // Force layout rebuild

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 8: Spaceship Development Dock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #000000 0%, #0a0a2e 50%, #16003b 100%);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .game-scene {
+            width: 800px;
+            height: 600px;
+            position: relative;
+            background: radial-gradient(ellipse at center, #1a0033 0%, #000000 100%);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 
+                        inset 0 0 150px rgba(138,43,226,0.2);
+            overflow: hidden;
+        }
+        
+        /* 깊은 우주 배경 */
+        .deep-space-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(138,43,226,0.1) 0%, transparent 40%),
+                radial-gradient(ellipse at 80% 70%, rgba(0,191,255,0.1) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 50%, rgba(255,0,255,0.05) 0%, transparent 60%);
+        }
+        
+        /* 은하수 효과 */
+        .galaxy {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><defs><filter id="nebula"><feTurbulence baseFrequency="0.02" numOctaves="4" /><feColorMatrix values="0 0 0 0 0.5 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0"/></filter></defs><rect width="800" height="600" filter="url(%23nebula)" opacity="0.3"/></svg>');
+            opacity: 0.2;
+            animation: galaxy-drift 60s linear infinite;
+        }
+        
+        @keyframes galaxy-drift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100px); }
+        }
+        
+        /* 별 필드 */
+        .starfield {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .star-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, white, transparent),
+                radial-gradient(2px 2px at 40% 70%, white, transparent),
+                radial-gradient(1px 1px at 50% 50%, white, transparent),
+                radial-gradient(1px 1px at 80% 10%, white, transparent),
+                radial-gradient(2px 2px at 90% 60%, white, transparent);
+            background-size: 250px 250px;
+            animation: star-movement 120s linear infinite;
+        }
+        
+        @keyframes star-movement {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-250px, -250px); }
+        }
+        
+        /* 우주 정거장 도크 */
+        .space-dock {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 200px;
+        }
+        
+        .dock-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 5px solid rgba(0,191,255,0.3);
+            border-radius: 50%;
+            transform: rotateX(60deg);
+            box-shadow: 
+                0 0 50px rgba(0,191,255,0.5),
+                inset 0 0 50px rgba(0,191,255,0.2);
+            animation: dock-rotate 20s linear infinite;
+        }
+        
+        @keyframes dock-rotate {
+            0% { transform: rotateX(60deg) rotateZ(0deg); }
+            100% { transform: rotateX(60deg) rotateZ(360deg); }
+        }
+        
+        .dock-lights {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #00ffff;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #00ffff;
+            animation: light-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes light-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .dock-lights:nth-child(2) { top: 0; left: 50%; transform: translateX(-50%); }
+        .dock-lights:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); animation-delay: 0.5s; }
+        .dock-lights:nth-child(4) { top: 50%; left: 0; transform: translateY(-50%); animation-delay: 1s; }
+        .dock-lights:nth-child(5) { top: 50%; right: 0; transform: translateY(-50%); animation-delay: 1.5s; }
+        
+        /* 메인 우주선 */
+        .main-spaceship {
+            position: absolute;
+            bottom: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 150px;
+            z-index: 10;
+            animation: spaceship-hover 4s ease-in-out infinite;
+        }
+        
+        @keyframes spaceship-hover {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-20px); }
+        }
+        
+        .ship-hull {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 50%, #1a202c 100%);
+            border-radius: 100px 100px 50px 50px / 50px 50px 30px 30px;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.5),
+                0 0 60px rgba(138,43,226,0.3);
+        }
+        
+        .ship-dome {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 50px;
+            background: radial-gradient(ellipse at center, rgba(0,255,255,0.6) 0%, rgba(0,191,255,0.3) 100%);
+            border-radius: 50% 50% 40% 40%;
+            box-shadow: 
+                inset 0 0 30px rgba(255,255,255,0.5),
+                0 0 40px rgba(0,255,255,0.5);
+        }
+        
+        .ship-engine {
+            position: absolute;
+            bottom: -20px;
+            width: 30px;
+            height: 40px;
+            background: linear-gradient(180deg, #1a202c 0%, #4a5568 100%);
+            border-radius: 0 0 50% 50%;
+        }
+        
+        .ship-engine:nth-child(3) { left: 30px; }
+        .ship-engine:nth-child(4) { left: 85px; }
+        .ship-engine:nth-child(5) { right: 30px; }
+        
+        .engine-glow {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 30px;
+            background: radial-gradient(ellipse at center, #00ffff 0%, #0099ff 50%, transparent 100%);
+            filter: blur(5px);
+            animation: engine-pulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes engine-pulse {
+            0%, 100% { opacity: 0.5; transform: translateX(-50%) scaleY(0.8); }
+            50% { opacity: 1; transform: translateX(-50%) scaleY(1.2); }
+        }
+        
+        /* 에너지 실드 */
+        .energy-shield {
+            position: absolute;
+            top: -40px;
+            left: -40px;
+            right: -40px;
+            bottom: -40px;
+            border: 2px solid rgba(0,255,255,0.2);
+            border-radius: 50%;
+            animation: shield-ripple 3s ease-in-out infinite;
+        }
+        
+        @keyframes shield-ripple {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 0;
+            }
+            50% { 
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
+        }
+        
+        /* 소행성들 */
+        .asteroid {
+            position: absolute;
+            background: radial-gradient(circle at 30% 30%, #8b7355, #3e3e3e);
+            border-radius: 40% 60% 50% 40%;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.5);
+        }
+        
+        .asteroid:nth-child(1) {
+            width: 40px;
+            height: 35px;
+            top: 150px;
+            left: 100px;
+            animation: asteroid-drift-1 30s linear infinite;
+        }
+        
+        .asteroid:nth-child(2) {
+            width: 30px;
+            height: 25px;
+            top: 300px;
+            right: 120px;
+            animation: asteroid-drift-2 40s linear infinite;
+        }
+        
+        .asteroid:nth-child(3) {
+            width: 25px;
+            height: 20px;
+            bottom: 150px;
+            left: 150px;
+            animation: asteroid-drift-3 35s linear infinite;
+        }
+        
+        @keyframes asteroid-drift-1 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(200px, 100px) rotate(360deg); }
+        }
+        
+        @keyframes asteroid-drift-2 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-150px, 50px) rotate(-360deg); }
+        }
+        
+        @keyframes asteroid-drift-3 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(100px, -80px) rotate(360deg); }
+        }
+        
+        /* 건설 드론 */
+        .construction-drone {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            animation: drone-patrol 15s linear infinite;
+        }
+        
+        @keyframes drone-patrol {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(100px, -50px); }
+            50% { transform: translate(150px, 50px); }
+            75% { transform: translate(50px, 100px); }
+            100% { transform: translate(0, 0); }
+        }
+        
+        .construction-drone:nth-child(1) {
+            top: 200px;
+            left: 50px;
+        }
+        
+        .construction-drone:nth-child(2) {
+            top: 250px;
+            right: 100px;
+            animation-delay: -5s;
+        }
+        
+        .drone-core {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(251,191,36,0.5);
+        }
+        
+        .drone-arm {
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: #f59e0b;
+            top: 50%;
+            left: 50%;
+            transform-origin: center;
+            animation: arm-spin 2s linear infinite;
+        }
+        
+        @keyframes arm-spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* 워프 게이트 */
+        .warp-gate {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            width: 100px;
+            height: 100px;
+        }
+        
+        .gate-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #8b5cf6;
+            border-radius: 50%;
+            animation: gate-spin 10s linear infinite;
+            box-shadow: 0 0 30px rgba(139,92,246,0.5);
+        }
+        
+        @keyframes gate-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .gate-portal {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(139,92,246,0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: portal-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes portal-pulse {
+            0%, 100% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* 행성 */
+        .planet {
+            position: absolute;
+            bottom: 50px;
+            right: 100px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, #60a5fa, #1e40af);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 50px rgba(96,165,250,0.5),
+                inset -20px -20px 30px rgba(0,0,0,0.3);
+            animation: planet-rotate 60s linear infinite;
+        }
+        
+        @keyframes planet-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .planet-ring {
+            position: absolute;
+            top: 50%;
+            left: -20%;
+            width: 140%;
+            height: 20px;
+            border: 3px solid rgba(96,165,250,0.3);
+            border-radius: 50%;
+            transform: translateY(-50%) rotateX(70deg);
+        }
+        
+        /* 우주 정거장 모듈 */
+        .station-module {
+            position: absolute;
+            top: 150px;
+            left: 80px;
+            width: 80px;
+            height: 100px;
+        }
+        
+        .module-body {
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(180deg, #e2e8f0 0%, #94a3b8 100%);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .solar-array {
+            position: absolute;
+            top: 20px;
+            width: 80px;
+            height: 30px;
+            background: linear-gradient(90deg, #1e40af 0%, #3b82f6 50%, #1e40af 100%);
+            box-shadow: 0 5px 15px rgba(59,130,246,0.3);
+        }
+        
+        .solar-array.left {
+            left: -15px;
+            transform: perspective(100px) rotateY(30deg);
+        }
+        
+        .solar-array.right {
+            right: -15px;
+            transform: perspective(100px) rotateY(-30deg);
+        }
+        
+        /* 에너지 빔 */
+        .energy-beam {
+            position: absolute;
+            top: 200px;
+            right: 200px;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            animation: beam-shoot 3s linear infinite;
+            transform-origin: left center;
+        }
+        
+        @keyframes beam-shoot {
+            0% { 
+                transform: scaleX(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% { 
+                transform: scaleX(1) rotate(0deg);
+                opacity: 1;
+            }
+            100% { 
+                transform: scaleX(0) rotate(0deg);
+                opacity: 0;
+            }
+        }
+        
+        /* 네뷸라 효과 */
+        .nebula {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 300px;
+            background: radial-gradient(ellipse at center, 
+                rgba(138,43,226,0.1) 0%, 
+                rgba(0,191,255,0.05) 30%, 
+                transparent 70%);
+            filter: blur(30px);
+            animation: nebula-swirl 30s ease-in-out infinite;
+        }
+        
+        @keyframes nebula-swirl {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+        }
+        
+        /* 블랙홀 힌트 (다음 스테이지) */
+        .blackhole-hint {
+            position: absolute;
+            top: 80px;
+            left: 50px;
+            width: 50px;
+            height: 50px;
+            opacity: 0.5;
+        }
+        
+        .blackhole-core {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #000000 0%, #4a0080 50%, transparent 100%);
+            border-radius: 50%;
+            animation: blackhole-spin 10s linear infinite;
+        }
+        
+        @keyframes blackhole-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .event-horizon {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid rgba(148,0,211,0.3);
+            border-radius: 50%;
+            animation: horizon-distort 3s ease-in-out infinite;
+        }
+        
+        @keyframes horizon-distort {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+        
+        /* 홀로그램 디스플레이 */
+        .hologram-display {
+            position: absolute;
+            bottom: 100px;
+            left: 100px;
+            width: 100px;
+            height: 80px;
+        }
+        
+        .holo-projection {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid rgba(0,255,255,0.3);
+            background: linear-gradient(180deg, 
+                rgba(0,255,255,0.1) 0%, 
+                transparent 50%, 
+                rgba(0,255,255,0.1) 100%);
+            animation: holo-flicker 2s ease-in-out infinite;
+        }
+        
+        @keyframes holo-flicker {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+        
+        .holo-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ffff;
+            font-size: 10px;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px rgba(0,255,255,0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="game-scene">
+        <div class="deep-space-background"></div>
+        <div class="galaxy"></div>
+        
+        <!-- 별 필드 -->
+        <div class="starfield">
+            <div class="star-layer"></div>
+        </div>
+        
+        <!-- 네뷸라 -->
+        <div class="nebula"></div>
+        
+        <!-- 블랙홀 힌트 -->
+        <div class="blackhole-hint">
+            <div class="blackhole-core"></div>
+            <div class="event-horizon"></div>
+        </div>
+        
+        <!-- 워프 게이트 -->
+        <div class="warp-gate">
+            <div class="gate-ring"></div>
+            <div class="gate-portal"></div>
+        </div>
+        
+        <!-- 우주 정거장 도크 -->
+        <div class="space-dock">
+            <div class="dock-ring"></div>
+            <div class="dock-lights"></div>
+            <div class="dock-lights"></div>
+            <div class="dock-lights"></div>
+            <div class="dock-lights"></div>
+        </div>
+        
+        <!-- 우주 정거장 모듈 -->
+        <div class="station-module">
+            <div class="module-body"></div>
+            <div class="solar-array left"></div>
+            <div class="solar-array right"></div>
+        </div>
+        
+        <!-- 소행성들 -->
+        <div class="asteroid"></div>
+        <div class="asteroid"></div>
+        <div class="asteroid"></div>
+        
+        <!-- 건설 드론 -->
+        <div class="construction-drone">
+            <div class="drone-core"></div>
+            <div class="drone-arm"></div>
+        </div>
+        <div class="construction-drone">
+            <div class="drone-core"></div>
+            <div class="drone-arm"></div>
+        </div>
+        
+        <!-- 에너지 빔 -->
+        <div class="energy-beam"></div>
+        
+        <!-- 홀로그램 디스플레이 -->
+        <div class="hologram-display">
+            <div class="holo-projection">
+                <div class="holo-text">SYSTEM ONLINE</div>
+            </div>
+        </div>
+        
+        <!-- 행성 -->
+        <div class="planet">
+            <div class="planet-ring"></div>
+        </div>
+        
+        <!-- 메인 우주선 -->
+        <div class="main-spaceship">
+            <div class="energy-shield"></div>
+            <div class="ship-hull"></div>
+            <div class="ship-dome"></div>
+            <div class="ship-engine">
+                <div class="engine-glow"></div>
+            </div>
+            <div class="ship-engine">
+                <div class="engine-glow"></div>
+            </div>
+            <div class="ship-engine">
+                <div class="engine-glow"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

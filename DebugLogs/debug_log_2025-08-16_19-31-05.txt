@@ -1,0 +1,345 @@
+=== DEBUG LOG EXPORT ===
+Date: 2025-08-16 19:31:05
+Total Entries: 100
+Unity Version: 6000.0.45f1
+===================================================
+
+[19:31:04.838] [Log]
+[Adaptive Performance] No Provider was configured for use. Make sure you added at least one Provider in the Adaptive Performance Settings.
+-----------------------------------------
+[19:31:04.864] [Log]
+[TimeUtilities] Initialized at 8/16/2025 7:31:04 PM
+-----------------------------------------
+[19:31:04.871] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[19:31:04.876] [Log]
+[CSVLoader] Awake - Instance set
+-----------------------------------------
+[19:31:04.877] [Log]
+[CSVLoader] Instance created
+-----------------------------------------
+[19:31:04.878] [Log]
+[BalanceManager] Loading balance data from CSV files...
+-----------------------------------------
+[19:31:04.880] [Log]
+[CSVLoader] Starting to load all CSV data...
+-----------------------------------------
+[19:31:04.883] [Log]
+[CSVLoader] Loaded 15 rows from Upgrades.csv
+-----------------------------------------
+[19:31:04.885] [Log]
+[CSVLoader] Loaded 50 rows from Levels.csv
+-----------------------------------------
+[19:31:04.887] [Log]
+[CSVLoader] Loaded 15 rows from Projects.csv
+-----------------------------------------
+[19:31:04.889] [Log]
+[CSVLoader] Loaded 10 rows from Stage.csv
+-----------------------------------------
+[19:31:04.890] [Log]
+[CSVLoader] Loaded 7 rows from DualCurrency.csv
+-----------------------------------------
+[19:31:04.892] [Log]
+[CSVLoader] Loaded 10 rows from ExpectedTime.csv
+-----------------------------------------
+[19:31:04.895] [Log]
+[CSVLoader] Parsed 15 upgrades
+-----------------------------------------
+[19:31:04.898] [Log]
+[CSVLoader] Parsed 50 levels
+-----------------------------------------
+[19:31:04.900] [Log]
+[CSVLoader] Parsed 15 projects
+-----------------------------------------
+[19:31:04.902] [Log]
+[CSVLoader] Parsed 10 stages
+-----------------------------------------
+[19:31:04.904] [Log]
+[CSVLoader] Parsed 7 dual currency settings
+-----------------------------------------
+[19:31:04.905] [Log]
+[CSVLoader] All CSV data loaded successfully!
+-----------------------------------------
+[19:31:04.907] [Log]
+[BalanceManager] Balance data loaded successfully!
+-----------------------------------------
+[19:31:04.909] [Log]
+[Singleton] An instance of GameDevClicker.Core.Managers.BalanceManager is needed in the scene, so '[Singleton] BalanceManager (UnityEngine.GameObject)' was created with DontDestroyOnLoad.
+-----------------------------------------
+[19:31:04.910] [Log]
+[BalanceManager] Loading balance data from CSV files...
+-----------------------------------------
+[19:31:04.910] [Log]
+[CSVLoader] Starting to load all CSV data...
+-----------------------------------------
+[19:31:04.912] [Log]
+[CSVLoader] Loaded 15 rows from Upgrades.csv
+-----------------------------------------
+[19:31:04.914] [Log]
+[CSVLoader] Loaded 50 rows from Levels.csv
+-----------------------------------------
+[19:31:04.914] [Log]
+[CSVLoader] Loaded 15 rows from Projects.csv
+-----------------------------------------
+[19:31:04.916] [Log]
+[CSVLoader] Loaded 10 rows from Stage.csv
+-----------------------------------------
+[19:31:04.917] [Log]
+[CSVLoader] Loaded 7 rows from DualCurrency.csv
+-----------------------------------------
+[19:31:04.919] [Log]
+[CSVLoader] Loaded 10 rows from ExpectedTime.csv
+-----------------------------------------
+[19:31:04.919] [Log]
+[CSVLoader] Parsed 15 upgrades
+-----------------------------------------
+[19:31:04.920] [Log]
+[CSVLoader] Parsed 50 levels
+-----------------------------------------
+[19:31:04.921] [Log]
+[CSVLoader] Parsed 15 projects
+-----------------------------------------
+[19:31:04.922] [Log]
+[CSVLoader] Parsed 10 stages
+-----------------------------------------
+[19:31:04.922] [Log]
+[CSVLoader] Parsed 7 dual currency settings
+-----------------------------------------
+[19:31:04.924] [Log]
+[CSVLoader] All CSV data loaded successfully!
+-----------------------------------------
+[19:31:04.924] [Log]
+[BalanceManager] Balance data loaded successfully!
+-----------------------------------------
+[19:31:04.925] [Log]
+[GameManager] Balance data initialization started
+-----------------------------------------
+[19:31:04.926] [Log]
+[GameManager] Game initialized successfully
+-----------------------------------------
+[19:31:04.928] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[19:31:04.934] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[19:31:04.936] [Log]
+[Singleton] Using instance already created: SaveManager
+-----------------------------------------
+[19:31:04.937] [Log]
+[GameModel] No saved data found, creating new game data
+-----------------------------------------
+[19:31:04.939] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[19:31:04.941] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[19:31:04.944] [Log]
+[UpgradeManager] Loaded 15 upgrades from Resources
+-----------------------------------------
+[19:31:04.947] [Log]
+[UpgradeManager] Initialized with 15 upgrades
+-----------------------------------------
+[19:31:04.948] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[19:31:04.949] [Log]
+[ProjectSystem] Initialized with default project requirement: 1000
+-----------------------------------------
+[19:31:04.950] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[19:31:04.952] [Log]
+[UnlockManager] Initialized with 0 unlock milestones
+-----------------------------------------
+[19:31:04.953] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[19:31:05.483] [Error]
+Webview is not supported on this platform.
+Stack Trace:
+0x00007ffed5a6b9dd (Unity) StackWalker::ShowCallstack
+0x00007ffed5a7b999 (Unity) PlatformStacktrace::GetStacktrace
+0x00007ffed6cef9de (Unity) Stacktrace::GetStacktrace
+0x00007ffed72994cf (Unity) DebugStringToFile
+0x00007ffed4bcc305 (Unity) DebugLogHandler_CUSTOM_Internal_Log
+0x00000205ac83e22d (Mono JIT Code) (wrapper managed-to-native) UnityEngine.DebugLogHandler:Internal_Log_Injected (UnityEngine.LogType,UnityEngine.LogOption,UnityEngine.Bindings.ManagedSpanWrapper&,intptr)
+0x00000205ac83e0e3 (Mono JIT Code) UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+0x00000205ac83dcfb (Mono JIT Code) UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+0x00000205ac83da40 (Mono JIT Code) UnityEngine.Logger:Log (UnityEngine.LogType,object)
+0x00000205b5e2c8b5 (Mono JIT Code) UnityEngine.Debug:LogError (object)
+0x00000205b5e2c843 (Mono JIT Code) WebViewObject:Init (System.Action`1<string>,System.Action`1<string>,System.Action`1<string>,System.Action`1<string>,System.Action`1<string>,System.Action`1<string>,System.Action`1<string>,bool,bool,string,int,int,bool,int,bool,bool,bool) (at C:/Projects/Developer_Clicker/Assets/Plugins/WebViewObject.cs:723)
+0x00000205b5e2c00b (Mono JIT Code) GameDevClicker.Game.Managers.HTMLBackgroundManager:InitializeWebView () (at C:/Projects/Developer_Clicker/Assets/Scripts/Game/Managers/HTMLBackgroundManager.cs:92)
+0x00000205b5e2ba13 (Mono JIT Code) GameDevClicker.Game.Managers.HTMLBackgroundManager:Start () (at C:/Projects/Developer_Clicker/Assets/Scripts/Game/Managers/HTMLBackgroundManager.cs:60)
+0x00000205c0438398 (Mono JIT Code) (wrapper runtime-invoke) object:runtime_invoke_void__this__ (object,intptr,intptr,intptr)
+0x00007ffece8268de (mono-2.0-bdwgc) mono_jit_runtime_invoke (at C:/build/output/Unity-Technologies/mono/mono/mini/mini-runtime.c:3445)
+0x00007ffece768404 (mono-2.0-bdwgc) do_runtime_invoke (at C:/build/output/Unity-Technologies/mono/mono/metadata/object.c:3068)
+0x00007ffece7684f0 (mono-2.0-bdwgc) mono_runtime_invoke (at C:/build/output/Unity-Technologies/mono/mono/metadata/object.c:3115)
+0x00007ffed598f844 (Unity) scripting_method_invoke
+0x00007ffed59675c3 (Unity) ScriptingInvocation::Invoke
+0x00007ffed59584c0 (Unity) MonoBehaviour::InvokeMethodOrCoroutineChecked
+0x00007ffed59585cf (Unity) MonoBehaviour::InvokeMethodOrCoroutineChecked
+0x00007ffed59539e2 (Unity) MonoBehaviour::DelayedStartCall
+0x00007ffed53836a8 (Unity) DelayedCallManager::Update
+0x00007ffed560d809 (Unity) `InitPlayerLoopCallbacks'::`2'::EarlyUpdateScriptRunDelayedStartupFrameRegistrator::Forward
+0x00007ffed55dc867 (Unity) ExecutePlayerLoop
+0x00007ffed55dc9d7 (Unity) ExecutePlayerLoop
+0x00007ffed55e1b0f (Unity) PlayerLoop
+0x00007ffed66e7ada (Unity) EditorPlayerLoop::Execute
+0x00007ffed66fe4d7 (Unity) PlayerLoopController::InternalUpdateScene
+0x00007ffed66fd343 (Unity) PlayerLoopController::EnterPlayMode
+0x00007ffed66fefbf (Unity) PlayerLoopController::SetIsPlaying
+0x00007ffed66fa32d (Unity) Application::TickTimer
+0x00007ffed6cf46da (Unity) MainMessageLoop
+0x00007ffed6cfa384 (Unity) UnityMain
+0x00007ff628232fba (Unity) __scrt_common_main_seh
+0x00007fff90c7e8d7 (KERNEL32) BaseThreadInitThunk
+0x00007fff923bc34c (ntdll) RtlUserThreadStart
+
+-----------------------------------------
+[19:31:05.488] [Log]
+[SaveManager] Game loaded successfully. Save version: 2
+-----------------------------------------
+[19:31:05.488] [Log]
+[GameManager] Game state changed: MainMenu -> Playing
+-----------------------------------------
+[19:31:05.489] [Log]
+[GameController] Initializing Game Dev Clicker...
+-----------------------------------------
+[19:31:05.490] [Log]
+[GameController] Statistics System initialized
+-----------------------------------------
+[19:31:05.491] [Log]
+[GameController] Achievement System initialized
+-----------------------------------------
+[19:31:05.492] [Log]
+[GameController] Offline Progression System initialized
+-----------------------------------------
+[19:31:05.492] [Log]
+[GameController] UI System initialized
+-----------------------------------------
+[19:31:05.494] [Log]
+[GameController] Systems connected
+-----------------------------------------
+[19:31:05.495] [Log]
+[SaveManager] Game loaded successfully. Save version: 2
+-----------------------------------------
+[19:31:05.495] [Log]
+[GameController] Loaded existing save
+-----------------------------------------
+[19:31:05.499] [Log]
+[GamePresenter] Checking Skills category - Found 5 total upgrades
+-----------------------------------------
+[19:31:05.501] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 10
+-----------------------------------------
+[19:31:05.504] [Log]
+[GamePresenter] skill_01 (Typing Speed) - Unlocked: True (Requires: Level 1, Stage 1)
+-----------------------------------------
+[19:31:05.504] [Log]
+[GamePresenter] skill_02 (Algorithm Study) - Unlocked: True (Requires: Level 5, Stage 1)
+-----------------------------------------
+[19:31:05.505] [Log]
+[GamePresenter] skill_03 (Design Sense) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[19:31:05.506] [Log]
+[GamePresenter] skill_04 (Project Management) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[19:31:05.506] [Log]
+[GamePresenter] skill_05 (Innovative Thinking) - Unlocked: True (Requires: Level 30, Stage 1)
+-----------------------------------------
+[19:31:05.507] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Skills
+-----------------------------------------
+[19:31:05.509] [Log]
+[GameViewUI] Creating upgrade element for skill_01 in parent Viewport
+-----------------------------------------
+[19:31:05.517] [Log]
+[GameViewUI] Successfully created upgrade UI for Typing Speed
+-----------------------------------------
+[19:31:05.518] [Log]
+[GameViewUI] Creating upgrade element for skill_02 in parent Viewport
+-----------------------------------------
+[19:31:05.519] [Log]
+[GameViewUI] Successfully created upgrade UI for Algorithm Study
+-----------------------------------------
+[19:31:05.519] [Log]
+[GameViewUI] Creating upgrade element for skill_03 in parent Viewport
+-----------------------------------------
+[19:31:05.521] [Log]
+[GameViewUI] Successfully created upgrade UI for Design Sense
+-----------------------------------------
+[19:31:05.522] [Log]
+[GameViewUI] Creating upgrade element for skill_04 in parent Viewport
+-----------------------------------------
+[19:31:05.524] [Log]
+[GameViewUI] Successfully created upgrade UI for Project Management
+-----------------------------------------
+[19:31:05.524] [Log]
+[GameViewUI] Creating upgrade element for skill_05 in parent Viewport
+-----------------------------------------
+[19:31:05.526] [Log]
+[GameViewUI] Successfully created upgrade UI for Innovative Thinking
+-----------------------------------------
+[19:31:05.527] [Log]
+[GamePresenter] Checking Equipment category - Found 5 total upgrades
+-----------------------------------------
+[19:31:05.527] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 10
+-----------------------------------------
+[19:31:05.528] [Log]
+[GamePresenter] equip_01 (Better Keyboard) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[19:31:05.528] [Log]
+[GamePresenter] equip_02 (Dual Monitor) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[19:31:05.529] [Log]
+[GamePresenter] equip_03 (High-end PC) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[19:31:05.530] [Log]
+[GamePresenter] equip_04 (Server Farm) - Unlocked: True (Requires: Level 1, Stage 3)
+-----------------------------------------
+[19:31:05.530] [Log]
+[GamePresenter] equip_05 (AI Workstation) - Unlocked: True (Requires: Level 1, Stage 5)
+-----------------------------------------
+[19:31:05.532] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Equipment
+-----------------------------------------
+[19:31:05.532] [Log]
+[GameViewUI] Creating upgrade element for equip_05 in parent Viewport
+-----------------------------------------
+[19:31:05.533] [Log]
+[GameViewUI] Successfully created upgrade UI for AI Workstation
+-----------------------------------------
+[19:31:05.534] [Log]
+[GameViewUI] Creating upgrade element for equip_04 in parent Viewport
+-----------------------------------------
+[19:31:05.535] [Log]
+[GameViewUI] Successfully created upgrade UI for Server Farm
+-----------------------------------------
+[19:31:05.537] [Log]
+[GameViewUI] Creating upgrade element for equip_01 in parent Viewport
+-----------------------------------------
+[19:31:05.538] [Log]
+[GameViewUI] Successfully created upgrade UI for Better Keyboard
+-----------------------------------------
+[19:31:05.539] [Log]
+[GameViewUI] Creating upgrade element for equip_02 in parent Viewport
+-----------------------------------------
+[19:31:05.540] [Log]
+[GameViewUI] Successfully created upgrade UI for Dual Monitor
+-----------------------------------------
+[19:31:05.541] [Log]
+[GameViewUI] Creating upgrade element for equip_03 in parent Viewport
+-----------------------------------------
+[19:31:05.542] [Log]
+[GameViewUI] Successfully created upgrade UI for High-end PC
+-----------------------------------------
+[19:31:05.543] [Log]
+[GamePresenter] Checking Team category - Found 5 total upgrades
+-----------------------------------------
+[19:31:05.544] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 10
+-----------------------------------------

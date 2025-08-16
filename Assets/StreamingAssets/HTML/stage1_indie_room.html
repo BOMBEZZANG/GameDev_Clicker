@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인디 개발자 원룸 - 아트 디자인</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2c1810 0%, #1a0e08 100%);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .game-scene {
+            width: 800px;
+            height: 600px;
+            position: relative;
+            background: linear-gradient(180deg, #d4a574 0%, #c19660 100%);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        
+        /* 벽과 바닥 */
+        .room-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #e8d5b7 0%, #e8d5b7 60%, #8b7355 60%, #7a6248 100%);
+        }
+        
+        /* 창문 */
+        .window {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 150px;
+            height: 180px;
+            background: linear-gradient(180deg, #87CEEB 0%, #FFE4B5 100%);
+            border: 8px solid #6b4423;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+        }
+        
+        .window::before,
+        .window::after {
+            content: '';
+            position: absolute;
+            background: #6b4423;
+        }
+        
+        .window::before {
+            top: 50%;
+            left: -8px;
+            right: -8px;
+            height: 6px;
+        }
+        
+        .window::after {
+            left: 50%;
+            top: -8px;
+            bottom: -8px;
+            width: 6px;
+        }
+        
+        /* 달빛 효과 */
+        .moonlight {
+            position: absolute;
+            top: 280px;
+            left: 50px;
+            width: 200px;
+            height: 150px;
+            background: linear-gradient(135deg, rgba(255,255,200,0.2) 0%, transparent 100%);
+            transform: skewX(-20deg);
+            filter: blur(20px);
+        }
+        
+        /* 책상 */
+        .desk {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 250px;
+        }
+        
+        .desk-top {
+            position: absolute;
+            bottom: 80px;
+            width: 100%;
+            height: 30px;
+            background: linear-gradient(180deg, #8b6f47 0%, #6b4f37 100%);
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .desk-leg {
+            position: absolute;
+            bottom: 0;
+            width: 30px;
+            height: 80px;
+            background: linear-gradient(180deg, #6b4f37 0%, #4a3426 100%);
+        }
+        
+        .desk-leg.left {
+            left: 30px;
+        }
+        
+        .desk-leg.right {
+            right: 30px;
+        }
+        
+        /* 노트북 */
+        .laptop {
+            position: absolute;
+            bottom: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 150px;
+        }
+        
+        .laptop-screen {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(180deg, #4a4a4a 0%, #2a2a2a 100%);
+            border: 8px solid #1a1a1a;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+        }
+        
+        .screen-content {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            background: #000;
+            color: #0f0;
+            padding: 5px;
+            font-size: 8px;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+        
+        .code-line {
+            margin: 2px 0;
+            opacity: 0.8;
+            animation: typing 2s infinite;
+        }
+        
+        @keyframes typing {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        .laptop-keyboard {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
+            background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
+            border: 8px solid #1a1a1a;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        /* 컵라면 */
+        .cup-noodle {
+            position: absolute;
+            bottom: 140px;
+            left: 180px;
+            width: 50px;
+            height: 60px;
+        }
+        
+        .cup-body {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(180deg, #ff6b6b 0%, #ff5252 50%, #ffffff 50%, #ffffff 100%);
+            border-radius: 0 0 5px 5px;
+            clip-path: polygon(10% 0%, 90% 0%, 85% 100%, 15% 100%);
+        }
+        
+        .steam {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+        }
+        
+        .steam::before,
+        .steam::after {
+            content: '~';
+            position: absolute;
+            color: rgba(255,255,255,0.6);
+            font-size: 20px;
+            animation: float-steam 3s infinite ease-in-out;
+        }
+        
+        .steam::after {
+            left: 10px;
+            animation-delay: 1.5s;
+        }
+        
+        @keyframes float-steam {
+            0%, 100% { 
+                transform: translateY(0) scaleY(1);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(-20px) scaleY(1.5);
+                opacity: 1;
+            }
+        }
+        
+        /* 커피잔 */
+        .coffee-mug {
+            position: absolute;
+            bottom: 140px;
+            right: 180px;
+            width: 45px;
+            height: 40px;
+        }
+        
+        .mug-body {
+            position: absolute;
+            bottom: 0;
+            width: 40px;
+            height: 35px;
+            background: linear-gradient(180deg, #f5f5dc 0%, #e6e6d0 100%);
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .mug-handle {
+            position: absolute;
+            right: -8px;
+            top: 5px;
+            width: 15px;
+            height: 20px;
+            border: 3px solid #e6e6d0;
+            border-left: none;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .coffee {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            height: 20px;
+            background: linear-gradient(180deg, #4a2c2a 0%, #3a1c1a 100%);
+            border-radius: 0 0 3px 3px;
+        }
+        
+        /* 포스트잇 */
+        .post-it {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #fffacd;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            transform: rotate(-5deg);
+        }
+        
+        .post-it::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            height: 2px;
+            background: #ccc;
+            box-shadow: 0 5px 0 #ccc, 0 10px 0 #ccc;
+        }
+        
+        .post-it.yellow {
+            background: #fffacd;
+            top: 180px;
+            right: 220px;
+        }
+        
+        .post-it.pink {
+            background: #ffb6c1;
+            top: 220px;
+            right: 190px;
+            transform: rotate(10deg);
+        }
+        
+        .post-it.blue {
+            background: #add8e6;
+            top: 200px;
+            right: 250px;
+            transform: rotate(-15deg);
+        }
+        
+        /* 고양이 */
+        .cat {
+            position: absolute;
+            bottom: 90px;
+            right: 100px;
+            width: 60px;
+            height: 50px;
+            animation: cat-idle 4s infinite ease-in-out;
+        }
+        
+        @keyframes cat-idle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .cat-body {
+            position: absolute;
+            bottom: 0;
+            width: 40px;
+            height: 30px;
+            background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
+            border-radius: 50% 50% 40% 40%;
+        }
+        
+        .cat-head {
+            position: absolute;
+            bottom: 20px;
+            left: -5px;
+            width: 30px;
+            height: 25px;
+            background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
+            border-radius: 50%;
+        }
+        
+        .cat-ear {
+            position: absolute;
+            top: -8px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid #ffa500;
+        }
+        
+        .cat-ear.left {
+            left: 2px;
+            transform: rotate(-20deg);
+        }
+        
+        .cat-ear.right {
+            right: 2px;
+            transform: rotate(20deg);
+        }
+        
+        .cat-eye {
+            position: absolute;
+            top: 8px;
+            width: 4px;
+            height: 4px;
+            background: #000;
+            border-radius: 50%;
+        }
+        
+        .cat-eye.left {
+            left: 7px;
+        }
+        
+        .cat-eye.right {
+            right: 7px;
+        }
+        
+        .cat-tail {
+            position: absolute;
+            bottom: 5px;
+            right: -15px;
+            width: 25px;
+            height: 25px;
+            border: 5px solid #ff8c00;
+            border-radius: 50%;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            transform: rotate(-45deg);
+            animation: tail-wag 3s infinite ease-in-out;
+        }
+        
+        @keyframes tail-wag {
+            0%, 100% { transform: rotate(-45deg); }
+            50% { transform: rotate(-35deg); }
+        }
+        
+        /* 책장 */
+        .bookshelf {
+            position: absolute;
+            top: 100px;
+            right: 50px;
+            width: 120px;
+            height: 150px;
+        }
+        
+        .shelf {
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(180deg, #6b4f37 0%, #4a3426 100%);
+        }
+        
+        .shelf.top {
+            top: 0;
+        }
+        
+        .shelf.middle {
+            top: 50px;
+        }
+        
+        .shelf.bottom {
+            top: 100px;
+        }
+        
+        .book {
+            position: absolute;
+            width: 15px;
+            background: linear-gradient(180deg, #4a7c7e 0%, #3a5c5e 100%);
+            border-radius: 2px;
+        }
+        
+        .book:nth-child(4) {
+            left: 10px;
+            top: 5px;
+            height: 45px;
+            background: linear-gradient(180deg, #7c4a7e 0%, #5c3a5e 100%);
+        }
+        
+        .book:nth-child(5) {
+            left: 30px;
+            top: 5px;
+            height: 43px;
+            background: linear-gradient(180deg, #7e7c4a 0%, #5e5c3a 100%);
+        }
+        
+        .book:nth-child(6) {
+            left: 50px;
+            top: 5px;
+            height: 44px;
+        }
+        
+        /* 시계 */
+        .clock {
+            position: absolute;
+            top: 50px;
+            right: 220px;
+            width: 60px;
+            height: 60px;
+            background: #fff;
+            border: 5px solid #333;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .clock-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: #333;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+        
+        .clock-hand {
+            position: absolute;
+            background: #333;
+            transform-origin: bottom center;
+            left: 50%;
+            bottom: 50%;
+        }
+        
+        .hour-hand {
+            width: 3px;
+            height: 15px;
+            transform: translateX(-50%) rotate(30deg);
+        }
+        
+        .minute-hand {
+            width: 2px;
+            height: 20px;
+            transform: translateX(-50%) rotate(150deg);
+        }
+        
+        /* 마우스 패드와 마우스 */
+        .mousepad {
+            position: absolute;
+            bottom: 115px;
+            right: 220px;
+            width: 60px;
+            height: 40px;
+            background: #2c2c2c;
+            border-radius: 5px;
+        }
+        
+        .mouse {
+            position: absolute;
+            bottom: 125px;
+            right: 235px;
+            width: 25px;
+            height: 35px;
+            background: linear-gradient(180deg, #666 0%, #444 100%);
+            border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .mouse::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 8px;
+            background: #333;
+            border-radius: 1px;
+        }
+        
+        /* 조명 효과 */
+        .lamp-light {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(ellipse at center, rgba(255,230,180,0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        /* 타이틀 */
+
+    </style>
+</head>
+<body>
+    <div class="game-scene">
+        <div class="room-background"></div>
+        
+        <!-- 창문과 달빛 -->
+        <div class="window"></div>
+        <div class="moonlight"></div>
+        
+        <!-- 시계 -->
+        <div class="clock">
+            <div class="clock-center"></div>
+            <div class="clock-hand hour-hand"></div>
+            <div class="clock-hand minute-hand"></div>
+        </div>
+        
+        <!-- 책장 -->
+        <div class="bookshelf">
+            <div class="shelf top"></div>
+            <div class="shelf middle"></div>
+            <div class="shelf bottom"></div>
+            <div class="book"></div>
+            <div class="book"></div>
+            <div class="book"></div>
+        </div>
+        
+        <!-- 포스트잇들 -->
+        <div class="post-it yellow"></div>
+        <div class="post-it pink"></div>
+        <div class="post-it blue"></div>
+        
+        <!-- 책상 -->
+        <div class="desk">
+            <div class="desk-top"></div>
+            <div class="desk-leg left"></div>
+            <div class="desk-leg right"></div>
+        </div>
+        
+        <!-- 노트북 -->
+        <div class="laptop">
+            <div class="laptop-screen">
+                <div class="screen-content">
+                    <div class="code-line">function makeGame() {</div>
+                    <div class="code-line">  while(coffee > 0) {</div>
+                    <div class="code-line">    code();</div>
+                    <div class="code-line">    debug();</div>
+                    <div class="code-line">    dream();</div>
+                    <div class="code-line">  }</div>
+                    <div class="code-line">  return success;</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line">// TODO: Sleep? Maybe later...</div>
+                </div>
+            </div>
+            <div class="laptop-keyboard"></div>
+        </div>
+        
+        <!-- 컵라면 -->
+        <div class="cup-noodle">
+            <div class="cup-body"></div>
+            <div class="steam"></div>
+        </div>
+        
+        <!-- 커피잔 -->
+        <div class="coffee-mug">
+            <div class="mug-body">
+                <div class="coffee"></div>
+            </div>
+            <div class="mug-handle"></div>
+        </div>
+        
+        <!-- 마우스패드와 마우스 -->
+        <div class="mousepad"></div>
+        <div class="mouse"></div>
+        
+        <!-- 고양이 -->
+        <div class="cat">
+            <div class="cat-body"></div>
+            <div class="cat-head">
+                <div class="cat-ear left"></div>
+                <div class="cat-ear right"></div>
+                <div class="cat-eye left"></div>
+                <div class="cat-eye right"></div>
+            </div>
+            <div class="cat-tail"></div>
+        </div>
+        
+        <!-- 조명 효과 -->
+        <div class="lamp-light"></div>
+        
+
+    </div>
+</body>
+</html>

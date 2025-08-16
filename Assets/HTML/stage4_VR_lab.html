@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 4: VR Development Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0e27 0%, #151b3d 50%, #1e2951 100%);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .game-scene {
+            width: 800px;
+            height: 600px;
+            position: relative;
+            background: linear-gradient(180deg, #0f1419 0%, #1a1f3a 100%);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 
+                        inset 0 0 100px rgba(0,200,255,0.1);
+            overflow: hidden;
+        }
+        
+        /* 미래적인 실험실 배경 */
+        .vr-lab-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(0,200,255,0.03) 50px,
+                    rgba(0,200,255,0.03) 51px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(0,200,255,0.03) 50px,
+                    rgba(0,200,255,0.03) 51px
+                ),
+                linear-gradient(180deg, #0a0e27 0%, #0a0e27 70%, #151b3d 70%, #1a1f3a 100%);
+        }
+        
+        /* 홀로그램 프로젝션 효과 */
+        .hologram-projection {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .hologram-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(0,255,255,0.5);
+            border-radius: 50%;
+            animation: hologram-rotate 10s linear infinite;
+        }
+        
+        @keyframes hologram-rotate {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        
+        .hologram-ring:nth-child(2) {
+            animation-delay: -3s;
+            transform: rotate(60deg);
+        }
+        
+        .hologram-ring:nth-child(3) {
+            animation-delay: -6s;
+            transform: rotate(120deg);
+        }
+        
+        /* 대형 홀로그래픽 디스플레이 */
+        .holographic-display {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 200px;
+            background: rgba(0,30,60,0.5);
+            border: 2px solid rgba(0,255,255,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0,255,255,0.2);
+        }
+        
+        .holo-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(0,255,255,0.1) 50%, 
+                transparent 70%);
+            animation: holo-scan 3s linear infinite;
+        }
+        
+        @keyframes holo-scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* 3D 모델 디스플레이 */
+        .model-3d {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+        }
+        
+        .wireframe-cube {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: rotate-3d 5s linear infinite;
+        }
+        
+        @keyframes rotate-3d {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        
+        .cube-edge {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(0,255,255,0.6);
+            background: rgba(0,100,150,0.1);
+        }
+        
+        .cube-edge:nth-child(1) { transform: rotateY(0deg) translateZ(50px); }
+        .cube-edge:nth-child(2) { transform: rotateY(90deg) translateZ(50px); }
+        .cube-edge:nth-child(3) { transform: rotateY(180deg) translateZ(50px); }
+        .cube-edge:nth-child(4) { transform: rotateY(270deg) translateZ(50px); }
+        .cube-edge:nth-child(5) { transform: rotateX(90deg) translateZ(50px); }
+        .cube-edge:nth-child(6) { transform: rotateX(-90deg) translateZ(50px); }
+        
+        /* VR 작업 스테이션 */
+        .vr-workstation {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 300px;
+        }
+        
+        .curved-desk {
+            position: absolute;
+            bottom: 100px;
+            width: 100%;
+            height: 45px;
+            background: linear-gradient(180deg, #1a2332 0%, #0f1419 100%);
+            border-radius: 50px 50px 10px 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5),
+                        inset 0 2px 10px rgba(0,255,255,0.1);
+        }
+        
+        /* 곡면 모니터 */
+        .curved-monitor {
+            position: absolute;
+            bottom: 145px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 180px;
+            background: linear-gradient(135deg, #0a0e27 0%, #151b3d 100%);
+            border: 3px solid rgba(0,255,255,0.3);
+            border-radius: 50px 50px 10px 10px / 20px 20px 10px 10px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0,255,255,0.3);
+        }
+        
+        .monitor-vr-content {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            background: #000;
+            border-radius: inherit;
+            padding: 10px;
+            color: #00ffff;
+            font-family: 'Courier New', monospace;
+            font-size: 8px;
+        }
+        
+        .vr-code {
+            color: #00ff00;
+            text-shadow: 0 0 5px rgba(0,255,0,0.5);
+        }
+        
+        /* VR 헤드셋들 */
+        .vr-headset-display {
+            position: absolute;
+            bottom: 150px;
+            right: 50px;
+            width: 150px;
+            height: 100px;
+        }
+        
+        .oculus-quest {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 70px;
+            height: 45px;
+            background: linear-gradient(135deg, #e0e0e0 0%, #b0b0b0 100%);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .quest-lens {
+            position: absolute;
+            top: 15px;
+            width: 20px;
+            height: 20px;
+            background: #000;
+            border-radius: 50%;
+            border: 2px solid #333;
+        }
+        
+        .quest-lens.left { left: 10px; }
+        .quest-lens.right { right: 10px; }
+        
+        .quest-strap {
+            position: absolute;
+            top: 50%;
+            left: -15px;
+            right: -15px;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+        
+        .htc-vive {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 65px;
+            height: 40px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .vive-sensor {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: sensor-blink 2s infinite;
+        }
+        
+        @keyframes sensor-blink {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .vive-sensor:nth-child(1) { top: 10px; left: 10px; }
+        .vive-sensor:nth-child(2) { top: 10px; right: 10px; }
+        .vive-sensor:nth-child(3) { bottom: 10px; left: 20px; }
+        .vive-sensor:nth-child(4) { bottom: 10px; right: 20px; }
+        
+        /* VR 컨트롤러 */
+        .vr-controllers {
+            position: absolute;
+            bottom: 130px;
+            left: 100px;
+            width: 100px;
+            height: 80px;
+        }
+        
+        .vr-controller {
+            position: absolute;
+            width: 25px;
+            height: 60px;
+            background: linear-gradient(180deg, #2a3040 0%, #1a1f30 100%);
+            border-radius: 50% 50% 10px 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .vr-controller.left {
+            left: 0;
+            transform: rotate(-15deg);
+        }
+        
+        .vr-controller.right {
+            right: 0;
+            transform: rotate(15deg);
+        }
+        
+        .controller-ring {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(0,255,255,0.5);
+            border-radius: 50%;
+            animation: ring-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes ring-pulse {
+            0%, 100% { 
+                box-shadow: 0 0 10px rgba(0,255,255,0.5);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(0,255,255,0.8);
+            }
+        }
+        
+        /* 모션 캡처 카메라 */
+        .motion-capture {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 60px;
+            height: 40px;
+        }
+        
+        .capture-camera {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2a2a3e 0%, #1a1a2e 100%);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .camera-lens {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #ff0000 0%, #cc0000 50%, #000000 100%);
+            border-radius: 50%;
+            animation: recording 1s ease-in-out infinite;
+        }
+        
+        @keyframes recording {
+            0%, 100% { box-shadow: 0 0 10px rgba(255,0,0,0.5); }
+            50% { box-shadow: 0 0 20px rgba(255,0,0,1); }
+        }
+        
+        .camera-mount {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 20px;
+            background: #1a1a2e;
+        }
+        
+        /* 트래킹 베이스 스테이션 */
+        .base-station {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+            transform: rotate(45deg);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .base-station.top-left {
+            top: 30px;
+            left: 30px;
+        }
+        
+        .base-station.top-right {
+            top: 30px;
+            right: 30px;
+        }
+        
+        .tracking-laser {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: laser-sweep 3s linear infinite;
+        }
+        
+        @keyframes laser-sweep {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(0,255,0,0.8);
+                opacity: 0.5;
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(0,255,0,1);
+                opacity: 1;
+            }
+        }
+        
+        /* 그린 스크린 */
+        .green-screen {
+            position: absolute;
+            top: 250px;
+            left: 40px;
+            width: 120px;
+            height: 150px;
+            background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+            border: 3px solid #009900;
+            border-radius: 5px;
+            opacity: 0.8;
+            box-shadow: 0 0 30px rgba(0,255,0,0.3);
+        }
+        
+        .screen-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, 
+                    transparent, 
+                    transparent 10px, 
+                    rgba(0,0,0,0.1) 10px, 
+                    rgba(0,0,0,0.1) 11px),
+                repeating-linear-gradient(90deg, 
+                    transparent, 
+                    transparent 10px, 
+                    rgba(0,0,0,0.1) 10px, 
+                    rgba(0,0,0,0.1) 11px);
+        }
+        
+        /* VR 플레이 공간 매트 */
+        .play-area-mat {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 80px;
+            background: rgba(0,100,200,0.1);
+            border: 2px dashed rgba(0,255,255,0.3);
+            border-radius: 10px;
+        }
+        
+        .play-boundary {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(0,255,255,0.5);
+            border-radius: 10px;
+            animation: boundary-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes boundary-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+        
+        /* 3D 프린터 */
+        .printer-3d {
+            position: absolute;
+            bottom: 140px;
+            right: 180px;
+            width: 60px;
+            height: 70px;
+            background: linear-gradient(180deg, #3a3a4e 0%, #2a2a3e 100%);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .printer-bed {
+            position: absolute;
+            bottom: 10px;
+            left: 5px;
+            right: 5px;
+            height: 30px;
+            background: #1a1a2e;
+            border-radius: 3px;
+        }
+        
+        .printer-nozzle {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 20px;
+            background: #ff6600;
+            clip-path: polygon(50% 100%, 0 0, 100% 0);
+            animation: nozzle-move 4s ease-in-out infinite;
+        }
+        
+        @keyframes nozzle-move {
+            0%, 100% { left: 20%; }
+            50% { left: 80%; }
+        }
+        
+        /* 미래적인 의자 */
+        .futuristic-chair {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 120px;
+        }
+        
+        .chair-float-base {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(180deg, #1a2540 0%, #0f1930 100%);
+            border-radius: 50% 50% 10px 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5),
+                        0 -20px 40px rgba(0,200,255,0.2);
+            animation: chair-float 3s ease-in-out infinite;
+        }
+        
+        @keyframes chair-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .chair-glow {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 20px;
+            background: rgba(0,200,255,0.4);
+            border-radius: 50%;
+            filter: blur(15px);
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+        
+        /* VR 개발 도구 */
+        .dev-tools {
+            position: absolute;
+            top: 280px;
+            right: 50px;
+            width: 100px;
+            height: 60px;
+        }
+        
+        .unity-vr-logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #000000 0%, #2a2a3e 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+        
+        .unreal-logo {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0099ff;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+        
+        /* 햅틱 장갑 */
+        .haptic-gloves {
+            position: absolute;
+            bottom: 140px;
+            left: 220px;
+            width: 60px;
+            height: 50px;
+        }
+        
+        .glove {
+            position: absolute;
+            width: 25px;
+            height: 40px;
+            background: linear-gradient(180deg, #2a3040 0%, #1a1f30 100%);
+            border-radius: 50% 50% 30% 30%;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+        
+        .glove.left { left: 0; }
+        .glove.right { right: 0; }
+        
+        .haptic-sensor {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(0,255,255,0.8);
+            border-radius: 50%;
+            animation: haptic-pulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes haptic-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+        }
+        
+        .haptic-sensor:nth-child(1) { top: 10px; left: 5px; animation-delay: 0s; }
+        .haptic-sensor:nth-child(2) { top: 10px; right: 5px; animation-delay: 0.2s; }
+        .haptic-sensor:nth-child(3) { bottom: 10px; left: 8px; animation-delay: 0.4s; }
+        
+        /* AR 글래스 (다음 스테이지 힌트) */
+        .ar-glasses-hint {
+            position: absolute;
+            top: 200px;
+            left: 200px;
+            width: 60px;
+            height: 25px;
+            background: linear-gradient(180deg, rgba(100,100,150,0.3) 0%, rgba(80,80,130,0.3) 100%);
+            border-radius: 20px;
+            opacity: 0.5;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .ar-lens {
+            position: absolute;
+            top: 5px;
+            width: 20px;
+            height: 15px;
+            background: rgba(0,200,255,0.2);
+            border-radius: 5px;
+        }
+        
+        .ar-lens.left { left: 5px; }
+        .ar-lens.right { right: 5px; }
+        
+        /* 네온 사인 */
+        .neon-sign {
+            position: absolute;
+            top: 50px;
+            left: 300px;
+            padding: 10px 20px;
+            border: 2px solid rgba(0,255,255,0.8);
+            border-radius: 10px;
+            color: #00ffff;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0,255,255,0.8);
+            animation: neon-flicker 2s infinite;
+        }
+        
+        @keyframes neon-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+            51% { opacity: 0.9; }
+            52% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-scene">
+        <div class="vr-lab-background"></div>
+        
+        <!-- 홀로그램 효과 -->
+        <div class="hologram-projection">
+            <div class="hologram-ring"></div>
+            <div class="hologram-ring"></div>
+            <div class="hologram-ring"></div>
+        </div>
+        
+        <!-- 홀로그래픽 디스플레이 -->
+        <div class="holographic-display">
+            <div class="holo-content"></div>
+            <div class="model-3d">
+                <div class="wireframe-cube">
+                    <div class="cube-edge"></div>
+                    <div class="cube-edge"></div>
+                    <div class="cube-edge"></div>
+                    <div class="cube-edge"></div>
+                    <div class="cube-edge"></div>
+                    <div class="cube-edge"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 트래킹 베이스 스테이션 -->
+        <div class="base-station top-left">
+            <div class="tracking-laser"></div>
+        </div>
+        <div class="base-station top-right">
+            <div class="tracking-laser"></div>
+        </div>
+        
+        <!-- 모션 캡처 카메라 -->
+        <div class="motion-capture">
+            <div class="capture-camera">
+                <div class="camera-lens"></div>
+            </div>
+            <div class="camera-mount"></div>
+        </div>
+        
+        <!-- 네온 사인 -->
+        <div class="neon-sign">VR LAB</div>
+        
+        <!-- 그린 스크린 -->
+        <div class="green-screen">
+            <div class="screen-grid"></div>
+        </div>
+        
+        <!-- AR 글래스 힌트 -->
+        <div class="ar-glasses-hint">
+            <div class="ar-lens left"></div>
+            <div class="ar-lens right"></div>
+        </div>
+        
+        <!-- VR 개발 도구 -->
+        <div class="dev-tools">
+            <div class="unity-vr-logo">U</div>
+            <div class="unreal-logo">UE</div>
+        </div>
+        
+        <!-- VR 작업 스테이션 -->
+        <div class="vr-workstation">
+            <div class="curved-desk"></div>
+        </div>
+        
+        <!-- 곡면 모니터 -->
+        <div class="curved-monitor">
+            <div class="monitor-vr-content">
+                <div class="vr-code">
+                    // VR Experience Manager<br>
+                    void InitializeVR() {<br>
+                    &nbsp;&nbsp;XRSettings.enabled = true;<br>
+                    &nbsp;&nbsp;headset.StartTracking();<br>
+                    &nbsp;&nbsp;controllers.Calibrate();<br>
+                    &nbsp;&nbsp;haptics.Initialize();<br>
+                    }<br><br>
+                    void UpdateVRFrame() {<br>
+                    &nbsp;&nbsp;position = tracker.GetPosition();<br>
+                    &nbsp;&nbsp;rotation = tracker.GetRotation();<br>
+                    &nbsp;&nbsp;RenderStereoView();<br>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <!-- VR 헤드셋 디스플레이 -->
+        <div class="vr-headset-display">
+            <div class="oculus-quest">
+                <div class="quest-lens left"></div>
+                <div class="quest-lens right"></div>
+                <div class="quest-strap"></div>
+            </div>
+            <div class="htc-vive">
+                <div class="vive-sensor"></div>
+                <div class="vive-sensor"></div>
+                <div class="vive-sensor"></div>
+                <div class="vive-sensor"></div>
+            </div>
+        </div>
+        
+        <!-- VR 컨트롤러 -->
+        <div class="vr-controllers">
+            <div class="vr-controller left">
+                <div class="controller-ring"></div>
+            </div>
+            <div class="vr-controller right">
+                <div class="controller-ring"></div>
+            </div>
+        </div>
+        
+        <!-- 햅틱 장갑 -->
+        <div class="haptic-gloves">
+            <div class="glove left">
+                <div class="haptic-sensor"></div>
+                <div class="haptic-sensor"></div>
+                <div class="haptic-sensor"></div>
+            </div>
+            <div class="glove right">
+                <div class="haptic-sensor"></div>
+                <div class="haptic-sensor"></div>
+                <div class="haptic-sensor"></div>
+            </div>
+        </div>
+        
+        <!-- 3D 프린터 -->
+        <div class="printer-3d">
+            <div class="printer-bed"></div>
+            <div class="printer-nozzle"></div>
+        </div>
+        
+        <!-- VR 플레이 공간 -->
+        <div class="play-area-mat">
+            <div class="play-boundary"></div>
+        </div>
+        
+        <!-- 미래적인 의자 -->
+        <div class="futuristic-chair">
+            <div class="chair-float-base"></div>
+            <div class="chair-glow"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+=== DEBUG LOG EXPORT ===
+Date: 2025-08-16 19:29:54
+Total Entries: 2
+Unity Version: 6000.0.45f1
+===================================================
+
+[19:29:41.466] [Log]
+[SaveManager] Backup created
+-----------------------------------------
+[19:29:41.467] [Log]
+[SaveManager] Game saved successfully. Save count: 691
+-----------------------------------------
