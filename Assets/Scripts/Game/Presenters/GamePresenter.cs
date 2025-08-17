@@ -13,6 +13,7 @@ namespace GameDevClicker.Game.Presenters
     {
         [Header("References")]
         [SerializeField] private GameViewUI gameViewUI;
+        [SerializeField] private GameObject videoBackgroundManagerObject;
         
         [Header("Configuration")]
         [SerializeField] private float uiUpdateInterval = 0.1f;
@@ -48,6 +49,16 @@ namespace GameDevClicker.Game.Presenters
                 {
                     Debug.LogError("[GamePresenter] GameViewUI not found!");
                     return;
+                }
+            }
+
+            // Initialize video background manager if available
+            if (videoBackgroundManagerObject == null)
+            {
+                videoBackgroundManagerObject = GameObject.Find("VideoBackgroundManager");
+                if (videoBackgroundManagerObject == null)
+                {
+                    Debug.LogWarning("[GamePresenter] VideoBackgroundManager GameObject not found in scene");
                 }
             }
 
@@ -207,6 +218,13 @@ namespace GameDevClicker.Game.Presenters
         {
             gameViewUI.UpdateStageDisplay(stage);
             PopulateUpgradeLists(); // Refresh upgrade lists as new upgrades may be available
+            
+            // Update video background for new stage
+            if (videoBackgroundManagerObject != null)
+            {
+                // Use SendMessage to avoid direct reference to VideoBackgroundManager
+                videoBackgroundManagerObject.SendMessage("LoadStageByNumber", stage, SendMessageOptions.DontRequireReceiver);
+            }
         }
 
         private void OnFeatureUnlocked(string featureName)
