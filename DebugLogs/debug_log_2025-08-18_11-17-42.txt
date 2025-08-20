@@ -1,0 +1,306 @@
+=== DEBUG LOG EXPORT ===
+Date: 2025-08-18 11:17:42
+Total Entries: 100
+Unity Version: 6000.0.45f1
+===================================================
+
+[11:17:41.229] [Log]
+[Adaptive Performance] No Provider was configured for use. Make sure you added at least one Provider in the Adaptive Performance Settings.
+-----------------------------------------
+[11:17:41.257] [Log]
+[TimeUtilities] Initialized at 8/18/2025 11:17:41 AM
+-----------------------------------------
+[11:17:41.265] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:17:41.266] [Log]
+[CSVLoader] Awake - Instance set
+-----------------------------------------
+[11:17:41.267] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:17:41.269] [Log]
+[Singleton] Using instance already created: BlanceManager
+-----------------------------------------
+[11:17:41.270] [Log]
+[GameManager] Balance data initialization started
+-----------------------------------------
+[11:17:41.271] [Log]
+[GameManager] Game initialized successfully
+-----------------------------------------
+[11:17:41.273] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:17:41.279] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:17:41.279] [Log]
+[Singleton] Using instance already created: SaveManager
+-----------------------------------------
+[11:17:41.281] [Log]
+[GameModel] No saved data found, creating new game data
+-----------------------------------------
+[11:17:41.282] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:17:41.284] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:17:41.288] [Log]
+[UpgradeManager] Loaded 15 upgrades from Resources
+-----------------------------------------
+[11:17:41.291] [Log]
+[UpgradeManager] Processed 15 upgrades, skipped 0
+-----------------------------------------
+[11:17:41.292] [Log]
+[UpgradeManager] Initialized with 15 upgrades
+-----------------------------------------
+[11:17:41.295] [Log]
+Stage data auto-populated with default values
+-----------------------------------------
+[11:17:41.297] [Log]
+[BalanceManager] Initializing BalanceManager...
+-----------------------------------------
+[11:17:41.299] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:17:41.300] [Log]
+[ProjectSystem] Initialized with default project requirement: 1000
+-----------------------------------------
+[11:17:41.301] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:17:41.302] [Log]
+[UnlockManager] Initialized with 0 unlock milestones
+-----------------------------------------
+[11:17:41.303] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:17:41.965] [Log]
+[SaveManager] Game loaded successfully. Save version: 2
+-----------------------------------------
+[11:17:41.966] [Log]
+[GameManager] Game state changed: MainMenu -> Playing
+-----------------------------------------
+[11:17:41.967] [Log]
+[GameController] Initializing Game Dev Clicker...
+-----------------------------------------
+[11:17:41.968] [Log]
+[GameController] Statistics System initialized
+-----------------------------------------
+[11:17:41.969] [Log]
+[GameController] Achievement System initialized
+-----------------------------------------
+[11:17:41.970] [Log]
+[GameController] Offline Progression System initialized
+-----------------------------------------
+[11:17:41.971] [Log]
+[GameController] UI System initialized
+-----------------------------------------
+[11:17:41.972] [Log]
+[GameController] Systems connected
+-----------------------------------------
+[11:17:41.974] [Log]
+[SaveManager] Game loaded successfully. Save version: 2
+-----------------------------------------
+[11:17:41.975] [Log]
+[GameController] Loaded existing save
+-----------------------------------------
+[11:17:41.980] [Log]
+[GamePresenter] Checking Skills category - Found 5 total upgrades
+-----------------------------------------
+[11:17:41.981] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:17:41.983] [Log]
+[GamePresenter] skill_01 (Typing Speed) - Unlocked: True (Requires: Level 1, Stage 1)
+-----------------------------------------
+[11:17:41.984] [Log]
+[GamePresenter] skill_02 (Algorithm Study) - Unlocked: True (Requires: Level 5, Stage 1)
+-----------------------------------------
+[11:17:41.985] [Log]
+[GamePresenter] skill_03 (Design Sense) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:17:41.986] [Log]
+[GamePresenter] skill_04 (Project Management) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[11:17:41.986] [Log]
+[GamePresenter] skill_05 (Innovative Thinking) - Unlocked: True (Requires: Level 30, Stage 1)
+-----------------------------------------
+[11:17:41.987] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Skills
+-----------------------------------------
+[11:17:41.990] [Log]
+[GameViewUI] Creating upgrade element for skill_01 in parent Viewport
+-----------------------------------------
+[11:17:41.998] [Log]
+[GameViewUI] Successfully created upgrade UI for Typing Speed
+-----------------------------------------
+[11:17:41.998] [Log]
+[GameViewUI] Creating upgrade element for skill_02 in parent Viewport
+-----------------------------------------
+[11:17:42.000] [Log]
+[GameViewUI] Successfully created upgrade UI for Algorithm Study
+-----------------------------------------
+[11:17:42.001] [Log]
+[GameViewUI] Creating upgrade element for skill_03 in parent Viewport
+-----------------------------------------
+[11:17:42.002] [Log]
+[GameViewUI] Successfully created upgrade UI for Design Sense
+-----------------------------------------
+[11:17:42.004] [Log]
+[GameViewUI] Creating upgrade element for skill_04 in parent Viewport
+-----------------------------------------
+[11:17:42.005] [Log]
+[GameViewUI] Successfully created upgrade UI for Project Management
+-----------------------------------------
+[11:17:42.006] [Log]
+[GameViewUI] Creating upgrade element for skill_05 in parent Viewport
+-----------------------------------------
+[11:17:42.007] [Log]
+[GameViewUI] Successfully created upgrade UI for Innovative Thinking
+-----------------------------------------
+[11:17:42.008] [Log]
+[GamePresenter] Checking Equipment category - Found 5 total upgrades
+-----------------------------------------
+[11:17:42.009] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:17:42.009] [Log]
+[GamePresenter] equip_01 (Better Keyboard) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:17:42.011] [Log]
+[GamePresenter] equip_02 (Dual Monitor) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[11:17:42.011] [Log]
+[GamePresenter] equip_03 (High-end PC) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[11:17:42.012] [Log]
+[GamePresenter] equip_04 (Server Farm) - Unlocked: False (Requires: Level 1, Stage 3)
+-----------------------------------------
+[11:17:42.013] [Log]
+[GamePresenter] equip_05 (AI Workstation) - Unlocked: False (Requires: Level 1, Stage 5)
+-----------------------------------------
+[11:17:42.014] [Log]
+[GamePresenter] Showing 3 unlocked upgrades for Equipment
+-----------------------------------------
+[11:17:42.014] [Log]
+[GameViewUI] Creating upgrade element for equip_01 in parent Viewport
+-----------------------------------------
+[11:17:42.016] [Log]
+[GameViewUI] Successfully created upgrade UI for Better Keyboard
+-----------------------------------------
+[11:17:42.017] [Log]
+[GameViewUI] Creating upgrade element for equip_02 in parent Viewport
+-----------------------------------------
+[11:17:42.017] [Log]
+[GameViewUI] Successfully created upgrade UI for Dual Monitor
+-----------------------------------------
+[11:17:42.019] [Log]
+[GameViewUI] Creating upgrade element for equip_03 in parent Viewport
+-----------------------------------------
+[11:17:42.020] [Log]
+[GameViewUI] Successfully created upgrade UI for High-end PC
+-----------------------------------------
+[11:17:42.021] [Log]
+[GamePresenter] Checking Team category - Found 5 total upgrades
+-----------------------------------------
+[11:17:42.022] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:17:42.022] [Log]
+[GamePresenter] team_01 (Junior Developer) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:17:42.024] [Log]
+[GamePresenter] team_02 (Graphic Designer) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[11:17:42.025] [Log]
+[GamePresenter] team_03 (Senior Developer) - Unlocked: True (Requires: Level 25, Stage 1)
+-----------------------------------------
+[11:17:42.026] [Log]
+[GamePresenter] team_04 (Project Manager) - Unlocked: False (Requires: Level 1, Stage 3)
+-----------------------------------------
+[11:17:42.026] [Log]
+[GamePresenter] team_05 (AI Researcher) - Unlocked: False (Requires: Level 1, Stage 5)
+-----------------------------------------
+[11:17:42.027] [Log]
+[GamePresenter] Showing 3 unlocked upgrades for Team
+-----------------------------------------
+[11:17:42.027] [Log]
+[GameViewUI] Creating upgrade element for team_01 in parent Viewport
+-----------------------------------------
+[11:17:42.029] [Log]
+[GameViewUI] Successfully created upgrade UI for Junior Developer
+-----------------------------------------
+[11:17:42.030] [Log]
+[GameViewUI] Creating upgrade element for team_02 in parent Viewport
+-----------------------------------------
+[11:17:42.031] [Log]
+[GameViewUI] Successfully created upgrade UI for Graphic Designer
+-----------------------------------------
+[11:17:42.032] [Log]
+[GameViewUI] Creating upgrade element for team_03 in parent Viewport
+-----------------------------------------
+[11:17:42.034] [Log]
+[GameViewUI] Successfully created upgrade UI for Senior Developer
+-----------------------------------------
+[11:17:42.035] [Log]
+[GameController] Game loop started
+-----------------------------------------
+[11:17:42.036] [Log]
+[GameController] Game Dev Clicker initialized successfully!
+-----------------------------------------
+[11:17:42.037] [Log]
+[OfflineProgression] Not enough offline time: 0.0625944 seconds
+-----------------------------------------
+[11:17:42.041] [Log]
+Background RawImage set to full screen and made non-interactive
+-----------------------------------------
+[11:17:42.042] [Log]
+Loading video from: file:///C:/Projects/Developer_Clicker/Assets/GameData/BG_Images/mp4/stage1_indie_room.mp4
+-----------------------------------------
+[11:17:42.045] [Log]
+[GamePresenter] Connections established successfully
+-----------------------------------------
+[11:17:42.046] [Log]
+[GamePresenter] Checking Skills category - Found 5 total upgrades
+-----------------------------------------
+[11:17:42.047] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:17:42.048] [Log]
+[GamePresenter] skill_01 (Typing Speed) - Unlocked: True (Requires: Level 1, Stage 1)
+-----------------------------------------
+[11:17:42.048] [Log]
+[GamePresenter] skill_02 (Algorithm Study) - Unlocked: True (Requires: Level 5, Stage 1)
+-----------------------------------------
+[11:17:42.049] [Log]
+[GamePresenter] skill_03 (Design Sense) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:17:42.049] [Log]
+[GamePresenter] skill_04 (Project Management) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[11:17:42.051] [Log]
+[GamePresenter] skill_05 (Innovative Thinking) - Unlocked: True (Requires: Level 30, Stage 1)
+-----------------------------------------
+[11:17:42.051] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Skills
+-----------------------------------------
+[11:17:42.052] [Log]
+[GamePresenter] Checking Equipment category - Found 5 total upgrades
+-----------------------------------------
+[11:17:42.054] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:17:42.054] [Log]
+[GamePresenter] equip_01 (Better Keyboard) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:17:42.055] [Log]
+[GamePresenter] equip_02 (Dual Monitor) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[11:17:42.056] [Log]
+[GamePresenter] equip_03 (High-end PC) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[11:17:42.057] [Log]
+[GamePresenter] equip_04 (Server Farm) - Unlocked: False (Requires: Level 1, Stage 3)
+-----------------------------------------

@@ -39,6 +39,10 @@ namespace GameDevClicker.Game.Views
         [SerializeField] private Button clickZoneButton;
         [SerializeField] private TextMeshProUGUI clickZoneIcon;
         [SerializeField] private TextMeshProUGUI clickZoneText;
+        
+        // Click zone protection variables
+        private Vector2 _originalClickZoneSize;
+        private Vector3 _originalClickZoneScale;
 
         [Header("Auto Income")]
         [SerializeField] private TextMeshProUGUI autoIncomeText;
@@ -95,6 +99,7 @@ namespace GameDevClicker.Game.Views
         {
             SubscribeToEvents();
             SetupInitialState();
+            StartCoroutine(FixScrollViewDelayed());
         }
 
         private void InitializeUI()
@@ -102,6 +107,9 @@ namespace GameDevClicker.Game.Views
             // Auto-find components if not assigned
             if (mainCanvas == null)
                 mainCanvas = GetComponentInParent<Canvas>();
+            
+            // Ensure correct parent for upgrade items early
+            EnsureCorrectUpgradeParent();
 
             SetupTabButtonTexts();
             SetupUICallbacks();
@@ -133,7 +141,17 @@ namespace GameDevClicker.Game.Views
         {
             // Click zone
             if (clickZoneButton != null)
+            {
                 clickZoneButton.onClick.AddListener(OnClickZoneClick);
+                
+                // Store initial size to protect against external modifications
+                var rectTransform = clickZoneButton.GetComponent<RectTransform>();
+                if (rectTransform != null)
+                {
+                    _originalClickZoneSize = rectTransform.sizeDelta;
+                    _originalClickZoneScale = clickZoneButton.transform.localScale;
+                }
+            }
 
             // Upgrade tabs
             if (skillsTabButton != null)
@@ -339,11 +357,32 @@ namespace GameDevClicker.Game.Views
 
         public void PopulateUpgradeList(UpgradeData.UpgradeCategory category, List<UpgradeData> upgrades)
         {
+            // Validate inputs
+            if (upgrades == null)
+            {
+                Debug.LogError($"[GameViewUI] PopulateUpgradeList called with null upgrades list for category {category}");
+                return;
+            }
+            
+            // Remove any null entries from the upgrades list
+            var validUpgrades = new List<UpgradeData>();
+            for (int i = 0; i < upgrades.Count; i++)
+            {
+                if (upgrades[i] != null)
+                {
+                    validUpgrades.Add(upgrades[i]);
+                }
+                else
+                {
+                    Debug.LogWarning($"[GameViewUI] Null upgrade found at index {i} in category {category}");
+                }
+            }
+            
             // Check if we already have cached elements for this category
             if (_cachedUpgradeElements.ContainsKey(category))
             {
                 // Update existing elements instead of recreating
-                UpdateCachedElements(category, upgrades);
+                UpdateCachedElements(category, validUpgrades);
                 
                 // If this is the current tab, show the elements
                 if (category == _currentUpgradeTab)
@@ -359,7 +398,7 @@ namespace GameDevClicker.Game.Views
                 _cachedUpgradeElements[category] = new List<GameObject>();
             }
             
-            foreach (var upgrade in upgrades)
+            foreach (var upgrade in validUpgrades)
             {
                 CreateUpgradeElement(upgrade, category);
             }
@@ -385,7 +424,19 @@ namespace GameDevClicker.Game.Views
                 var upgradeItem = cachedElements[i].GetComponent<UpgradeItemUI>();
                 if (upgradeItem != null)
                 {
-                    upgradeItem.Setup(upgrades[i], () => OnUpgradePurchaseRequested?.Invoke(upgrades[i]));
+                    // Capture the upgrade in a local variable to avoid closure issues
+                    var currentUpgrade = upgrades[i];
+                    upgradeItem.Setup(currentUpgrade, () => 
+                    {
+                        if (currentUpgrade != null)
+                        {
+                            OnUpgradePurchaseRequested?.Invoke(currentUpgrade);
+                        }
+                        else
+                        {
+                            Debug.LogError("[GameViewUI] Upgrade is null in button click handler");
+                        }
+                    });
                 }
             }
             
@@ -423,24 +474,64 @@ namespace GameDevClicker.Game.Views
 
         private void CreateUpgradeElement(UpgradeData upgrade, UpgradeData.UpgradeCategory category)
         {
-            if (upgradeItemPrefab == null || upgradeListParent == null) 
+            // Ensure we have the correct parent (Content, not Viewport)
+            Transform correctParent = EnsureCorrectUpgradeParent();
+            
+            if (upgradeItemPrefab == null || correctParent == null) 
             {
-                Debug.LogError($"[GameViewUI] Cannot create upgrade element: prefab={upgradeItemPrefab?.name ?? "null"}, parent={upgradeListParent?.name ?? "null"}");
+                Debug.LogError($"[GameViewUI] Cannot create upgrade element: prefab={upgradeItemPrefab?.name ?? "null"}, parent={correctParent?.name ?? "null"}");
                 return;
             }
 
-            Debug.Log($"[GameViewUI] Creating upgrade element for {upgrade.upgradeId} in parent {upgradeListParent.name}");
+            if (upgrade == null)
+            {
+                Debug.LogError("[GameViewUI] Cannot create upgrade element for null upgrade");
+                return;
+            }
+
+            Debug.Log($"[GameViewUI] Creating upgrade element for {upgrade.upgradeId} in parent {correctParent.name}");
             
-            var upgradeObject = Instantiate(upgradeItemPrefab, upgradeListParent);
+            var upgradeObject = Instantiate(upgradeItemPrefab, correctParent);
             upgradeObject.name = $"UpgradeItem_{upgrade.upgradeId}"; // Better naming
+            
+            // Ensure upgrade item has proper RectTransform settings
+            var itemRect = upgradeObject.GetComponent<RectTransform>();
+            if (itemRect != null)
+            {
+                // Make item stretch to full width of content
+                itemRect.anchorMin = new Vector2(0, 1);  // Left-Top
+                itemRect.anchorMax = new Vector2(1, 1);  // Right-Top
+                itemRect.pivot = new Vector2(0.5f, 0.5f);
+                itemRect.sizeDelta = new Vector2(0, 100); // 0 width = stretch, 100 height (or your preferred height)
+                itemRect.anchoredPosition = Vector2.zero;
+            }
             
             var upgradeItem = upgradeObject.GetComponent<UpgradeItemUI>();
             
             if (upgradeItem != null)
             {
-                upgradeItem.Setup(upgrade, () => OnUpgradePurchaseRequested?.Invoke(upgrade));
+                // Capture the upgrade in a local variable to avoid closure issues
+                var capturedUpgrade = upgrade;
+                upgradeItem.Setup(capturedUpgrade, () => 
+                {
+                    if (capturedUpgrade != null)
+                    {
+                        OnUpgradePurchaseRequested?.Invoke(capturedUpgrade);
+                    }
+                    else
+                    {
+                        Debug.LogError("[GameViewUI] Captured upgrade is null in button click handler");
+                    }
+                });
                 _upgradeElements[upgrade.upgradeId] = upgradeObject;
+                
+                // Ensure the category list exists
+                if (!_cachedUpgradeElements.ContainsKey(category))
+                {
+                    _cachedUpgradeElements[category] = new List<GameObject>();
+                }
                 _cachedUpgradeElements[category].Add(upgradeObject);
+                
                 Debug.Log($"[GameViewUI] Successfully created upgrade UI for {upgrade.upgradeName}");
             }
             else
@@ -472,6 +563,14 @@ namespace GameDevClicker.Game.Views
         private void OnClickZoneClick()
         {
             OnClickZoneClicked?.Invoke();
+            
+            // Trigger character animations through CharacterManager
+            var characterManager = Character.CharacterManager.Instance;
+            if (characterManager != null)
+            {
+                characterManager.OnClickZoneClicked();
+            }
+            
             Vector2 clickPosition = GetRandomClickPosition();
             CreateClickEffect(clickPosition);
         }
@@ -484,15 +583,21 @@ namespace GameDevClicker.Game.Views
 
         private void AnimateClickZone()
         {
-            if (clickZoneButton != null)
-            {
-                StartCoroutine(ClickZoneAnimation());
-            }
+            // Temporarily disable animation to test if it's causing the shrinking
+            // if (clickZoneButton != null)
+            // {
+            //     StartCoroutine(ClickZoneAnimation());
+            // }
+            
+            // Just log the click for now
+            Debug.Log("[ClickZone] Click animation disabled to prevent shrinking");
         }
 
         private IEnumerator ClickZoneAnimation()
         {
+            // Store the original scale and size to restore later
             var originalScale = clickZoneButton.transform.localScale;
+            var originalSize = clickZoneButton.GetComponent<RectTransform>().sizeDelta;
             var pressedScale = originalScale * 0.95f;
             
             // Scale down
@@ -515,7 +620,59 @@ namespace GameDevClicker.Game.Views
                 yield return null;
             }
             
+            // Ensure we restore both scale and size to prevent any shrinking
             clickZoneButton.transform.localScale = originalScale;
+            clickZoneButton.GetComponent<RectTransform>().sizeDelta = originalSize;
+            
+            // Also restore to our stored original values as a safety measure
+            RestoreClickZoneSize();
+        }
+        
+        /// <summary>
+        /// Restores the click zone to its original size and scale
+        /// Call this if external systems are modifying the click zone
+        /// </summary>
+        [ContextMenu("Restore Click Zone Size")]
+        public void RestoreClickZoneSize()
+        {
+            if (clickZoneButton != null)
+            {
+                var rectTransform = clickZoneButton.GetComponent<RectTransform>();
+                if (rectTransform != null && _originalClickZoneSize != Vector2.zero)
+                {
+                    Debug.Log($"[ClickZone] Restoring size from {rectTransform.sizeDelta} to {_originalClickZoneSize}");
+                    Debug.Log($"[ClickZone] Restoring scale from {clickZoneButton.transform.localScale} to {_originalClickZoneScale}");
+                    clickZoneButton.transform.localScale = _originalClickZoneScale;
+                    rectTransform.sizeDelta = _originalClickZoneSize;
+                }
+            }
+        }
+        
+        private void Update()
+        {
+            // Monitor click zone size changes to catch what's modifying it
+            if (clickZoneButton != null && _originalClickZoneSize != Vector2.zero)
+            {
+                var rectTransform = clickZoneButton.GetComponent<RectTransform>();
+                if (rectTransform != null)
+                {
+                    var currentSize = rectTransform.sizeDelta;
+                    var currentScale = clickZoneButton.transform.localScale;
+                    
+                    // Check if size or scale has changed unexpectedly
+                    if (Vector2.Distance(currentSize, _originalClickZoneSize) > 1f || 
+                        Vector3.Distance(currentScale, _originalClickZoneScale) > 0.01f)
+                    {
+                        Debug.LogWarning($"[ClickZone] Size changed! Current: {currentSize}, Original: {_originalClickZoneSize}");
+                        Debug.LogWarning($"[ClickZone] Scale changed! Current: {currentScale}, Original: {_originalClickZoneScale}");
+                        Debug.LogWarning($"[ClickZone] Stack trace: {System.Environment.StackTrace}");
+                        
+                        // Auto-restore to prevent shrinking
+                        clickZoneButton.transform.localScale = _originalClickZoneScale;
+                        rectTransform.sizeDelta = _originalClickZoneSize;
+                    }
+                }
+            }
         }
 
         private void CreateClickEffect(Vector2 position)
@@ -624,6 +781,209 @@ namespace GameDevClicker.Game.Views
             if (popupOverlay != null) popupOverlay.SetActive(false);
         }
 
+        #endregion
+
+        #region ScrollView Fix Methods
+        
+        /// <summary>
+        /// Ensures upgrade items are placed in the correct Content transform, not Viewport
+        /// </summary>
+        private Transform EnsureCorrectUpgradeParent()
+        {
+            // First try to use the assigned upgradeListParent if it's the Content
+            if (upgradeListParent != null && upgradeListParent.name == "Content")
+            {
+                return upgradeListParent;
+            }
+            
+            // Find the ScrollRect
+            if (upgradeScrollRect == null)
+            {
+                upgradeScrollRect = GetComponentInChildren<ScrollRect>(true);
+            }
+            
+            if (upgradeScrollRect != null && upgradeScrollRect.content != null)
+            {
+                // Update the reference for future use
+                upgradeListParent = upgradeScrollRect.content;
+                Debug.Log($"[GameViewUI] Set upgrade parent to ScrollRect Content: {upgradeListParent.name}");
+                return upgradeListParent;
+            }
+            
+            // Fallback: Try to find Content by hierarchy
+            Transform scrollView = transform.Find("Upgrades Panel/Upgrade Content/Upgrade List/Scroll View");
+            if (scrollView != null)
+            {
+                Transform viewport = scrollView.Find("Viewport");
+                if (viewport != null)
+                {
+                    Transform content = viewport.Find("Content");
+                    if (content != null)
+                    {
+                        upgradeListParent = content;
+                        Debug.Log($"[GameViewUI] Found Content by hierarchy search: {upgradeListParent.name}");
+                        return content;
+                    }
+                }
+            }
+            
+            // Last resort: if we have a parent named "Viewport", get its child "Content"
+            if (upgradeListParent != null && upgradeListParent.name == "Viewport")
+            {
+                Transform content = upgradeListParent.Find("Content");
+                if (content != null)
+                {
+                    Debug.LogWarning($"[GameViewUI] Parent was set to Viewport, switching to Content");
+                    upgradeListParent = content;
+                    return content;
+                }
+            }
+            
+            Debug.LogError("[GameViewUI] Could not find proper Content transform for upgrade items!");
+            return upgradeListParent; // Return whatever we have
+        }
+        
+        private IEnumerator FixScrollViewDelayed()
+        {
+            // Wait for UI to be fully initialized
+            yield return new WaitForSeconds(0.1f);
+            
+            FixScrollView();
+            
+            // Fix again after a short delay to ensure everything is loaded
+            yield return new WaitForSeconds(0.5f);
+            FixScrollView();
+            
+            // Start continuous monitoring
+            StartCoroutine(MonitorScrollView());
+        }
+        
+        private void FixScrollView()
+        {
+            // Ensure we have the correct parent first
+            Transform correctParent = EnsureCorrectUpgradeParent();
+            
+            var scrollRect = GetComponentInChildren<ScrollRect>(true);
+            if (scrollRect == null)
+            {
+                Debug.LogWarning("[GameViewUI] No ScrollRect found in children");
+                return;
+            }
+            
+            // Move any misplaced upgrade items from Viewport to Content
+            Transform viewport = scrollRect.viewport;
+            if (viewport != null && correctParent != null && viewport != correctParent)
+            {
+                // Get all upgrade items that are wrongly placed in Viewport
+                List<Transform> misplacedItems = new List<Transform>();
+                foreach (Transform child in viewport)
+                {
+                    if (child.name != "Content" && child.name.Contains("Upgrade"))
+                    {
+                        misplacedItems.Add(child);
+                    }
+                }
+                
+                // Move them to Content
+                foreach (Transform item in misplacedItems)
+                {
+                    Debug.Log($"[GameViewUI] Moving {item.name} from Viewport to Content");
+                    item.SetParent(correctParent, false);
+                }
+            }
+            
+            // Fix content
+            if (scrollRect.content != null)
+            {
+                var content = scrollRect.content;
+                
+                // Fix anchoring - Content should stretch horizontally and anchor to top
+                content.anchorMin = new Vector2(0, 1);  // Left-Top
+                content.anchorMax = new Vector2(1, 1);  // Right-Top  
+                content.pivot = new Vector2(0.5f, 1);   // Center-Top pivot
+                
+                // Reset position to top-left corner
+                content.anchoredPosition = new Vector2(0, 0);
+                
+                // Make content full width of viewport
+                content.sizeDelta = new Vector2(0, content.sizeDelta.y); // 0 width means stretch to anchors
+                
+                // Ensure proper offset to prevent cutting off
+                content.offsetMin = new Vector2(0, content.offsetMin.y);  // Left offset = 0
+                content.offsetMax = new Vector2(0, content.offsetMax.y);  // Right offset = 0
+                
+                // Ensure VerticalLayoutGroup
+                var layoutGroup = content.GetComponent<VerticalLayoutGroup>();
+                if (layoutGroup == null)
+                {
+                    layoutGroup = content.gameObject.AddComponent<VerticalLayoutGroup>();
+                }
+                layoutGroup.childForceExpandWidth = true;
+                layoutGroup.childForceExpandHeight = false;
+                layoutGroup.childControlHeight = false;
+                layoutGroup.childControlWidth = true;
+                layoutGroup.spacing = 5f;
+                layoutGroup.padding = new RectOffset(10, 10, 10, 10);
+                layoutGroup.childAlignment = TextAnchor.UpperCenter; // Align children to top-center
+                
+                // Ensure ContentSizeFitter
+                var sizeFitter = content.GetComponent<ContentSizeFitter>();
+                if (sizeFitter == null)
+                {
+                    sizeFitter = content.gameObject.AddComponent<ContentSizeFitter>();
+                }
+                sizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+                sizeFitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+            }
+            
+            // Configure ScrollRect
+            scrollRect.horizontal = false;
+            scrollRect.vertical = true;
+            scrollRect.movementType = ScrollRect.MovementType.Elastic;
+            scrollRect.elasticity = 0.1f;
+            scrollRect.inertia = true;
+            scrollRect.decelerationRate = 0.135f;
+            scrollRect.scrollSensitivity = 15f;
+            
+            // Fix scrollbar
+            if (scrollRect.verticalScrollbar != null)
+            {
+                scrollRect.verticalScrollbar.gameObject.SetActive(true);
+                scrollRect.verticalScrollbar.direction = Scrollbar.Direction.TopToBottom;
+                scrollRect.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHideAndExpandViewport;
+                scrollRect.verticalScrollbarSpacing = -3f;
+            }
+            
+            // Force layout rebuild
+            if (scrollRect.content != null)
+            {
+                Canvas.ForceUpdateCanvases();
+                LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
+            }
+            
+            Debug.Log("[GameViewUI] ScrollView fixed");
+        }
+        
+        private IEnumerator MonitorScrollView()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(1f);
+                
+                // Check if scrollbar became inactive
+                var scrollRect = GetComponentInChildren<ScrollRect>(true);
+                if (scrollRect != null && scrollRect.verticalScrollbar != null)
+                {
+                    if (!scrollRect.verticalScrollbar.gameObject.activeSelf && scrollRect.content != null && scrollRect.content.childCount > 0)
+                    {
+                        // Reactivate scrollbar if it has content
+                        scrollRect.verticalScrollbar.gameObject.SetActive(true);
+                        Debug.Log("[GameViewUI] Reactivated inactive scrollbar");
+                    }
+                }
+            }
+        }
+        
         #endregion
 
         #region Utility Methods

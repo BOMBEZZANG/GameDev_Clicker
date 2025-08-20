@@ -11,6 +11,8 @@ namespace GameDevClicker.Game.Managers
         [Header("Video Settings")]
         public RawImage backgroundImage;
         public VideoPlayer videoPlayer;
+        [Tooltip("Stretch: Fill entire screen (may distort)\nFitInside: Fit video maintaining aspect ratio (may have black bars)\nFitOutside: Cover entire screen maintaining aspect ratio (may crop)")]
+        public VideoAspectRatio aspectRatioMode = VideoAspectRatio.Stretch;
         
         [Header("Stage Configuration")]
         public List<StageVideoData> stageData = new List<StageVideoData>();
@@ -46,6 +48,8 @@ namespace GameDevClicker.Game.Managers
         
         void Start()
         {
+            SetupFullScreenBackground();
+            
             if (stageData.Count > 0)
             {
                 LoadStageVideo(currentStageIndex);
@@ -53,6 +57,85 @@ namespace GameDevClicker.Game.Managers
             else
             {
                 Debug.LogWarning("No stage data configured. Please set up stage data in the Inspector.");
+            }
+        }
+        
+        void Update()
+        {
+            // Continuously ensure the background stays full screen
+            EnsureFullScreenBackground();
+        }
+        
+        void EnsureFullScreenBackground()
+        {
+            if (backgroundImage != null)
+            {
+                RectTransform rectTransform = backgroundImage.GetComponent<RectTransform>();
+                if (rectTransform != null)
+                {
+                    // Check if size has changed and reset if needed
+                    if (rectTransform.anchorMin != Vector2.zero || 
+                        rectTransform.anchorMax != Vector2.one ||
+                        rectTransform.offsetMin != Vector2.zero ||
+                        rectTransform.offsetMax != Vector2.zero)
+                    {
+                        // Reset to full screen
+                        rectTransform.anchorMin = Vector2.zero;
+                        rectTransform.anchorMax = Vector2.one;
+                        rectTransform.offsetMin = Vector2.zero;
+                        rectTransform.offsetMax = Vector2.zero;
+                        rectTransform.anchoredPosition = Vector2.zero;
+                        rectTransform.sizeDelta = Vector2.zero;
+                        
+                        // Ensure it stays non-interactive
+                        backgroundImage.raycastTarget = false;
+                        
+                        // Keep it as the first child (behind other UI elements)
+                        rectTransform.SetAsFirstSibling();
+                    }
+                }
+            }
+        }
+        
+        void SetupFullScreenBackground()
+        {
+            if (backgroundImage != null)
+            {
+                RectTransform rectTransform = backgroundImage.GetComponent<RectTransform>();
+                if (rectTransform != null)
+                {
+                    // Set anchors to stretch
+                    rectTransform.anchorMin = Vector2.zero;
+                    rectTransform.anchorMax = Vector2.one;
+                    
+                    // Reset offsets to make it fill the parent
+                    rectTransform.offsetMin = Vector2.zero;
+                    rectTransform.offsetMax = Vector2.zero;
+                    
+                    // Ensure proper stretch
+                    rectTransform.anchoredPosition = Vector2.zero;
+                    rectTransform.sizeDelta = Vector2.zero;
+                    
+                    // Make the RawImage non-interactive to prevent clicks
+                    backgroundImage.raycastTarget = false;
+                    
+                    // Remove any potentially interfering components
+                    var button = backgroundImage.GetComponent<Button>();
+                    if (button != null)
+                    {
+                        DestroyImmediate(button);
+                        Debug.Log("Removed Button component from video background");
+                    }
+                    
+                    var selectable = backgroundImage.GetComponent<Selectable>();
+                    if (selectable != null)
+                    {
+                        DestroyImmediate(selectable);
+                        Debug.Log("Removed Selectable component from video background");
+                    }
+                    
+                    Debug.Log("Background RawImage set to full screen and made non-interactive");
+                }
             }
         }
         
@@ -92,7 +175,7 @@ namespace GameDevClicker.Game.Managers
             // Configure video player
             videoPlayer.renderMode = VideoRenderMode.RenderTexture;
             videoPlayer.targetTexture = renderTexture;
-            videoPlayer.aspectRatio = VideoAspectRatio.FitInside;
+            videoPlayer.aspectRatio = aspectRatioMode;  // Use configurable aspect ratio
             videoPlayer.isLooping = true;
             videoPlayer.playOnAwake = false;
             
@@ -226,6 +309,13 @@ namespace GameDevClicker.Game.Managers
             {
                 LoadStageVideo(index);
             }
+        }
+        
+        [ContextMenu("Fix Background Size")]
+        public void FixBackgroundSize()
+        {
+            SetupFullScreenBackground();
+            Debug.Log("Background size manually fixed");
         }
         
         void OnDestroy()

@@ -1,0 +1,541 @@
+=== DEBUG LOG EXPORT ===
+Date: 2025-08-18 10:54:08
+Total Entries: 149
+Unity Version: 6000.0.45f1
+===================================================
+
+[10:54:00.166] [Log]
+[Adaptive Performance] No Provider was configured for use. Make sure you added at least one Provider in the Adaptive Performance Settings.
+-----------------------------------------
+[10:54:00.196] [Log]
+[TimeUtilities] Initialized at 8/18/2025 10:54:00 AM
+-----------------------------------------
+[10:54:00.203] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[10:54:00.204] [Log]
+[CSVLoader] Awake - Instance set
+-----------------------------------------
+[10:54:00.205] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[10:54:00.208] [Log]
+[Singleton] Using instance already created: BlanceManager
+-----------------------------------------
+[10:54:00.209] [Log]
+[BalanceManager] LoadBalanceData called. _csvLoader is null: True
+-----------------------------------------
+[10:54:00.210] [Log]
+[BalanceManager] csvLoaderReference is null: False
+-----------------------------------------
+[10:54:00.211] [Error]
+[BalanceManager] CSVLoader is null. Cannot load balance data.
+Stack Trace:
+0x00007ffb3a29b9dd (Unity) StackWalker::ShowCallstack
+0x00007ffb3a2ab999 (Unity) PlatformStacktrace::GetStacktrace
+0x00007ffb3b51f9de (Unity) Stacktrace::GetStacktrace
+0x00007ffb3bac94cf (Unity) DebugStringToFile
+0x00007ffb393fc305 (Unity) DebugLogHandler_CUSTOM_Internal_Log
+0x0000023661c84e4d (Mono JIT Code) (wrapper managed-to-native) UnityEngine.DebugLogHandler:Internal_Log_Injected (UnityEngine.LogType,UnityEngine.LogOption,UnityEngine.Bindings.ManagedSpanWrapper&,intptr)
+0x0000023661c84d03 (Mono JIT Code) UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+0x0000023661c8491b (Mono JIT Code) UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+0x0000023661c84660 (Mono JIT Code) UnityEngine.Logger:Log (UnityEngine.LogType,object)
+0x0000023661cdd195 (Mono JIT Code) UnityEngine.Debug:LogError (object)
+0x0000023661cdcd73 (Mono JIT Code) GameDevClicker.Core.Managers.BalanceManager:LoadBalanceData () (at C:/Projects/Developer_Clicker/Assets/Scripts/Core/Managers/BalanceManager.cs:148)
+0x0000023661cdc263 (Mono JIT Code) GameDevClicker.Core.Managers.GameManager:InitializeBalanceData () (at C:/Projects/Developer_Clicker/Assets/Scripts/Core/Managers/GameManager.cs:58)
+0x0000023661cdb38b (Mono JIT Code) GameDevClicker.Core.Managers.GameManager:InitializeGame () (at C:/Projects/Developer_Clicker/Assets/Scripts/Core/Managers/GameManager.cs:47)
+0x0000023661cdb073 (Mono JIT Code) GameDevClicker.Core.Managers.GameManager:Awake () (at C:/Projects/Developer_Clicker/Assets/Scripts/Core/Managers/GameManager.cs:36)
+0x00000237368cfaa8 (Mono JIT Code) (wrapper runtime-invoke) object:runtime_invoke_void__this__ (object,intptr,intptr,intptr)
+0x00007ffb2e4d68de (mono-2.0-bdwgc) mono_jit_runtime_invoke (at C:/build/output/Unity-Technologies/mono/mono/mini/mini-runtime.c:3445)
+0x00007ffb2e418404 (mono-2.0-bdwgc) do_runtime_invoke (at C:/build/output/Unity-Technologies/mono/mono/metadata/object.c:3068)
+0x00007ffb2e4184f0 (mono-2.0-bdwgc) mono_runtime_invoke (at C:/build/output/Unity-Technologies/mono/mono/metadata/object.c:3115)
+0x00007ffb3a1bf844 (Unity) scripting_method_invoke
+0x00007ffb3a1975c3 (Unity) ScriptingInvocation::Invoke
+0x00007ffb3a1976ae (Unity) ScriptingInvocation::InvokeChecked
+0x00007ffb3a241b36 (Unity) SerializableManagedRef::CallMethod
+0x00007ffb3a182665 (Unity) MonoBehaviour::CallAwake
+0x00007ffb3a180ffc (Unity) MonoBehaviour::AddToManager
+0x00007ffb3a181a4b (Unity) MonoBehaviour::AwakeFromLoad
+0x00007ffb3a284246 (Unity) AwakeFromLoadQueue::InvokePersistentManagerAwake
+0x00007ffb3a2853d9 (Unity) AwakeFromLoadQueue::PersistentManagerSingleQueueAwakeFromLoad
+0x00007ffb3a284edd (Unity) AwakeFromLoadQueue::PersistentManagerAwakeFromLoad_NoChecks
+0x00007ffb39e5f131 (Unity) LoadSceneOperation::CompleteAwakeSequence
+0x00007ffb39e5fed5 (Unity) LoadSceneOperation::CompletePreloadManagerLoadSceneEditor
+0x00007ffb39e60c69 (Unity) LoadSceneOperation::IntegrateMainThread
+0x00007ffb39e63c22 (Unity) PreloadManager::UpdatePreloadingSingleStep
+0x00007ffb39e64365 (Unity) PreloadManager::WaitForAllAsyncOperationsToComplete
+0x00007ffb3b392dfa (Unity) EditorSceneManager::RestoreSceneBackups
+0x00007ffb3af2d276 (Unity) PlayerLoopController::EnterPlayMode
+0x00007ffb3af2efbf (Unity) PlayerLoopController::SetIsPlaying
+0x00007ffb3af2a32d (Unity) Application::TickTimer
+0x00007ffb3b5246da (Unity) MainMessageLoop
+0x00007ffb3b52a384 (Unity) UnityMain
+0x00007ff7cc122fba (Unity) __scrt_common_main_seh
+0x00007ffbe16ee8d7 (KERNEL32) BaseThreadInitThunk
+0x00007ffbe23fc34c (ntdll) RtlUserThreadStart
+
+-----------------------------------------
+[10:54:00.211] [Error]
+[BalanceManager] This suggests LoadBalanceData was called before initialization completed.
+Stack Trace:
+0x00007ffb3a29b9dd (Unity) StackWalker::ShowCallstack
+0x00007ffb3a2ab999 (Unity) PlatformStacktrace::GetStacktrace
+0x00007ffb3b51f9de (Unity) Stacktrace::GetStacktrace
+0x00007ffb3bac94cf (Unity) DebugStringToFile
+0x00007ffb393fc305 (Unity) DebugLogHandler_CUSTOM_Internal_Log
+0x0000023661c84e4d (Mono JIT Code) (wrapper managed-to-native) UnityEngine.DebugLogHandler:Internal_Log_Injected (UnityEngine.LogType,UnityEngine.LogOption,UnityEngine.Bindings.ManagedSpanWrapper&,intptr)
+0x0000023661c84d03 (Mono JIT Code) UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+0x0000023661c8491b (Mono JIT Code) UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+0x0000023661c84660 (Mono JIT Code) UnityEngine.Logger:Log (UnityEngine.LogType,object)
+0x0000023661cdd195 (Mono JIT Code) UnityEngine.Debug:LogError (object)
+0x0000023661cdcd8b (Mono JIT Code) GameDevClicker.Core.Managers.BalanceManager:LoadBalanceData () (at C:/Projects/Developer_Clicker/Assets/Scripts/Core/Managers/BalanceManager.cs:149)
+0x0000023661cdc263 (Mono JIT Code) GameDevClicker.Core.Managers.GameManager:InitializeBalanceData () (at C:/Projects/Developer_Clicker/Assets/Scripts/Core/Managers/GameManager.cs:58)
+0x0000023661cdb38b (Mono JIT Code) GameDevClicker.Core.Managers.GameManager:InitializeGame () (at C:/Projects/Developer_Clicker/Assets/Scripts/Core/Managers/GameManager.cs:47)
+0x0000023661cdb073 (Mono JIT Code) GameDevClicker.Core.Managers.GameManager:Awake () (at C:/Projects/Developer_Clicker/Assets/Scripts/Core/Managers/GameManager.cs:36)
+0x00000237368cfaa8 (Mono JIT Code) (wrapper runtime-invoke) object:runtime_invoke_void__this__ (object,intptr,intptr,intptr)
+0x00007ffb2e4d68de (mono-2.0-bdwgc) mono_jit_runtime_invoke (at C:/build/output/Unity-Technologies/mono/mono/mini/mini-runtime.c:3445)
+0x00007ffb2e418404 (mono-2.0-bdwgc) do_runtime_invoke (at C:/build/output/Unity-Technologies/mono/mono/metadata/object.c:3068)
+0x00007ffb2e4184f0 (mono-2.0-bdwgc) mono_runtime_invoke (at C:/build/output/Unity-Technologies/mono/mono/metadata/object.c:3115)
+0x00007ffb3a1bf844 (Unity) scripting_method_invoke
+0x00007ffb3a1975c3 (Unity) ScriptingInvocation::Invoke
+0x00007ffb3a1976ae (Unity) ScriptingInvocation::InvokeChecked
+0x00007ffb3a241b36 (Unity) SerializableManagedRef::CallMethod
+0x00007ffb3a182665 (Unity) MonoBehaviour::CallAwake
+0x00007ffb3a180ffc (Unity) MonoBehaviour::AddToManager
+0x00007ffb3a181a4b (Unity) MonoBehaviour::AwakeFromLoad
+0x00007ffb3a284246 (Unity) AwakeFromLoadQueue::InvokePersistentManagerAwake
+0x00007ffb3a2853d9 (Unity) AwakeFromLoadQueue::PersistentManagerSingleQueueAwakeFromLoad
+0x00007ffb3a284edd (Unity) AwakeFromLoadQueue::PersistentManagerAwakeFromLoad_NoChecks
+0x00007ffb39e5f131 (Unity) LoadSceneOperation::CompleteAwakeSequence
+0x00007ffb39e5fed5 (Unity) LoadSceneOperation::CompletePreloadManagerLoadSceneEditor
+0x00007ffb39e60c69 (Unity) LoadSceneOperation::IntegrateMainThread
+0x00007ffb39e63c22 (Unity) PreloadManager::UpdatePreloadingSingleStep
+0x00007ffb39e64365 (Unity) PreloadManager::WaitForAllAsyncOperationsToComplete
+0x00007ffb3b392dfa (Unity) EditorSceneManager::RestoreSceneBackups
+0x00007ffb3af2d276 (Unity) PlayerLoopController::EnterPlayMode
+0x00007ffb3af2efbf (Unity) PlayerLoopController::SetIsPlaying
+0x00007ffb3af2a32d (Unity) Application::TickTimer
+0x00007ffb3b5246da (Unity) MainMessageLoop
+0x00007ffb3b52a384 (Unity) UnityMain
+0x00007ff7cc122fba (Unity) __scrt_common_main_seh
+0x00007ffbe16ee8d7 (KERNEL32) BaseThreadInitThunk
+0x00007ffbe23fc34c (ntdll) RtlUserThreadStart
+
+-----------------------------------------
+[10:54:00.213] [Log]
+[GameManager] Balance data initialization started
+-----------------------------------------
+[10:54:00.214] [Log]
+[GameManager] Game initialized successfully
+-----------------------------------------
+[10:54:00.214] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[10:54:00.223] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[10:54:00.224] [Log]
+[Singleton] Using instance already created: SaveManager
+-----------------------------------------
+[10:54:00.226] [Log]
+[GameModel] No saved data found, creating new game data
+-----------------------------------------
+[10:54:00.227] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[10:54:00.229] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[10:54:00.233] [Log]
+[UpgradeManager] Loaded 15 upgrades from Resources
+-----------------------------------------
+[10:54:00.236] [Log]
+[UpgradeManager] Processed 15 upgrades, skipped 0
+-----------------------------------------
+[10:54:00.237] [Log]
+[UpgradeManager] Initialized with 15 upgrades
+-----------------------------------------
+[10:54:00.241] [Log]
+Stage data auto-populated with default values
+-----------------------------------------
+[10:54:00.242] [Log]
+[BalanceManager] Initializing BalanceManager...
+-----------------------------------------
+[10:54:00.244] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[10:54:00.246] [Log]
+[ProjectSystem] Initialized with default project requirement: 1000
+-----------------------------------------
+[10:54:00.247] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[10:54:00.249] [Log]
+[UnlockManager] Initialized with 0 unlock milestones
+-----------------------------------------
+[10:54:00.251] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[10:54:00.893] [Log]
+[SaveManager] Game loaded successfully. Save version: 2
+-----------------------------------------
+[10:54:00.894] [Log]
+[GameManager] Game state changed: MainMenu -> Playing
+-----------------------------------------
+[10:54:00.896] [Log]
+[GameController] Initializing Game Dev Clicker...
+-----------------------------------------
+[10:54:00.897] [Log]
+[GameController] Statistics System initialized
+-----------------------------------------
+[10:54:00.898] [Log]
+[GameController] Achievement System initialized
+-----------------------------------------
+[10:54:00.898] [Log]
+[GameController] Offline Progression System initialized
+-----------------------------------------
+[10:54:00.899] [Log]
+[GameController] UI System initialized
+-----------------------------------------
+[10:54:00.900] [Log]
+[GameController] Systems connected
+-----------------------------------------
+[10:54:00.902] [Log]
+[SaveManager] Game loaded successfully. Save version: 2
+-----------------------------------------
+[10:54:00.902] [Log]
+[GameController] Loaded existing save
+-----------------------------------------
+[10:54:00.909] [Log]
+[GamePresenter] Checking Skills category - Found 5 total upgrades
+-----------------------------------------
+[10:54:00.910] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[10:54:00.912] [Log]
+[GamePresenter] skill_01 (Typing Speed) - Unlocked: True (Requires: Level 1, Stage 1)
+-----------------------------------------
+[10:54:00.912] [Log]
+[GamePresenter] skill_02 (Algorithm Study) - Unlocked: True (Requires: Level 5, Stage 1)
+-----------------------------------------
+[10:54:00.914] [Log]
+[GamePresenter] skill_03 (Design Sense) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[10:54:00.914] [Log]
+[GamePresenter] skill_04 (Project Management) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[10:54:00.916] [Log]
+[GamePresenter] skill_05 (Innovative Thinking) - Unlocked: True (Requires: Level 30, Stage 1)
+-----------------------------------------
+[10:54:00.916] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Skills
+-----------------------------------------
+[10:54:00.919] [Log]
+[GameViewUI] Creating upgrade element for skill_01 in parent Viewport
+-----------------------------------------
+[10:54:00.927] [Log]
+[GameViewUI] Successfully created upgrade UI for Typing Speed
+-----------------------------------------
+[10:54:00.927] [Log]
+[GameViewUI] Creating upgrade element for skill_02 in parent Viewport
+-----------------------------------------
+[10:54:00.930] [Log]
+[GameViewUI] Successfully created upgrade UI for Algorithm Study
+-----------------------------------------
+[10:54:00.931] [Log]
+[GameViewUI] Creating upgrade element for skill_03 in parent Viewport
+-----------------------------------------
+[10:54:00.932] [Log]
+[GameViewUI] Successfully created upgrade UI for Design Sense
+-----------------------------------------
+[10:54:00.934] [Log]
+[GameViewUI] Creating upgrade element for skill_04 in parent Viewport
+-----------------------------------------
+[10:54:00.935] [Log]
+[GameViewUI] Successfully created upgrade UI for Project Management
+-----------------------------------------
+[10:54:00.936] [Log]
+[GameViewUI] Creating upgrade element for skill_05 in parent Viewport
+-----------------------------------------
+[10:54:00.937] [Log]
+[GameViewUI] Successfully created upgrade UI for Innovative Thinking
+-----------------------------------------
+[10:54:00.939] [Log]
+[GamePresenter] Checking Equipment category - Found 5 total upgrades
+-----------------------------------------
+[10:54:00.939] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[10:54:00.940] [Log]
+[GamePresenter] equip_01 (Better Keyboard) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[10:54:00.941] [Log]
+[GamePresenter] equip_02 (Dual Monitor) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[10:54:00.942] [Log]
+[GamePresenter] equip_03 (High-end PC) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[10:54:00.943] [Log]
+[GamePresenter] equip_04 (Server Farm) - Unlocked: False (Requires: Level 1, Stage 3)
+-----------------------------------------
+[10:54:00.943] [Log]
+[GamePresenter] equip_05 (AI Workstation) - Unlocked: False (Requires: Level 1, Stage 5)
+-----------------------------------------
+[10:54:00.944] [Log]
+[GamePresenter] Showing 3 unlocked upgrades for Equipment
+-----------------------------------------
+[10:54:00.944] [Log]
+[GameViewUI] Creating upgrade element for equip_01 in parent Viewport
+-----------------------------------------
+[10:54:00.946] [Log]
+[GameViewUI] Successfully created upgrade UI for Better Keyboard
+-----------------------------------------
+[10:54:00.947] [Log]
+[GameViewUI] Creating upgrade element for equip_02 in parent Viewport
+-----------------------------------------
+[10:54:00.949] [Log]
+[GameViewUI] Successfully created upgrade UI for Dual Monitor
+-----------------------------------------
+[10:54:00.950] [Log]
+[GameViewUI] Creating upgrade element for equip_03 in parent Viewport
+-----------------------------------------
+[10:54:00.951] [Log]
+[GameViewUI] Successfully created upgrade UI for High-end PC
+-----------------------------------------
+[10:54:00.952] [Log]
+[GamePresenter] Checking Team category - Found 5 total upgrades
+-----------------------------------------
+[10:54:00.954] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[10:54:00.954] [Log]
+[GamePresenter] team_01 (Junior Developer) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[10:54:00.955] [Log]
+[GamePresenter] team_02 (Graphic Designer) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[10:54:00.956] [Log]
+[GamePresenter] team_03 (Senior Developer) - Unlocked: True (Requires: Level 25, Stage 1)
+-----------------------------------------
+[10:54:00.956] [Log]
+[GamePresenter] team_04 (Project Manager) - Unlocked: False (Requires: Level 1, Stage 3)
+-----------------------------------------
+[10:54:00.957] [Log]
+[GamePresenter] team_05 (AI Researcher) - Unlocked: False (Requires: Level 1, Stage 5)
+-----------------------------------------
+[10:54:00.959] [Log]
+[GamePresenter] Showing 3 unlocked upgrades for Team
+-----------------------------------------
+[10:54:00.959] [Log]
+[GameViewUI] Creating upgrade element for team_01 in parent Viewport
+-----------------------------------------
+[10:54:00.960] [Log]
+[GameViewUI] Successfully created upgrade UI for Junior Developer
+-----------------------------------------
+[10:54:00.962] [Log]
+[GameViewUI] Creating upgrade element for team_02 in parent Viewport
+-----------------------------------------
+[10:54:00.965] [Log]
+[GameViewUI] Successfully created upgrade UI for Graphic Designer
+-----------------------------------------
+[10:54:00.965] [Log]
+[GameViewUI] Creating upgrade element for team_03 in parent Viewport
+-----------------------------------------
+[10:54:00.967] [Log]
+[GameViewUI] Successfully created upgrade UI for Senior Developer
+-----------------------------------------
+[10:54:00.969] [Log]
+[GameController] Game loop started
+-----------------------------------------
+[10:54:00.970] [Log]
+[GameController] Game Dev Clicker initialized successfully!
+-----------------------------------------
+[10:54:00.972] [Log]
+[OfflineProgression] Not enough offline time: 0.0685157 seconds
+-----------------------------------------
+[10:54:00.976] [Log]
+Background RawImage set to full screen and made non-interactive
+-----------------------------------------
+[10:54:00.977] [Log]
+Loading video from: file:///C:/Projects/Developer_Clicker/Assets/GameData/BG_Images/mp4/stage1_indie_room.mp4
+-----------------------------------------
+[10:54:00.980] [Log]
+[GamePresenter] Connections established successfully
+-----------------------------------------
+[10:54:00.980] [Log]
+[GamePresenter] Checking Skills category - Found 5 total upgrades
+-----------------------------------------
+[10:54:00.982] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[10:54:00.982] [Log]
+[GamePresenter] skill_01 (Typing Speed) - Unlocked: True (Requires: Level 1, Stage 1)
+-----------------------------------------
+[10:54:00.983] [Log]
+[GamePresenter] skill_02 (Algorithm Study) - Unlocked: True (Requires: Level 5, Stage 1)
+-----------------------------------------
+[10:54:00.983] [Log]
+[GamePresenter] skill_03 (Design Sense) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[10:54:00.984] [Log]
+[GamePresenter] skill_04 (Project Management) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[10:54:00.984] [Log]
+[GamePresenter] skill_05 (Innovative Thinking) - Unlocked: True (Requires: Level 30, Stage 1)
+-----------------------------------------
+[10:54:00.986] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Skills
+-----------------------------------------
+[10:54:00.987] [Log]
+[GamePresenter] Checking Equipment category - Found 5 total upgrades
+-----------------------------------------
+[10:54:00.988] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[10:54:00.999] [Log]
+[GamePresenter] equip_01 (Better Keyboard) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[10:54:01.000] [Log]
+[GamePresenter] equip_02 (Dual Monitor) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[10:54:01.000] [Log]
+[GamePresenter] equip_03 (High-end PC) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[10:54:01.001] [Log]
+[GamePresenter] equip_04 (Server Farm) - Unlocked: False (Requires: Level 1, Stage 3)
+-----------------------------------------
+[10:54:01.002] [Log]
+[GamePresenter] equip_05 (AI Workstation) - Unlocked: False (Requires: Level 1, Stage 5)
+-----------------------------------------
+[10:54:01.003] [Log]
+[GamePresenter] Showing 3 unlocked upgrades for Equipment
+-----------------------------------------
+[10:54:01.003] [Log]
+[GamePresenter] Checking Team category - Found 5 total upgrades
+-----------------------------------------
+[10:54:01.004] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[10:54:01.004] [Log]
+[GamePresenter] team_01 (Junior Developer) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[10:54:01.006] [Log]
+[GamePresenter] team_02 (Graphic Designer) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[10:54:01.007] [Log]
+[GamePresenter] team_03 (Senior Developer) - Unlocked: True (Requires: Level 25, Stage 1)
+-----------------------------------------
+[10:54:01.008] [Log]
+[GamePresenter] team_04 (Project Manager) - Unlocked: False (Requires: Level 1, Stage 3)
+-----------------------------------------
+[10:54:01.008] [Log]
+[GamePresenter] team_05 (AI Researcher) - Unlocked: False (Requires: Level 1, Stage 5)
+-----------------------------------------
+[10:54:01.009] [Log]
+[GamePresenter] Showing 3 unlocked upgrades for Team
+-----------------------------------------
+[10:54:01.028] [Log]
+[BalanceManager] Attempting to get CSVLoader (attempt 1/5)...
+-----------------------------------------
+[10:54:01.029] [Log]
+[BalanceManager] Using serialized reference CSVLoader
+-----------------------------------------
+[10:54:01.029] [Log]
+[BalanceManager] CSVLoader initialized successfully
+-----------------------------------------
+[10:54:01.031] [Log]
+[BalanceManager] LoadBalanceData called. _csvLoader is null: False
+-----------------------------------------
+[10:54:01.031] [Log]
+[BalanceManager] csvLoaderReference is null: False
+-----------------------------------------
+[10:54:01.033] [Log]
+[BalanceManager] Loading balance data from CSV files...
+-----------------------------------------
+[10:54:01.033] [Log]
+[CSVLoader] Starting to load all CSV data...
+-----------------------------------------
+[10:54:01.036] [Log]
+[CSVLoader] Loaded 15 rows from Upgrades.csv
+-----------------------------------------
+[10:54:01.037] [Log]
+[CSVLoader] Loaded 50 rows from Levels.csv
+-----------------------------------------
+[10:54:01.039] [Log]
+[CSVLoader] Loaded 15 rows from Projects.csv
+-----------------------------------------
+[10:54:01.040] [Log]
+[CSVLoader] Loaded 10 rows from Stage.csv
+-----------------------------------------
+[10:54:01.041] [Log]
+[CSVLoader] Loaded 7 rows from DualCurrency.csv
+-----------------------------------------
+[10:54:01.041] [Log]
+[CSVLoader] Loaded 10 rows from ExpectedTime.csv
+-----------------------------------------
+[10:54:01.043] [Log]
+[CSVLoader] Parsed 15 upgrades
+-----------------------------------------
+[10:54:01.046] [Log]
+[CSVLoader] Parsed 50 levels
+-----------------------------------------
+[10:54:01.047] [Log]
+[CSVLoader] Parsed 15 projects
+-----------------------------------------
+[10:54:01.049] [Log]
+[CSVLoader] Parsed 10 stages
+-----------------------------------------
+[10:54:01.049] [Log]
+[CSVLoader] Parsed 7 dual currency settings
+-----------------------------------------
+[10:54:01.051] [Log]
+[CSVLoader] All CSV data loaded successfully!
+-----------------------------------------
+[10:54:01.052] [Log]
+[BalanceManager] Found 15 upgrades
+-----------------------------------------
+[10:54:01.052] [Log]
+[BalanceManager] Found 50 levels
+-----------------------------------------
+[10:54:01.053] [Log]
+[BalanceManager] Found 15 projects
+-----------------------------------------
+[10:54:01.054] [Log]
+[BalanceManager] Found 10 stages
+-----------------------------------------
+[10:54:01.054] [Log]
+[BalanceManager] Balance data loaded successfully!
+-----------------------------------------
+[10:54:01.156] [Warning]
+The character with Unicode value \U0001F4B0 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Auto Income Text].
+-----------------------------------------
+[10:54:01.156] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Auto Income Text].
+-----------------------------------------
+[10:54:01.168] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[10:54:01.170] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[10:54:01.171] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[10:54:01.172] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[10:54:01.173] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[10:54:02.192] [Log]
+Unity Remote connected to input!
+-----------------------------------------
+[10:54:02.264] [Log]
+Video prepared successfully
+-----------------------------------------
+[10:54:02.267] [Warning]
+[GameViewUI] No ScrollRect found in children
+-----------------------------------------
+[10:54:02.776] [Warning]
+[GameViewUI] No ScrollRect found in children
+-----------------------------------------

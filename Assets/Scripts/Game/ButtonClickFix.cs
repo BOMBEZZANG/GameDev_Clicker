@@ -75,6 +75,15 @@ namespace GameDevClicker.Game
         {
             if (button == null) return;
             
+            // Skip click zone button to preserve its size and behavior
+            if (button.name.ToLower().Contains("clickzone") || 
+                button.name.ToLower().Contains("click-zone") ||
+                button.name.ToLower().Contains("click_zone"))
+            {
+                Debug.Log($"[ButtonClickFix] Skipping click zone button: {button.name}");
+                return;
+            }
+            
             // Ensure button has Image component
             Image buttonImage = button.GetComponent<Image>();
             if (buttonImage == null)

@@ -54,7 +54,8 @@ namespace GameDevClicker.Core.Managers
         {
             if (BalanceManager.Instance != null)
             {
-                BalanceManager.Instance.LoadBalanceData();
+                // BalanceManager auto-loads with autoLoadOnStart = true
+                // No need to manually call LoadBalanceData() here
                 Debug.Log("[GameManager] Balance data initialization started");
             }
         }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using GameDevClicker.Core.Patterns;
 using GameDevClicker.Core.Utilities;
+using GameDevClicker.Core.Managers;
 using GameDevClicker.Data.ScriptableObjects;
 using GameDevClicker.Game.Models;
 
@@ -372,8 +373,29 @@ namespace GameDevClicker.Game.Views
             var button = element.Q<Button>();
             if (button == null) return;
             
-            // Update button text with cost
-            long cost = upgrade.CalculatePrice(0); // TODO: Get actual level from UpgradeManager
+            // Get actual level from UpgradeManager and calculate cost
+            int currentLevel = 0;
+            long cost = 0;
+            
+            try
+            {
+                if (UpgradeManager.Instance != null)
+                {
+                    currentLevel = UpgradeManager.Instance.GetUpgradeLevel(upgrade.upgradeId);
+                    cost = UpgradeManager.Instance.GetUpgradeCost(upgrade);
+                }
+                else
+                {
+                    // Fallback if UpgradeManager is not available
+                    cost = upgrade.CalculatePrice(0);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[GameView] Error calculating upgrade cost for {upgrade.upgradeId}: {ex.Message}");
+                cost = upgrade.CalculatePrice(0); // Safe fallback
+            }
+            
             string currencySymbol = upgrade.currencyType == UpgradeData.CurrencyType.Money ? "💰" : "⭐";
             button.text = $"{currencySymbol} {NumberFormatter.Format(cost)}";
             

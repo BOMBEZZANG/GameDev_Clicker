@@ -67,9 +67,24 @@ namespace GameDevClicker.Core.Managers
 
         private void ProcessUpgradeData()
         {
+            int processedCount = 0;
+            int skippedCount = 0;
+            
             foreach (UpgradeData upgrade in allUpgrades)
             {
-                if (upgrade == null) continue;
+                if (upgrade == null) 
+                {
+                    skippedCount++;
+                    Debug.LogWarning("[UpgradeManager] Skipping null upgrade in allUpgrades array");
+                    continue;
+                }
+
+                if (string.IsNullOrEmpty(upgrade.upgradeId))
+                {
+                    skippedCount++;
+                    Debug.LogWarning($"[UpgradeManager] Skipping upgrade with empty ID: {upgrade.upgradeName}");
+                    continue;
+                }
 
                 _upgradeDataLookup[upgrade.upgradeId] = upgrade;
                 _purchasedLevels[upgrade.upgradeId] = 0;
@@ -79,7 +94,10 @@ namespace GameDevClicker.Core.Managers
                     _upgradesByCategory[upgrade.category] = new List<UpgradeData>();
                 }
                 _upgradesByCategory[upgrade.category].Add(upgrade);
+                processedCount++;
             }
+            
+            Debug.Log($"[UpgradeManager] Processed {processedCount} upgrades, skipped {skippedCount}");
         }
 
         private void SubscribeToEvents()
@@ -144,59 +162,80 @@ namespace GameDevClicker.Core.Managers
 
         public bool PurchaseUpgrade(UpgradeData upgrade)
         {
-            if (!CanPurchaseUpgrade(upgrade))
+            try
             {
-                Debug.LogWarning($"[UpgradeManager] Cannot purchase upgrade: {upgrade.upgradeName}");
+                if (upgrade == null)
+                {
+                    Debug.LogError("[UpgradeManager] Cannot purchase null upgrade");
+                    return false;
+                }
+
+                if (!CanPurchaseUpgrade(upgrade))
+                {
+                    Debug.LogWarning($"[UpgradeManager] Cannot purchase upgrade: {upgrade.upgradeName}");
+                    return false;
+                }
+
+                long cost = GetUpgradeCost(upgrade);
+                
+                // Deduct cost
+                bool success = false;
+                switch (upgrade.currencyType)
+                {
+                    case UpgradeData.CurrencyType.Money:
+                        success = GameModel.Instance.SpendMoney(cost);
+                        break;
+                    case UpgradeData.CurrencyType.Experience:
+                        success = GameModel.Instance.SpendExperience(cost);
+                        break;
+                }
+
+                if (!success)
+                {
+                    Debug.LogError($"[UpgradeManager] Failed to deduct cost for upgrade: {upgrade.upgradeName}");
+                    return false;
+                }
+
+                // Ensure the upgrade exists in our tracking dictionary
+                if (!_purchasedLevels.ContainsKey(upgrade.upgradeId))
+                {
+                    _purchasedLevels[upgrade.upgradeId] = 0;
+                    Debug.LogWarning($"[UpgradeManager] Added missing upgrade {upgrade.upgradeId} to tracking");
+                }
+
+                // Update level
+                _purchasedLevels[upgrade.upgradeId]++;
+                
+                // Apply effects
+                ApplyUpgradeEffects(upgrade);
+                
+                // Update statistics
+                var gameData = SaveManager.Instance?.CurrentGameData;
+                if (gameData != null)
+                {
+                    gameData.totalUpgradesPurchased++;
+                }
+
+                // Save changes
+                SaveUpgradeLevels();
+
+                // Trigger events
+                GameEvents.InvokeUpgradePurchased(upgrade);
+                
+                // Check if upgrade is now maxed out
+                if (IsUpgradeMaxedOut(upgrade))
+                {
+                    OnUpgradeMaxedOut?.Invoke(upgrade);
+                }
+
+                Debug.Log($"[UpgradeManager] Purchased {upgrade.upgradeName} (Level {GetUpgradeLevel(upgrade.upgradeId)})");
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[UpgradeManager] Exception during upgrade purchase for {upgrade?.upgradeName ?? "null"}: {ex.Message}\n{ex.StackTrace}");
                 return false;
             }
-
-            long cost = GetUpgradeCost(upgrade);
-            
-            // Deduct cost
-            bool success = false;
-            switch (upgrade.currencyType)
-            {
-                case UpgradeData.CurrencyType.Money:
-                    success = GameModel.Instance.SpendMoney(cost);
-                    break;
-                case UpgradeData.CurrencyType.Experience:
-                    success = GameModel.Instance.SpendExperience(cost);
-                    break;
-            }
-
-            if (!success)
-            {
-                Debug.LogError($"[UpgradeManager] Failed to deduct cost for upgrade: {upgrade.upgradeName}");
-                return false;
-            }
-
-            // Update level
-            _purchasedLevels[upgrade.upgradeId]++;
-            
-            // Apply effects
-            ApplyUpgradeEffects(upgrade);
-            
-            // Update statistics
-            var gameData = SaveManager.Instance.CurrentGameData;
-            if (gameData != null)
-            {
-                gameData.totalUpgradesPurchased++;
-            }
-
-            // Save changes
-            SaveUpgradeLevels();
-
-            // Trigger events
-            GameEvents.InvokeUpgradePurchased(upgrade);
-            
-            // Check if upgrade is now maxed out
-            if (IsUpgradeMaxedOut(upgrade))
-            {
-                OnUpgradeMaxedOut?.Invoke(upgrade);
-            }
-
-            Debug.Log($"[UpgradeManager] Purchased {upgrade.upgradeName} (Level {GetUpgradeLevel(upgrade.upgradeId)})");
-            return true;
         }
 
         #endregion
@@ -205,11 +244,38 @@ namespace GameDevClicker.Core.Managers
 
         private void ApplyUpgradeEffects(UpgradeData upgrade)
         {
-            int currentLevel = GetUpgradeLevel(upgrade.upgradeId);
-            
-            foreach (var effect in upgrade.effects)
+            try
             {
-                ApplyUpgradeEffect(effect, currentLevel);
+                if (upgrade?.effects == null || upgrade.effects.Length == 0)
+                {
+                    Debug.LogWarning($"[UpgradeManager] No effects defined for upgrade: {upgrade?.upgradeName ?? "null"}");
+                    return;
+                }
+
+                int currentLevel = GetUpgradeLevel(upgrade.upgradeId);
+                
+                for (int i = 0; i < upgrade.effects.Length; i++)
+                {
+                    try
+                    {
+                        if (upgrade.effects[i] != null)
+                        {
+                            ApplyUpgradeEffect(upgrade.effects[i], currentLevel);
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"[UpgradeManager] Null effect at index {i} for upgrade: {upgrade.upgradeName}");
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Debug.LogError($"[UpgradeManager] Error applying effect {i} for upgrade {upgrade.upgradeName}: {ex.Message}");
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[UpgradeManager] Error applying upgrade effects for {upgrade?.upgradeName ?? "null"}: {ex.Message}");
             }
         }
 
@@ -273,9 +339,22 @@ namespace GameDevClicker.Core.Managers
 
         public long GetUpgradeCost(UpgradeData upgrade)
         {
-            if (upgrade == null) return 0;
-            int currentLevel = GetUpgradeLevel(upgrade.upgradeId);
-            return upgrade.CalculatePrice(currentLevel);
+            try
+            {
+                if (upgrade == null) 
+                {
+                    Debug.LogError("[UpgradeManager] Cannot get cost for null upgrade");
+                    return 0;
+                }
+                
+                int currentLevel = GetUpgradeLevel(upgrade.upgradeId);
+                return upgrade.CalculatePrice(currentLevel);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[UpgradeManager] Error calculating cost for upgrade {upgrade?.upgradeName ?? "null"}: {ex.Message}");
+                return upgrade?.basePrice != null ? (long)upgrade.basePrice : 0;
+            }
         }
 
         public int GetUpgradeLevel(string upgradeId)
