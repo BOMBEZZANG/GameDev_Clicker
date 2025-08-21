@@ -1,0 +1,306 @@
+=== DEBUG LOG EXPORT ===
+Date: 2025-08-21 11:55:53
+Total Entries: 100
+Unity Version: 6000.0.45f1
+===================================================
+
+[11:55:52.693] [Log]
+[Adaptive Performance] No Provider was configured for use. Make sure you added at least one Provider in the Adaptive Performance Settings.
+-----------------------------------------
+[11:55:52.725] [Log]
+[TimeUtilities] Initialized at 8/21/2025 11:55:52 AM
+-----------------------------------------
+[11:55:52.740] [Log]
+[ClickEffectManager] Created pooled text object #1
+-----------------------------------------
+[11:55:52.742] [Log]
+[ClickEffectManager] Created pooled text object #2
+-----------------------------------------
+[11:55:52.743] [Log]
+[ClickEffectManager] Created pooled text object #3
+-----------------------------------------
+[11:55:52.744] [Log]
+[ClickEffectManager] Created pooled text object #4
+-----------------------------------------
+[11:55:52.746] [Log]
+[ClickEffectManager] Created pooled text object #5
+-----------------------------------------
+[11:55:52.747] [Log]
+[ClickEffectManager] Created pooled text object #6
+-----------------------------------------
+[11:55:52.748] [Log]
+[ClickEffectManager] Created pooled text object #7
+-----------------------------------------
+[11:55:52.748] [Log]
+[ClickEffectManager] Created pooled text object #8
+-----------------------------------------
+[11:55:52.750] [Log]
+[ClickEffectManager] Created pooled text object #9
+-----------------------------------------
+[11:55:52.751] [Log]
+[ClickEffectManager] Created pooled text object #10
+-----------------------------------------
+[11:55:52.753] [Log]
+[ClickEffectManager] Created pooled text object #11
+-----------------------------------------
+[11:55:52.754] [Log]
+[ClickEffectManager] Created pooled text object #12
+-----------------------------------------
+[11:55:52.755] [Log]
+[ClickEffectManager] Created pooled text object #13
+-----------------------------------------
+[11:55:52.757] [Log]
+[ClickEffectManager] Created pooled text object #14
+-----------------------------------------
+[11:55:52.757] [Log]
+[ClickEffectManager] Created pooled text object #15
+-----------------------------------------
+[11:55:52.758] [Log]
+[ClickEffectManager] Created pooled text object #16
+-----------------------------------------
+[11:55:52.760] [Log]
+[ClickEffectManager] Created pooled text object #17
+-----------------------------------------
+[11:55:52.761] [Log]
+[ClickEffectManager] Created pooled text object #18
+-----------------------------------------
+[11:55:52.762] [Log]
+[ClickEffectManager] Created pooled text object #19
+-----------------------------------------
+[11:55:52.763] [Log]
+[ClickEffectManager] Created pooled text object #20
+-----------------------------------------
+[11:55:52.766] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.768] [Log]
+[Singleton] Using instance already created: BlanceManager
+-----------------------------------------
+[11:55:52.770] [Log]
+[GameManager] Balance data initialization started
+-----------------------------------------
+[11:55:52.770] [Log]
+[GameManager] Game initialized successfully
+-----------------------------------------
+[11:55:52.772] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.775] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.776] [Log]
+[CSVLoader] Awake - Instance set
+-----------------------------------------
+[11:55:52.781] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.783] [Log]
+[Singleton] Using instance already created: SaveManager
+-----------------------------------------
+[11:55:52.783] [Log]
+[GameModel] No saved data found, creating new game data
+-----------------------------------------
+[11:55:52.785] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.787] [Log]
+[GameViewUI] Set upgrade parent to ScrollRect Content: Content
+-----------------------------------------
+[11:55:52.789] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.792] [Log]
+[UpgradeManager] Loaded 15 upgrades from Resources
+-----------------------------------------
+[11:55:52.796] [Log]
+[UpgradeManager] Processed 15 upgrades, skipped 0
+-----------------------------------------
+[11:55:52.797] [Log]
+[UpgradeManager] Initialized with 15 upgrades
+-----------------------------------------
+[11:55:52.799] [Log]
+[Singleton] Using instance already created: CharacterManager
+-----------------------------------------
+[11:55:52.799] [Log]
+[CharacterManager] Registered character: CH1_1_0
+-----------------------------------------
+[11:55:52.801] [Log]
+[BalanceManager] Initializing BalanceManager...
+-----------------------------------------
+[11:55:52.802] [Log]
+[CharacterManager] Initialized 1 existing characters
+-----------------------------------------
+[11:55:52.804] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.806] [Log]
+[ProjectSystem] Initialized with default project requirement: 1000
+-----------------------------------------
+[11:55:52.807] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.808] [Log]
+[UnlockManager] Initialized with 0 unlock milestones
+-----------------------------------------
+[11:55:52.809] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:53.261] [Log]
+[SaveManager] Game loaded successfully. Save version: 2
+-----------------------------------------
+[11:55:53.262] [Log]
+[GameManager] Game state changed: MainMenu -> Playing
+-----------------------------------------
+[11:55:53.262] [Log]
+[GameController] Initializing Game Dev Clicker...
+-----------------------------------------
+[11:55:53.264] [Log]
+[GameController] Statistics System initialized
+-----------------------------------------
+[11:55:53.264] [Log]
+[GameController] Achievement System initialized
+-----------------------------------------
+[11:55:53.266] [Log]
+[GameController] Offline Progression System initialized
+-----------------------------------------
+[11:55:53.267] [Log]
+[GameController] UI System initialized
+-----------------------------------------
+[11:55:53.268] [Log]
+[GameController] Systems connected
+-----------------------------------------
+[11:55:53.269] [Log]
+[SaveManager] Game loaded successfully. Save version: 2
+-----------------------------------------
+[11:55:53.269] [Log]
+[GameController] Loaded existing save
+-----------------------------------------
+[11:55:53.274] [Log]
+[GamePresenter] Checking Skills category - Found 5 total upgrades
+-----------------------------------------
+[11:55:53.275] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:55:53.277] [Log]
+[GamePresenter] skill_01 (Typing Speed) - Unlocked: True (Requires: Level 1, Stage 1)
+-----------------------------------------
+[11:55:53.278] [Log]
+[GamePresenter] skill_02 (Algorithm Study) - Unlocked: True (Requires: Level 5, Stage 1)
+-----------------------------------------
+[11:55:53.278] [Log]
+[GamePresenter] skill_03 (Design Sense) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:55:53.280] [Log]
+[GamePresenter] skill_04 (Project Management) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[11:55:53.280] [Log]
+[GamePresenter] skill_05 (Innovative Thinking) - Unlocked: True (Requires: Level 30, Stage 1)
+-----------------------------------------
+[11:55:53.281] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Skills
+-----------------------------------------
+[11:55:53.285] [Log]
+[GameViewUI] Creating upgrade element for skill_01 in parent Content
+-----------------------------------------
+[11:55:53.293] [Log]
+[GameViewUI] Successfully created upgrade UI for Typing Speed
+-----------------------------------------
+[11:55:53.294] [Log]
+[GameViewUI] Creating upgrade element for skill_02 in parent Content
+-----------------------------------------
+[11:55:53.296] [Log]
+[GameViewUI] Successfully created upgrade UI for Algorithm Study
+-----------------------------------------
+[11:55:53.297] [Log]
+[GameViewUI] Creating upgrade element for skill_03 in parent Content
+-----------------------------------------
+[11:55:53.299] [Log]
+[GameViewUI] Successfully created upgrade UI for Design Sense
+-----------------------------------------
+[11:55:53.299] [Log]
+[GameViewUI] Creating upgrade element for skill_04 in parent Content
+-----------------------------------------
+[11:55:53.301] [Log]
+[GameViewUI] Successfully created upgrade UI for Project Management
+-----------------------------------------
+[11:55:53.301] [Log]
+[GameViewUI] Creating upgrade element for skill_05 in parent Content
+-----------------------------------------
+[11:55:53.303] [Log]
+[GameViewUI] Successfully created upgrade UI for Innovative Thinking
+-----------------------------------------
+[11:55:53.304] [Log]
+[GamePresenter] Checking Equipment category - Found 5 total upgrades
+-----------------------------------------
+[11:55:53.305] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:55:53.305] [Log]
+[GamePresenter] equip_01 (Better Keyboard) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:55:53.307] [Log]
+[GamePresenter] equip_02 (Dual Monitor) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[11:55:53.307] [Log]
+[GamePresenter] equip_03 (High-end PC) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[11:55:53.308] [Log]
+[GamePresenter] equip_04 (Server Farm) - Unlocked: False (Requires: Level 1, Stage 3)
+-----------------------------------------
+[11:55:53.308] [Log]
+[GamePresenter] equip_05 (AI Workstation) - Unlocked: False (Requires: Level 1, Stage 5)
+-----------------------------------------
+[11:55:53.310] [Log]
+[GamePresenter] Showing 3 unlocked upgrades for Equipment
+-----------------------------------------
+[11:55:53.311] [Log]
+[GameViewUI] Creating upgrade element for equip_01 in parent Content
+-----------------------------------------
+[11:55:53.312] [Log]
+[GameViewUI] Successfully created upgrade UI for Better Keyboard
+-----------------------------------------
+[11:55:53.312] [Log]
+[GameViewUI] Creating upgrade element for equip_02 in parent Content
+-----------------------------------------
+[11:55:53.313] [Log]
+[GameViewUI] Successfully created upgrade UI for Dual Monitor
+-----------------------------------------
+[11:55:53.315] [Log]
+[GameViewUI] Creating upgrade element for equip_03 in parent Content
+-----------------------------------------
+[11:55:53.317] [Log]
+[GameViewUI] Successfully created upgrade UI for High-end PC
+-----------------------------------------
+[11:55:53.318] [Log]
+[GamePresenter] Checking Team category - Found 5 total upgrades
+-----------------------------------------
+[11:55:53.318] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:55:53.320] [Log]
+[GamePresenter] team_01 (Junior Developer) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:55:53.320] [Log]
+[GamePresenter] team_02 (Graphic Designer) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[11:55:53.321] [Log]
+[GamePresenter] team_03 (Senior Developer) - Unlocked: True (Requires: Level 25, Stage 1)
+-----------------------------------------
+[11:55:53.322] [Log]
+[GamePresenter] team_04 (Project Manager) - Unlocked: False (Requires: Level 1, Stage 3)
+-----------------------------------------
+[11:55:53.323] [Log]
+[GamePresenter] team_05 (AI Researcher) - Unlocked: False (Requires: Level 1, Stage 5)
+-----------------------------------------
+[11:55:53.324] [Log]
+[GamePresenter] Showing 3 unlocked upgrades for Team
+-----------------------------------------
+[11:55:53.325] [Log]
+[GameViewUI] Creating upgrade element for team_01 in parent Content
+-----------------------------------------
+[11:55:53.326] [Log]
+[GameViewUI] Successfully created upgrade UI for Junior Developer
+-----------------------------------------
+[11:55:53.327] [Log]
+[GameViewUI] Creating upgrade element for team_02 in parent Content
+-----------------------------------------

@@ -1,0 +1,606 @@
+=== DEBUG LOG EXPORT ===
+Date: 2025-08-21 11:55:59
+Total Entries: 200
+Unity Version: 6000.0.45f1
+===================================================
+
+[11:55:52.693] [Log]
+[Adaptive Performance] No Provider was configured for use. Make sure you added at least one Provider in the Adaptive Performance Settings.
+-----------------------------------------
+[11:55:52.725] [Log]
+[TimeUtilities] Initialized at 8/21/2025 11:55:52 AM
+-----------------------------------------
+[11:55:52.740] [Log]
+[ClickEffectManager] Created pooled text object #1
+-----------------------------------------
+[11:55:52.742] [Log]
+[ClickEffectManager] Created pooled text object #2
+-----------------------------------------
+[11:55:52.743] [Log]
+[ClickEffectManager] Created pooled text object #3
+-----------------------------------------
+[11:55:52.744] [Log]
+[ClickEffectManager] Created pooled text object #4
+-----------------------------------------
+[11:55:52.746] [Log]
+[ClickEffectManager] Created pooled text object #5
+-----------------------------------------
+[11:55:52.747] [Log]
+[ClickEffectManager] Created pooled text object #6
+-----------------------------------------
+[11:55:52.748] [Log]
+[ClickEffectManager] Created pooled text object #7
+-----------------------------------------
+[11:55:52.748] [Log]
+[ClickEffectManager] Created pooled text object #8
+-----------------------------------------
+[11:55:52.750] [Log]
+[ClickEffectManager] Created pooled text object #9
+-----------------------------------------
+[11:55:52.751] [Log]
+[ClickEffectManager] Created pooled text object #10
+-----------------------------------------
+[11:55:52.753] [Log]
+[ClickEffectManager] Created pooled text object #11
+-----------------------------------------
+[11:55:52.754] [Log]
+[ClickEffectManager] Created pooled text object #12
+-----------------------------------------
+[11:55:52.755] [Log]
+[ClickEffectManager] Created pooled text object #13
+-----------------------------------------
+[11:55:52.757] [Log]
+[ClickEffectManager] Created pooled text object #14
+-----------------------------------------
+[11:55:52.757] [Log]
+[ClickEffectManager] Created pooled text object #15
+-----------------------------------------
+[11:55:52.758] [Log]
+[ClickEffectManager] Created pooled text object #16
+-----------------------------------------
+[11:55:52.760] [Log]
+[ClickEffectManager] Created pooled text object #17
+-----------------------------------------
+[11:55:52.761] [Log]
+[ClickEffectManager] Created pooled text object #18
+-----------------------------------------
+[11:55:52.762] [Log]
+[ClickEffectManager] Created pooled text object #19
+-----------------------------------------
+[11:55:52.763] [Log]
+[ClickEffectManager] Created pooled text object #20
+-----------------------------------------
+[11:55:52.766] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.768] [Log]
+[Singleton] Using instance already created: BlanceManager
+-----------------------------------------
+[11:55:52.770] [Log]
+[GameManager] Balance data initialization started
+-----------------------------------------
+[11:55:52.770] [Log]
+[GameManager] Game initialized successfully
+-----------------------------------------
+[11:55:52.772] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.775] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.776] [Log]
+[CSVLoader] Awake - Instance set
+-----------------------------------------
+[11:55:52.781] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.783] [Log]
+[Singleton] Using instance already created: SaveManager
+-----------------------------------------
+[11:55:52.783] [Log]
+[GameModel] No saved data found, creating new game data
+-----------------------------------------
+[11:55:52.785] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.787] [Log]
+[GameViewUI] Set upgrade parent to ScrollRect Content: Content
+-----------------------------------------
+[11:55:52.789] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.792] [Log]
+[UpgradeManager] Loaded 15 upgrades from Resources
+-----------------------------------------
+[11:55:52.796] [Log]
+[UpgradeManager] Processed 15 upgrades, skipped 0
+-----------------------------------------
+[11:55:52.797] [Log]
+[UpgradeManager] Initialized with 15 upgrades
+-----------------------------------------
+[11:55:52.799] [Log]
+[Singleton] Using instance already created: CharacterManager
+-----------------------------------------
+[11:55:52.799] [Log]
+[CharacterManager] Registered character: CH1_1_0
+-----------------------------------------
+[11:55:52.801] [Log]
+[BalanceManager] Initializing BalanceManager...
+-----------------------------------------
+[11:55:52.802] [Log]
+[CharacterManager] Initialized 1 existing characters
+-----------------------------------------
+[11:55:52.804] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.806] [Log]
+[ProjectSystem] Initialized with default project requirement: 1000
+-----------------------------------------
+[11:55:52.807] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:52.808] [Log]
+[UnlockManager] Initialized with 0 unlock milestones
+-----------------------------------------
+[11:55:52.809] [Warning]
+DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.
+-----------------------------------------
+[11:55:53.261] [Log]
+[SaveManager] Game loaded successfully. Save version: 2
+-----------------------------------------
+[11:55:53.262] [Log]
+[GameManager] Game state changed: MainMenu -> Playing
+-----------------------------------------
+[11:55:53.262] [Log]
+[GameController] Initializing Game Dev Clicker...
+-----------------------------------------
+[11:55:53.264] [Log]
+[GameController] Statistics System initialized
+-----------------------------------------
+[11:55:53.264] [Log]
+[GameController] Achievement System initialized
+-----------------------------------------
+[11:55:53.266] [Log]
+[GameController] Offline Progression System initialized
+-----------------------------------------
+[11:55:53.267] [Log]
+[GameController] UI System initialized
+-----------------------------------------
+[11:55:53.268] [Log]
+[GameController] Systems connected
+-----------------------------------------
+[11:55:53.269] [Log]
+[SaveManager] Game loaded successfully. Save version: 2
+-----------------------------------------
+[11:55:53.269] [Log]
+[GameController] Loaded existing save
+-----------------------------------------
+[11:55:53.274] [Log]
+[GamePresenter] Checking Skills category - Found 5 total upgrades
+-----------------------------------------
+[11:55:53.275] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:55:53.277] [Log]
+[GamePresenter] skill_01 (Typing Speed) - Unlocked: True (Requires: Level 1, Stage 1)
+-----------------------------------------
+[11:55:53.278] [Log]
+[GamePresenter] skill_02 (Algorithm Study) - Unlocked: True (Requires: Level 5, Stage 1)
+-----------------------------------------
+[11:55:53.278] [Log]
+[GamePresenter] skill_03 (Design Sense) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:55:53.280] [Log]
+[GamePresenter] skill_04 (Project Management) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[11:55:53.280] [Log]
+[GamePresenter] skill_05 (Innovative Thinking) - Unlocked: True (Requires: Level 30, Stage 1)
+-----------------------------------------
+[11:55:53.281] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Skills
+-----------------------------------------
+[11:55:53.285] [Log]
+[GameViewUI] Creating upgrade element for skill_01 in parent Content
+-----------------------------------------
+[11:55:53.293] [Log]
+[GameViewUI] Successfully created upgrade UI for Typing Speed
+-----------------------------------------
+[11:55:53.294] [Log]
+[GameViewUI] Creating upgrade element for skill_02 in parent Content
+-----------------------------------------
+[11:55:53.296] [Log]
+[GameViewUI] Successfully created upgrade UI for Algorithm Study
+-----------------------------------------
+[11:55:53.297] [Log]
+[GameViewUI] Creating upgrade element for skill_03 in parent Content
+-----------------------------------------
+[11:55:53.299] [Log]
+[GameViewUI] Successfully created upgrade UI for Design Sense
+-----------------------------------------
+[11:55:53.299] [Log]
+[GameViewUI] Creating upgrade element for skill_04 in parent Content
+-----------------------------------------
+[11:55:53.301] [Log]
+[GameViewUI] Successfully created upgrade UI for Project Management
+-----------------------------------------
+[11:55:53.301] [Log]
+[GameViewUI] Creating upgrade element for skill_05 in parent Content
+-----------------------------------------
+[11:55:53.303] [Log]
+[GameViewUI] Successfully created upgrade UI for Innovative Thinking
+-----------------------------------------
+[11:55:53.304] [Log]
+[GamePresenter] Checking Equipment category - Found 5 total upgrades
+-----------------------------------------
+[11:55:53.305] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:55:53.305] [Log]
+[GamePresenter] equip_01 (Better Keyboard) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:55:53.307] [Log]
+[GamePresenter] equip_02 (Dual Monitor) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[11:55:53.307] [Log]
+[GamePresenter] equip_03 (High-end PC) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[11:55:53.308] [Log]
+[GamePresenter] equip_04 (Server Farm) - Unlocked: False (Requires: Level 1, Stage 3)
+-----------------------------------------
+[11:55:53.308] [Log]
+[GamePresenter] equip_05 (AI Workstation) - Unlocked: False (Requires: Level 1, Stage 5)
+-----------------------------------------
+[11:55:53.310] [Log]
+[GamePresenter] Showing 3 unlocked upgrades for Equipment
+-----------------------------------------
+[11:55:53.311] [Log]
+[GameViewUI] Creating upgrade element for equip_01 in parent Content
+-----------------------------------------
+[11:55:53.312] [Log]
+[GameViewUI] Successfully created upgrade UI for Better Keyboard
+-----------------------------------------
+[11:55:53.312] [Log]
+[GameViewUI] Creating upgrade element for equip_02 in parent Content
+-----------------------------------------
+[11:55:53.313] [Log]
+[GameViewUI] Successfully created upgrade UI for Dual Monitor
+-----------------------------------------
+[11:55:53.315] [Log]
+[GameViewUI] Creating upgrade element for equip_03 in parent Content
+-----------------------------------------
+[11:55:53.317] [Log]
+[GameViewUI] Successfully created upgrade UI for High-end PC
+-----------------------------------------
+[11:55:53.318] [Log]
+[GamePresenter] Checking Team category - Found 5 total upgrades
+-----------------------------------------
+[11:55:53.318] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:55:53.320] [Log]
+[GamePresenter] team_01 (Junior Developer) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:55:53.320] [Log]
+[GamePresenter] team_02 (Graphic Designer) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[11:55:53.321] [Log]
+[GamePresenter] team_03 (Senior Developer) - Unlocked: True (Requires: Level 25, Stage 1)
+-----------------------------------------
+[11:55:53.322] [Log]
+[GamePresenter] team_04 (Project Manager) - Unlocked: False (Requires: Level 1, Stage 3)
+-----------------------------------------
+[11:55:53.323] [Log]
+[GamePresenter] team_05 (AI Researcher) - Unlocked: False (Requires: Level 1, Stage 5)
+-----------------------------------------
+[11:55:53.324] [Log]
+[GamePresenter] Showing 3 unlocked upgrades for Team
+-----------------------------------------
+[11:55:53.325] [Log]
+[GameViewUI] Creating upgrade element for team_01 in parent Content
+-----------------------------------------
+[11:55:53.326] [Log]
+[GameViewUI] Successfully created upgrade UI for Junior Developer
+-----------------------------------------
+[11:55:53.327] [Log]
+[GameViewUI] Creating upgrade element for team_02 in parent Content
+-----------------------------------------
+[11:55:53.347] [Log]
+[GameViewUI] Successfully created upgrade UI for Graphic Designer
+-----------------------------------------
+[11:55:53.349] [Log]
+[GameViewUI] Creating upgrade element for team_03 in parent Content
+-----------------------------------------
+[11:55:53.351] [Log]
+[GameViewUI] Successfully created upgrade UI for Senior Developer
+-----------------------------------------
+[11:55:53.352] [Log]
+[GameController] Game loop started
+-----------------------------------------
+[11:55:53.353] [Log]
+[GameController] Game Dev Clicker initialized successfully!
+-----------------------------------------
+[11:55:53.355] [Log]
+[OfflineProgression] Not enough offline time: 0.0851748 seconds
+-----------------------------------------
+[11:55:53.359] [Log]
+[GamePresenter] Connections established successfully
+-----------------------------------------
+[11:55:53.359] [Log]
+[GamePresenter] Checking Skills category - Found 5 total upgrades
+-----------------------------------------
+[11:55:53.360] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:55:53.361] [Log]
+[GamePresenter] skill_01 (Typing Speed) - Unlocked: True (Requires: Level 1, Stage 1)
+-----------------------------------------
+[11:55:53.362] [Log]
+[GamePresenter] skill_02 (Algorithm Study) - Unlocked: True (Requires: Level 5, Stage 1)
+-----------------------------------------
+[11:55:53.362] [Log]
+[GamePresenter] skill_03 (Design Sense) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:55:53.363] [Log]
+[GamePresenter] skill_04 (Project Management) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[11:55:53.364] [Log]
+[GamePresenter] skill_05 (Innovative Thinking) - Unlocked: True (Requires: Level 30, Stage 1)
+-----------------------------------------
+[11:55:53.364] [Log]
+[GamePresenter] Showing 5 unlocked upgrades for Skills
+-----------------------------------------
+[11:55:53.365] [Log]
+[GamePresenter] Checking Equipment category - Found 5 total upgrades
+-----------------------------------------
+[11:55:53.367] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:55:53.367] [Log]
+[GamePresenter] equip_01 (Better Keyboard) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:55:53.368] [Log]
+[GamePresenter] equip_02 (Dual Monitor) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[11:55:53.369] [Log]
+[GamePresenter] equip_03 (High-end PC) - Unlocked: True (Requires: Level 20, Stage 1)
+-----------------------------------------
+[11:55:53.369] [Log]
+[GamePresenter] equip_04 (Server Farm) - Unlocked: False (Requires: Level 1, Stage 3)
+-----------------------------------------
+[11:55:53.370] [Log]
+[GamePresenter] equip_05 (AI Workstation) - Unlocked: False (Requires: Level 1, Stage 5)
+-----------------------------------------
+[11:55:53.371] [Log]
+[GamePresenter] Showing 3 unlocked upgrades for Equipment
+-----------------------------------------
+[11:55:53.372] [Log]
+[GamePresenter] Checking Team category - Found 5 total upgrades
+-----------------------------------------
+[11:55:53.373] [Log]
+[GamePresenter] Player State - Level: 50, Stage: 2
+-----------------------------------------
+[11:55:53.373] [Log]
+[GamePresenter] team_01 (Junior Developer) - Unlocked: True (Requires: Level 10, Stage 1)
+-----------------------------------------
+[11:55:53.374] [Log]
+[GamePresenter] team_02 (Graphic Designer) - Unlocked: True (Requires: Level 15, Stage 1)
+-----------------------------------------
+[11:55:53.374] [Log]
+[GamePresenter] team_03 (Senior Developer) - Unlocked: True (Requires: Level 25, Stage 1)
+-----------------------------------------
+[11:55:53.376] [Log]
+[GamePresenter] team_04 (Project Manager) - Unlocked: False (Requires: Level 1, Stage 3)
+-----------------------------------------
+[11:55:53.377] [Log]
+[GamePresenter] team_05 (AI Researcher) - Unlocked: False (Requires: Level 1, Stage 5)
+-----------------------------------------
+[11:55:53.377] [Log]
+[GamePresenter] Showing 3 unlocked upgrades for Team
+-----------------------------------------
+[11:55:53.378] [Log]
+[CharacterManager] Setting up stage 1
+-----------------------------------------
+[11:55:53.380] [Log]
+[CharacterManager] Unregistered character: CH1_1_0
+-----------------------------------------
+[11:55:53.383] [Log]
+[CharacterManager] Registered character: CH1_1_0
+-----------------------------------------
+[11:55:53.402] [Log]
+[BalanceManager] Attempting to get CSVLoader (attempt 1/5)...
+-----------------------------------------
+[11:55:53.403] [Log]
+[BalanceManager] Using serialized reference CSVLoader
+-----------------------------------------
+[11:55:53.403] [Log]
+[BalanceManager] CSVLoader initialized successfully
+-----------------------------------------
+[11:55:53.405] [Log]
+[BalanceManager] LoadBalanceData called. _csvLoader is null: False
+-----------------------------------------
+[11:55:53.405] [Log]
+[BalanceManager] csvLoaderReference is null: False
+-----------------------------------------
+[11:55:53.406] [Log]
+[BalanceManager] Loading balance data from CSV files...
+-----------------------------------------
+[11:55:53.406] [Log]
+[CSVLoader] Starting to load all CSV data...
+-----------------------------------------
+[11:55:53.410] [Log]
+[CSVLoader] Loaded 15 rows from Upgrades.csv
+-----------------------------------------
+[11:55:53.411] [Log]
+[CSVLoader] Loaded 50 rows from Levels.csv
+-----------------------------------------
+[11:55:53.412] [Log]
+[CSVLoader] Loaded 15 rows from Projects.csv
+-----------------------------------------
+[11:55:53.413] [Log]
+[CSVLoader] Loaded 10 rows from Stage.csv
+-----------------------------------------
+[11:55:53.414] [Log]
+[CSVLoader] Loaded 7 rows from DualCurrency.csv
+-----------------------------------------
+[11:55:53.415] [Log]
+[CSVLoader] Loaded 10 rows from ExpectedTime.csv
+-----------------------------------------
+[11:55:53.418] [Log]
+[CSVLoader] Parsed 15 upgrades
+-----------------------------------------
+[11:55:53.420] [Log]
+[CSVLoader] Parsed 50 levels
+-----------------------------------------
+[11:55:53.422] [Log]
+[CSVLoader] Parsed 15 projects
+-----------------------------------------
+[11:55:53.423] [Log]
+[CSVLoader] Parsed 10 stages
+-----------------------------------------
+[11:55:53.424] [Log]
+[CSVLoader] Parsed 7 dual currency settings
+-----------------------------------------
+[11:55:53.425] [Log]
+[CSVLoader] All CSV data loaded successfully!
+-----------------------------------------
+[11:55:53.425] [Log]
+[BalanceManager] Found 15 upgrades
+-----------------------------------------
+[11:55:53.427] [Log]
+[BalanceManager] Found 50 levels
+-----------------------------------------
+[11:55:53.428] [Log]
+[BalanceManager] Found 15 projects
+-----------------------------------------
+[11:55:53.428] [Log]
+[BalanceManager] Found 10 stages
+-----------------------------------------
+[11:55:53.428] [Log]
+[BalanceManager] Balance data loaded successfully!
+-----------------------------------------
+[11:55:53.528] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[11:55:53.530] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[11:55:53.531] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[11:55:53.533] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[11:55:53.534] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [Button Text].
+-----------------------------------------
+[11:55:54.567] [Log]
+Unity Remote connected to input!
+-----------------------------------------
+[11:55:54.656] [Warning]
+[GameViewUI] No ScrollRect found in children
+-----------------------------------------
+[11:55:55.164] [Warning]
+[GameViewUI] No ScrollRect found in children
+-----------------------------------------
+[11:55:58.077] [Log]
+[ClickZone] Click animation disabled to prevent shrinking
+-----------------------------------------
+[11:55:58.080] [Log]
+[GameViewUI] ShowClickEffects called: EXP=1, Money=0, Position=(-0.53, 32.75)
+-----------------------------------------
+[11:55:58.081] [Log]
+[GameViewUI] Final screen position: (539.47, 942.75)
+-----------------------------------------
+[11:55:58.083] [Log]
+[ClickEffectManager] ShowClickEffect called: Money=0, EXP=1, Position=(539.47, 942.75)
+-----------------------------------------
+[11:55:58.083] [Log]
+[ClickEffectManager] Screen resolution: 1080x1920
+-----------------------------------------
+[11:55:58.085] [Log]
+[ClickEffectManager] Canvas render mode: ScreenSpaceCamera, sorting order: -100
+-----------------------------------------
+[11:55:58.085] [Log]
+[ClickEffectManager] Converting screen coords: (539.47, 942.75) -> (-0.53, -17.25) (screen center: 540, 960)
+-----------------------------------------
+[11:55:58.087] [Log]
+[ClickEffectManager] Canvas position calculated: (-0.53, -17.25)
+-----------------------------------------
+[11:55:58.087] [Log]
+[ClickEffectManager] Showing EXP text: +1 ⭐
+-----------------------------------------
+[11:55:58.089] [Log]
+[ClickEffectManager] ShowFloatingText: '+1 ⭐' at (34.34, -2.56), Color=RGBA(0.500, 0.800, 1.000, 1.000), Size=28
+-----------------------------------------
+[11:55:58.089] [Log]
+[ClickEffectManager] Pool status: Active=0, Pooled=19
+-----------------------------------------
+[11:55:58.092] [Log]
+[ClickEffectManager] Text object activated: FloatingText
+-----------------------------------------
+[11:55:58.093] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [FloatingText].
+-----------------------------------------
+[11:55:58.652] [Log]
+[ClickZone] Click animation disabled to prevent shrinking
+-----------------------------------------
+[11:55:58.653] [Log]
+[GameViewUI] ShowClickEffects called: EXP=1, Money=0, Position=(-0.90, 15.06)
+-----------------------------------------
+[11:55:58.654] [Log]
+[GameViewUI] Final screen position: (539.11, 925.06)
+-----------------------------------------
+[11:55:58.654] [Log]
+[ClickEffectManager] ShowClickEffect called: Money=0, EXP=1, Position=(539.11, 925.06)
+-----------------------------------------
+[11:55:58.655] [Log]
+[ClickEffectManager] Screen resolution: 1080x1920
+-----------------------------------------
+[11:55:58.655] [Log]
+[ClickEffectManager] Canvas render mode: ScreenSpaceCamera, sorting order: -100
+-----------------------------------------
+[11:55:58.657] [Log]
+[ClickEffectManager] Converting screen coords: (539.11, 925.06) -> (-0.90, -34.94) (screen center: 540, 960)
+-----------------------------------------
+[11:55:58.658] [Log]
+[ClickEffectManager] Canvas position calculated: (-0.90, -34.94)
+-----------------------------------------
+[11:55:58.658] [Log]
+[ClickEffectManager] Showing EXP text: +1 ⭐
+-----------------------------------------
+[11:55:58.659] [Log]
+[ClickEffectManager] ShowFloatingText: '+1 ⭐' at (73.79, -42.64), Color=RGBA(0.500, 0.800, 1.000, 1.000), Size=28
+-----------------------------------------
+[11:55:58.660] [Log]
+[ClickEffectManager] Pool status: Active=1, Pooled=18
+-----------------------------------------
+[11:55:58.660] [Log]
+[ClickEffectManager] Text object activated: FloatingText
+-----------------------------------------
+[11:55:58.662] [Warning]
+The character with Unicode value \u2B50 was not found in the [LiberationSans SDF] font asset or any potential fallbacks. It was replaced by Unicode character \u25A1 in text object [FloatingText].
+-----------------------------------------
+[11:55:59.552] [Log]
+[ClickEffectManager] Memory Status: Active=2, Pooled=18, Total Created=20
+-----------------------------------------
+[11:55:59.802] [Log]
+[ClickZone] Click animation disabled to prevent shrinking
+-----------------------------------------
+[11:55:59.803] [Log]
+[GameViewUI] ShowClickEffects called: EXP=1, Money=0, Position=(-18.97, 22.01)
+-----------------------------------------
+[11:55:59.804] [Log]
+[GameViewUI] Final screen position: (521.03, 932.01)
+-----------------------------------------
+[11:55:59.805] [Log]
+[ClickEffectManager] ShowClickEffect called: Money=0, EXP=1, Position=(521.03, 932.01)
+-----------------------------------------
+[11:55:59.805] [Log]
+[ClickEffectManager] Screen resolution: 1080x1920
+-----------------------------------------
+[11:55:59.806] [Log]
+[ClickEffectManager] Canvas render mode: ScreenSpaceCamera, sorting order: -100
+-----------------------------------------
+[11:55:59.807] [Log]
+[ClickEffectManager] Converting screen coords: (521.03, 932.01) -> (-18.97, -27.99) (screen center: 540, 960)
+-----------------------------------------

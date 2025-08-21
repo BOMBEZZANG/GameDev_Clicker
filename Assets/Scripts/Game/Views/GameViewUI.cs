@@ -8,6 +8,7 @@ using GameDevClicker.Core.Patterns;
 using GameDevClicker.Core.Utilities;
 using GameDevClicker.Data.ScriptableObjects;
 using GameDevClicker.Game.Models;
+using GameDevClicker.Game.Effects;
 
 namespace GameDevClicker.Game.Views
 {
@@ -422,11 +423,12 @@ namespace GameDevClicker.Game.Views
             for (int i = 0; i < upgrades.Count && i < cachedElements.Count; i++)
             {
                 var upgradeItem = cachedElements[i].GetComponent<UpgradeItemUI>();
+                
                 if (upgradeItem != null)
                 {
                     // Capture the upgrade in a local variable to avoid closure issues
                     var currentUpgrade = upgrades[i];
-                    upgradeItem.Setup(currentUpgrade, () => 
+                    System.Action purchaseAction = () => 
                     {
                         if (currentUpgrade != null)
                         {
@@ -436,7 +438,9 @@ namespace GameDevClicker.Game.Views
                         {
                             Debug.LogError("[GameViewUI] Upgrade is null in button click handler");
                         }
-                    });
+                    };
+                    
+                    upgradeItem.Setup(currentUpgrade, purchaseAction);
                 }
             }
             
@@ -506,13 +510,14 @@ namespace GameDevClicker.Game.Views
                 itemRect.anchoredPosition = Vector2.zero;
             }
             
+            // Try to get the upgrade item component
             var upgradeItem = upgradeObject.GetComponent<UpgradeItemUI>();
             
             if (upgradeItem != null)
             {
                 // Capture the upgrade in a local variable to avoid closure issues
                 var capturedUpgrade = upgrade;
-                upgradeItem.Setup(capturedUpgrade, () => 
+                System.Action purchaseAction = () => 
                 {
                     if (capturedUpgrade != null)
                     {
@@ -522,7 +527,11 @@ namespace GameDevClicker.Game.Views
                     {
                         Debug.LogError("[GameViewUI] Captured upgrade is null in button click handler");
                     }
-                });
+                };
+                
+                upgradeItem.Setup(capturedUpgrade, purchaseAction);
+                Debug.Log($"[GameViewUI] Successfully created upgrade UI for {upgrade.upgradeName}");
+                
                 _upgradeElements[upgrade.upgradeId] = upgradeObject;
                 
                 // Ensure the category list exists
@@ -531,8 +540,6 @@ namespace GameDevClicker.Game.Views
                     _cachedUpgradeElements[category] = new List<GameObject>();
                 }
                 _cachedUpgradeElements[category].Add(upgradeObject);
-                
-                Debug.Log($"[GameViewUI] Successfully created upgrade UI for {upgrade.upgradeName}");
             }
             else
             {
@@ -552,7 +559,11 @@ namespace GameDevClicker.Game.Views
             if (_upgradeElements.TryGetValue(upgrade.upgradeId, out var element))
             {
                 var upgradeItem = element.GetComponent<UpgradeItemUI>();
-                upgradeItem?.UpdateDisplay(upgrade);
+                
+                if (upgradeItem != null)
+                {
+                    upgradeItem.UpdateDisplay(upgrade);
+                }
             }
         }
 
@@ -571,8 +582,9 @@ namespace GameDevClicker.Game.Views
                 characterManager.OnClickZoneClicked();
             }
             
+            // Get click position and show effects
             Vector2 clickPosition = GetRandomClickPosition();
-            CreateClickEffect(clickPosition);
+            ShowClickEffects(clickPosition);
         }
 
         private void OnClickPerformed(float moneyGained, float expGained)
@@ -675,61 +687,60 @@ namespace GameDevClicker.Game.Views
             }
         }
 
-        private void CreateClickEffect(Vector2 position)
+        private void ShowClickEffects(Vector2 position)
         {
-            if (clickEffectPrefab == null || clickEffectParent == null) return;
-
-            var effectObject = Instantiate(clickEffectPrefab, clickEffectParent);
-            var effectText = effectObject.GetComponent<TextMeshProUGUI>();
+            // Get the amounts from GameModel
+            float expGain = GameModel.Instance.ExpPerClick;
+            float moneyGain = GameModel.Instance.IsMoneyUnlocked ? GameModel.Instance.MoneyPerClick : 0f;
             
-            if (effectText != null)
+            Debug.Log($"[GameViewUI] ShowClickEffects called: EXP={expGain}, Money={moneyGain}, Position={position}");
+            
+            // For now, let's use the center of the screen as a test position
+            Vector2 screenPosition = new Vector2(Screen.width / 2f, Screen.height / 2f);
+            
+            // If we have a click zone, use its screen position
+            if (clickZoneButton != null)
             {
-                // Set effect text
-                float expGain = GameModel.Instance.ExpPerClick;
-                float moneyGain = GameModel.Instance.IsMoneyUnlocked ? GameModel.Instance.MoneyPerClick : 0f;
+                RectTransform clickRect = clickZoneButton.GetComponent<RectTransform>();
+                Canvas canvas = clickZoneButton.GetComponentInParent<Canvas>();
                 
-                if (moneyGain > 0)
+                if (clickRect != null && canvas != null)
                 {
-                    effectText.text = $"+{NumberFormatter.Format((long)expGain)} ⭐\n+{NumberFormatter.Format((long)moneyGain)} 💰";
+                    // Get the world position of the click zone center
+                    Vector3 worldPos = clickRect.TransformPoint(Vector3.zero);
+                    
+                    // Convert to screen position
+                    if (canvas.renderMode == RenderMode.ScreenSpaceOverlay)
+                    {
+                        screenPosition = worldPos;
+                    }
+                    else if (canvas.worldCamera != null)
+                    {
+                        screenPosition = canvas.worldCamera.WorldToScreenPoint(worldPos);
+                    }
+                    else
+                    {
+                        screenPosition = Camera.main.WorldToScreenPoint(worldPos);
+                    }
+                    
+                    // Add the random offset
+                    screenPosition += position;
                 }
-                else
-                {
-                    effectText.text = $"+{NumberFormatter.Format((long)expGain)} ⭐";
-                }
-                
-                // Position the effect
-                var rectTransform = effectObject.GetComponent<RectTransform>();
-                rectTransform.anchoredPosition = position;
-                
-                // Start animation
-                var coroutine = StartCoroutine(AnimateClickEffect(effectObject, rectTransform));
-                _activeClickEffects.Add(coroutine);
+            }
+            
+            Debug.Log($"[GameViewUI] Final screen position: {screenPosition}");
+            
+            // Show effects using the new system
+            if (ClickEffectManager.Instance != null)
+            {
+                ClickEffectManager.Instance.ShowClickEffect(screenPosition, moneyGain, expGain);
+            }
+            else
+            {
+                Debug.LogError("[GameViewUI] ClickEffectManager.Instance is null!");
             }
         }
 
-        private IEnumerator AnimateClickEffect(GameObject effectObject, RectTransform rectTransform)
-        {
-            var canvasGroup = effectObject.GetComponent<CanvasGroup>();
-            if (canvasGroup == null) canvasGroup = effectObject.AddComponent<CanvasGroup>();
-            
-            var startPos = rectTransform.anchoredPosition;
-            var endPos = startPos + Vector2.up * clickEffectDistance;
-            
-            float time = 0;
-            while (time < clickEffectDuration)
-            {
-                time += Time.deltaTime;
-                float t = time / clickEffectDuration;
-                
-                // Move up and fade out
-                rectTransform.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
-                canvasGroup.alpha = 1f - t;
-                
-                yield return null;
-            }
-            
-            Destroy(effectObject);
-        }
 
         private Vector2 GetRandomClickPosition()
         {
@@ -737,6 +748,32 @@ namespace GameDevClicker.Game.Views
                 UnityEngine.Random.Range(-50f, 50f),
                 UnityEngine.Random.Range(-50f, 50f)
             );
+        }
+        
+        /// <summary>
+        /// Show special effects for level ups, achievements, etc.
+        /// </summary>
+        public void ShowSpecialEffect(string message, Vector2? position = null)
+        {
+            Vector2 effectPosition = position ?? Vector2.zero;
+            
+            if (ClickEffectManager.Instance != null)
+            {
+                ClickEffectManager.Instance.ShowSpecialEffect(message, effectPosition);
+            }
+        }
+        
+        /// <summary>
+        /// Show combo effect for multiple rapid clicks
+        /// </summary>
+        public void ShowComboEffect(int comboCount, Vector2? position = null)
+        {
+            Vector2 effectPosition = position ?? Vector2.zero;
+            
+            if (ClickEffectManager.Instance != null)
+            {
+                ClickEffectManager.Instance.ShowComboEffect(comboCount, effectPosition);
+            }
         }
 
         #endregion
