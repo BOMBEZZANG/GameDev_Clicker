@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using GameDevClicker.Game.Effects;
 
 namespace GameDevClicker.Game.Character
 {
@@ -98,6 +99,12 @@ namespace GameDevClicker.Game.Character
         public void OnClicked()
         {
             if (!isActive || isAnimating) return;
+            
+            // Play stage-specific click sound
+            if (ClickSoundManager.Instance != null)
+            {
+                ClickSoundManager.Instance.PlayClickSound(characterStage);
+            }
             
             // Stop any current effect
             if (currentEffectCoroutine != null)

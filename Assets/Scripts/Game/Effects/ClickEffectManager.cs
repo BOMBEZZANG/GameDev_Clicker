@@ -201,8 +201,22 @@ namespace GameDevClicker.Game.Effects
         /// </summary>
         public void ShowClickEffect(Vector2 screenPosition, float moneyGained, float expGained, bool isCritical = false)
         {
-            Debug.Log($"[ClickEffectManager] ShowClickEffect called: Money={moneyGained}, EXP={expGained}, Position={screenPosition}");
+            ShowClickEffect(screenPosition, moneyGained, expGained, isCritical, 1); // Default to stage 1
+        }
+        
+        /// <summary>
+        /// Show a click effect at the specified position with stage-specific sound
+        /// </summary>
+        public void ShowClickEffect(Vector2 screenPosition, float moneyGained, float expGained, bool isCritical, int stage)
+        {
+            Debug.Log($"[ClickEffectManager] ShowClickEffect called: Money={moneyGained}, EXP={expGained}, Position={screenPosition}, Stage={stage}");
             Debug.Log($"[ClickEffectManager] Screen resolution: {Screen.width}x{Screen.height}");
+            
+            // Play stage-specific click sound
+            if (ClickSoundManager.Instance != null)
+            {
+                ClickSoundManager.Instance.PlayClickSound(stage);
+            }
             
             // Calculate position around click zone (not inside it)
             Vector2 canvasPosition = GetPositionAroundClickZone();
